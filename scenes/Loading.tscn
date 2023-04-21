@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=3 uid="uid://wjuh5us04303"]
+
+[ext_resource type="Texture2D" uid="uid://dim6m2c6rupcg" path="res://images/flux.png" id="1_kg7b2"]
+[ext_resource type="Script" path="res://scripts/Loader.gd" id="1_xco3o"]
+[ext_resource type="Texture2D" uid="uid://5u7n2u4erb06" path="res://images/ruwo.png" id="2_d173d"]
+
+[sub_resource type="SystemFont" id="SystemFont_aq8c5"]
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_p33ou"]
+font = SubResource("SystemFont_aq8c5")
+font_size = 30
+
+[sub_resource type="SystemFont" id="SystemFont_swavl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_fab16"]
+font = SubResource("SystemFont_swavl")
+font_size = 20
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_xco3o")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0941176, 0.0901961, 0.0901961, 1)
+
+[node name="FluxImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.5
+offset_top = -210.5
+offset_right = 154.5
+offset_bottom = 94.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_kg7b2")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LoadingLabel" type="Label" parent="FluxImage"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -187.5
+offset_top = -4.0
+offset_right = 187.5
+offset_bottom = 41.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "Loading Flux..."
+label_settings = SubResource("LabelSettings_p33ou")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CurrentMap" type="Label" parent="FluxImage"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -187.5
+offset_top = 37.0
+offset_right = 187.5
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "placeholder for current map loading"
+label_settings = SubResource("LabelSettings_fab16")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Ruwo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -205.0
+offset_top = -235.0
+offset_bottom = 173.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("2_d173d")
+expand_mode = 1
+stretch_mode = 4
