@@ -1,4 +1,4 @@
-class_name SyncManager
+extends Node
 
 signal finished
 
@@ -9,6 +9,10 @@ var last_time:int = 0
 @export var real_time:float = 0
 var current_time:float = 0
 @export var length:float = 0
+var paused:bool = false
+
+func _ready():
+	pass
 
 func start(from:float=0):
 	last_time = Time.get_ticks_usec()
@@ -22,15 +26,6 @@ func seek(from:float=0):
 func finish():
 	playing = false
 	finished.emit()
-
-var paused:bool = false
-func _notification(what):
-	if what == Node.NOTIFICATION_PAUSED:
-		paused = true
-		just_paused()
-	elif what == Node.NOTIFICATION_UNPAUSED:
-		paused = false
-		just_unpaused()
 		
 func just_paused():
 	pass
@@ -41,7 +36,7 @@ func just_unpaused():
 func _process(delta):
 	if !playing: return
 	var now = Time.get_ticks_usec()
-	var time = playback_speed * (now - last_time) / 1000000.0
+	var time = playback_speed * (now - last_time) / 1000.0
 	last_time = now
 	real_time += time
 	current_time = real_time

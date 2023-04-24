@@ -22,7 +22,6 @@ func load_maps():
 	finished = true
 
 func _ready():
-	thread.start(load_maps)
-	thread.wait_to_finish()
+	load_maps()
 	Flux.set_current_map("stress-test-grains-of-sand")
-	get_tree().change_scene_to_file("res://scenes/Game.tscn")
+	get_tree().change_scene_to_file("res://scenes/MapList.tscn")

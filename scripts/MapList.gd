@@ -10,5 +10,5 @@ func _ready():
 #		else:
 #			button.get_node("title").text = "%s" % (map.meta["song_name"])
 #		add_child(button)
-	var button = map_button_scene.instantiate()
-	add_child(button)
+#	var button = map_button_scene.instantiate()
+#	add_child(button)

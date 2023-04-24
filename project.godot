@@ -23,6 +23,8 @@ config/icon="res://images/flux.png"
 
 Flux="*res://Flux.gd"
 FluxMap="*res://classes/FluxMap.gd"
+TimeManager="*res://classes/TimeManager.gd"
+AudioManager="*res://classes/AudioManager.gd"
 
 [rendering]
 

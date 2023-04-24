@@ -3,8 +3,7 @@ extends Node
 var meta = {}
 var jackets = {}
 var audio_data = [] 
-var difficulties = {}
-var id = ""
+var diffs = {}
 const very_cool_seperator = "Ξζξ"
 
 class FluxNoteRawData:
@@ -12,24 +11,31 @@ class FluxNoteRawData:
 	var y: float
 	var time: int
 	
+func get_start_of_audio_buffer(f_txt: String):
+	var a = f_txt.find(very_cool_seperator)
+	var b = f_txt.find(very_cool_seperator, a + 1)
+	var c = f_txt.find(very_cool_seperator, b + 1)
+	return c
+	
 func load_from_path(path):
-	id = path	
 	var file = FileAccess.open("user://maps/%s" % path, FileAccess.READ)
 	var file_txt_a = file.get_as_text()
 	var file_txt = file_txt_a.substr(1).split(very_cool_seperator)
 	
 	var version = file.get_8()
-	if version != 2:
+	if version != 2:					
 		push_error("Invalid map version... skipping")
 		return
 		
-	meta = JSON.parse_string(file_txt[0])
+	var file_bytes = file.get_buffer(file.get_length() - 1)
 	
-	difficulties = JSON.parse_string(file_txt[1])
+	meta = JSON.parse_string(file_txt[0])
+	print(file_txt[3])
+	diffs = JSON.parse_string(file_txt[1])
 	if meta["has_jacket"]:
 		jackets = JSON.parse_string(file_txt[2])
 		
-	audio_data = file_txt[3].to_utf8_buffer()
+	audio_data = file_bytes.slice(get_start_of_audio_buffer(file_txt_a))
 	
 	print(meta["title"] + " " + meta["artist"] + " " + meta["mapper"] + " " + meta["id"])
 	
@@ -54,9 +60,6 @@ func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, jacket
 	var diffs = {}
 	diffs["default"] = []
 	
-	var _jackets = {}
-	output.store_string(" " + very_cool_seperator)
-	
 	for i in txt_data.split(",").slice(1):
 		var note_data = i.replace("\r", "").replace("\n", "").split("|")
 		diffs["default"].append({
@@ -64,9 +67,11 @@ func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, jacket
 			"y": float(note_data[1]),
 			"ms": int(note_data[2]),
 		})
-	
 	output.store_string(JSON.stringify(diffs))
 	output.store_string(very_cool_seperator)
-
+	
+	var _jackets = {}
+	output.store_string(" " + very_cool_seperator)
+	
 	var audio_bytes = FileAccess.get_file_as_bytes(audio_path)
 	output.store_buffer(audio_bytes)
