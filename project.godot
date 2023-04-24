@@ -5,7 +5,6 @@
 ; Format:
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
-;
 
 config_version=5
 
@@ -28,3 +27,4 @@ FluxMap="*res://classes/FluxMap.gd"
 [rendering]
 
 environment/defaults/default_clear_color=Color(0.301961, 0.301961, 0.301961, 1)
+anti_aliasing/quality/use_taa=true

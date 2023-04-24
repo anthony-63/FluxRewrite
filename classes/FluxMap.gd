@@ -1,55 +1,72 @@
 extends Node
 
 var meta = {}
-var audio_data = []
-var img_data = [] 
+var jackets = {}
+var audio_data = [] 
 var difficulties = {}
-var good_map = false
-var map_path = ""
+var id = ""
+const very_cool_seperator = "Ξζξ"
 
-func read_u16_flipped(f):
-	var n = f.get_8()
-	var nn = f.get_8()
+class FluxNoteRawData:
+	var x: float
+	var y: float
+	var time: int
 	
-	return n | nn
-
 func load_from_path(path):
-	map_path = "user://maps/%s" % path
-	var f = FileAccess.open(map_path, FileAccess.READ)
-	var magic = f.get_buffer(4).get_string_from_utf8()
-	if magic != "FLUX":
-		Flux.maps.push_back(self)
+	id = path	
+	var file = FileAccess.open("user://maps/%s" % path, FileAccess.READ)
+	var file_txt_a = file.get_as_text()
+	var file_txt = file_txt_a.substr(1).split(very_cool_seperator)
+	
+	var version = file.get_8()
+	if version != 2:
+		push_error("Invalid map version... skipping")
 		return
+		
+	meta = JSON.parse_string(file_txt[0])
 	
-	var vers = f.get_8()
-	if vers != 1:
-		Flux.maps.push_back(self)
-		return
+	difficulties = JSON.parse_string(file_txt[1])
+	if meta["has_jacket"]:
+		jackets = JSON.parse_string(file_txt[2])
+		
+	audio_data = file_txt[3].to_utf8_buffer()
 	
-	var meta_count = read_u16_flipped(f)
+	print(meta["title"] + " " + meta["artist"] + " " + meta["mapper"] + " " + meta["id"])
 	
-	for i in range(0, meta_count):
-		var meta_val_len = read_u16_flipped(f)
-		var meta_val = ""
-		for v in range(0, meta_val_len):
-			meta_val += char(f.get_8())
-			
-		var meta_key_len = read_u16_flipped(f)
-		var meta_key = ""
-		for v in range(0, meta_key_len):
-			meta_key += char(f.get_8())
-		
-		
-		meta_key = meta_key.replace("\r", "").replace("\n", "")
-		meta_val = meta_val.replace("\r", "").replace("\n", "")
-		
-		# ???? why do i have to do this wtf, but it works for nowhttps://i.imgur.com/wwcbYVo.png
-		
-		if meta_key == "mapper":
-			meta_key = "song_name"
-		elif meta_key == "song_name":
-			meta_key = "mapper"
-		
-		meta[meta_key] = meta_val
-		
-	Flux.maps.push_back(self)
+	Flux.maps.append(self)
+	
+func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, jacket_path = ""):
+#	var audio_data = FileAccess.get_file_as_bytes(audio_path)
+	var output = FileAccess.open("user://maps/%s.flux" % id, FileAccess.WRITE)
+	
+	output.store_8(2) # version
+	
+	var meta = {}
+	meta["title"] = title
+	meta["artist"] = artist
+	meta["mapper"] = mapper
+	meta["id"] = id
+	meta["has_jacket"] = false # jackets are not supported yet
+	output.store_string(JSON.stringify(meta))
+	
+	output.store_string(very_cool_seperator)
+	
+	var diffs = {}
+	diffs["default"] = []
+	
+	var _jackets = {}
+	output.store_string(" " + very_cool_seperator)
+	
+	for i in txt_data.split(",").slice(1):
+		var note_data = i.replace("\r", "").replace("\n", "").split("|")
+		diffs["default"].append({
+			"x": float(note_data[0]),
+			"y": float(note_data[1]),
+			"ms": int(note_data[2]),
+		})
+	
+	output.store_string(JSON.stringify(diffs))
+	output.store_string(very_cool_seperator)
+
+	var audio_bytes = FileAccess.get_file_as_bytes(audio_path)
+	output.store_buffer(audio_bytes)

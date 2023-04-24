@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dk3c842c70qus"]
+[gd_scene load_steps=4 format=3 uid="uid://cgm8bhsoxswr5"]
 
 [ext_resource type="Script" path="res://scripts/MapList.gd" id="1_525l2"]
+[ext_resource type="Texture2D" uid="uid://cxhq1qle61mtl" path="res://images/Buttons/download_icon.png" id="2_5gq00"]
+[ext_resource type="Script" path="res://scripts/Buttons/DownloadButton.gd" id="3_4gxme"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -10,7 +12,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -19,7 +21,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0941176, 0.0901961, 0.0901961, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="."]
+[node name="MapListBackground" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -30,7 +32,7 @@ grow_horizontal = 0
 grow_vertical = 2
 color = Color(0.160784, 0.160784, 0.160784, 1)
 
-[node name="ScrollContainer" type="ScrollContainer" parent="ColorRect2"]
+[node name="MapListScrollContainer" type="ScrollContainer" parent="MapListBackground"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -40,7 +42,19 @@ offset_left = -566.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="GridContainer" type="GridContainer" parent="ColorRect2/ScrollContainer"]
+[node name="MapListGridContainer" type="GridContainer" parent="MapListBackground/MapListScrollContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 script = ExtResource("1_525l2")
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_left = 5.0
+offset_top = 589.0
+offset_right = 61.0
+offset_bottom = 645.0
+action_mode = 0
+texture_normal = ExtResource("2_5gq00")
+ignore_texture_size = true
+stretch_mode = 4
+script = ExtResource("3_4gxme")

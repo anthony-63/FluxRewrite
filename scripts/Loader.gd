@@ -16,8 +16,6 @@ func load_maps():
 			$FluxImage/CurrentMap.text = map_path
 			
 			FluxMap.load_from_path(map_path)
-			
-			map_dir.get_next()
 	else:
 		var user_dir = DirAccess.open("user://")
 		user_dir.make_dir("maps")
@@ -25,7 +23,6 @@ func load_maps():
 
 func _ready():
 	thread.start(load_maps)
-	
-func _process(delta):
-	if finished:
-		get_tree().change_scene_to_file("res://scenes/MapList.tscn")
+	thread.wait_to_finish()
+	Flux.set_current_map("stress-test-grains-of-sand")
+	get_tree().change_scene_to_file("res://scenes/Game.tscn")

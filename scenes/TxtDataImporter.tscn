@@ -1,0 +1,220 @@
+[gd_scene load_steps=9 format=3 uid="uid://5gvlf2eqhkcl"]
+
+[ext_resource type="Script" path="res://scripts/InitTxtDataImporter.gd" id="1_2dmkk"]
+[ext_resource type="Script" path="res://scripts/Buttons/BackButton.gd" id="3_e0285"]
+
+[sub_resource type="Theme" id="Theme_y5y8q"]
+default_font_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_obk1w"]
+bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+
+[sub_resource type="Theme" id="Theme_ts317"]
+default_font_size = 30
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x34fx"]
+bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+
+[sub_resource type="GDScript" id="GDScript_rktwq"]
+script/source = "extends Node
+"
+
+[sub_resource type="LabelSettings" id="LabelSettings_10iav"]
+font_size = 20
+font_color = Color(0.807843, 0, 0, 1)
+
+[node name="TxtDataImporter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2dmkk")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0941176, 0.0901961, 0.0901961, 1)
+
+[node name="MapTxtData" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -154.5
+offset_top = 80.0
+offset_right = 154.5
+offset_bottom = 200.0
+grow_horizontal = 2
+theme_override_colors/background_color = Color(0.152941, 0.152941, 0.152941, 1)
+placeholder_text = "Enter the map data"
+scroll_smooth = true
+
+[node name="FileDialog" type="FileDialog" parent="."]
+initial_position = 1
+title = "Open a File"
+size = Vector2i(392, 162)
+ok_button_text = "Open"
+file_mode = 0
+access = 2
+filters = PackedStringArray("*.mp3", "*.wav")
+show_hidden_files = true
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -567.0
+offset_top = 246.5
+offset_right = -385.0
+offset_bottom = 315.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_y5y8q")
+theme_override_styles/normal = SubResource("StyleBoxFlat_obk1w")
+text = "Back"
+script = ExtResource("3_e0285")
+
+[node name="ConvertButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.5
+offset_top = 140.0
+offset_right = 154.5
+offset_bottom = 182.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ts317")
+theme_override_styles/normal = SubResource("StyleBoxFlat_x34fx")
+text = "Convert"
+script = SubResource("GDScript_rktwq")
+
+[node name="OpenMp3File" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.5
+offset_top = -92.0
+offset_right = 154.5
+offset_bottom = -36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ts317")
+theme_override_styles/normal = SubResource("StyleBoxFlat_x34fx")
+text = "Open audio file"
+script = SubResource("GDScript_rktwq")
+
+[node name="AudioPath" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -119.5
+offset_bottom = -96.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Please select an audio file"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Artist" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.5
+offset_top = 14.0
+offset_right = 155.5
+offset_bottom = 48.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/background_color = Color(0.152941, 0.152941, 0.152941, 1)
+placeholder_text = "Enter the artist"
+scroll_smooth = true
+
+[node name="Mapper" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.5
+offset_top = 98.0
+offset_right = 155.5
+offset_bottom = 132.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/background_color = Color(0.152941, 0.152941, 0.152941, 1)
+placeholder_text = "Enter the mapper"
+scroll_smooth = true
+
+[node name="ID" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.5
+offset_top = 56.0
+offset_right = 155.5
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/background_color = Color(0.152941, 0.152941, 0.152941, 1)
+placeholder_text = "Enter the ID"
+scroll_smooth = true
+
+[node name="Title" type="TextEdit" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.0
+offset_top = -28.0
+offset_right = 155.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/background_color = Color(0.152941, 0.152941, 0.152941, 1)
+placeholder_text = "Enter the title"
+scroll_smooth = true
+
+[node name="ErrLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -134.0
+offset_bottom = -111.0
+grow_horizontal = 2
+grow_vertical = 0
+label_settings = SubResource("LabelSettings_10iav")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="file_selected" from="FileDialog" to="." method="_on_file_dialog_file_selected"]
+[connection signal="pressed" from="ConvertButton" to="." method="_on_convert_button_pressed"]
+[connection signal="pressed" from="OpenMp3File" to="." method="_on_open_mp_3_file_pressed"]
