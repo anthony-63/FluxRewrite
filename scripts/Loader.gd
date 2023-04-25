@@ -23,5 +23,5 @@ func load_maps():
 
 func _ready():
 	load_maps()
-	Flux.set_current_map("stress-test-grains-of-sand")
-	get_tree().change_scene_to_file("res://scenes/MapList.tscn")
+	Flux.set_current_map("pryrule-dashie-my_bad")
+	get_tree().change_scene_to_file("res://scenes/Game.tscn")

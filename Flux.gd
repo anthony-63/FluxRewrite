@@ -28,3 +28,8 @@ func set_current_map(id):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
+
+func ms_to_min_sec_str(ms):
+	var min = int(float(ms) * 0.001) / 60
+	var sec = int(float(ms) * 0.001) % 60
+	return str(min) + ":" + ("%02d" % sec)
