@@ -25,6 +25,7 @@ Flux="*res://Flux.gd"
 FluxMap="*res://classes/FluxMap.gd"
 TimeManager="*res://classes/TimeManager.gd"
 AudioManager="*res://classes/AudioManager.gd"
+NoteManager="*res://scripts/NoteManager.gd"
 
 [rendering]
 

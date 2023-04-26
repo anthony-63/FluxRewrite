@@ -1,0 +1,417 @@
+[gd_scene load_steps=16 format=3 uid="uid://cgm8bhsoxswr5"]
+
+[ext_resource type="Script" path="res://scripts/UpdateVars.gd" id="1_abm0r"]
+[ext_resource type="Script" path="res://scripts/Buttons/ImportFromTxt.gd" id="2_3ij4o"]
+[ext_resource type="Script" path="res://scripts/MapList.gd" id="2_tthvc"]
+[ext_resource type="Texture2D" uid="uid://5u7n2u4erb06" path="res://images/ruwo.png" id="3_il0bq"]
+[ext_resource type="Script" path="res://scripts/Buttons/MapButton.gd" id="3_mdhbe"]
+[ext_resource type="Script" path="res://scripts/MapInfo.gd" id="6_gvm5r"]
+[ext_resource type="Texture2D" uid="uid://dim6m2c6rupcg" path="res://images/flux.png" id="6_mw0vg"]
+[ext_resource type="FontFile" uid="uid://b5o12budjhyv7" path="res://fonts/font.ttf" id="8_58afk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pdf3y"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_keemo"]
+
+[sub_resource type="Theme" id="Theme_2pltl"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_hucv2"]
+
+[sub_resource type="Theme" id="Theme_25olc"]
+default_font_size = 18
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mald1"]
+bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3su5l"]
+font_size = 11
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_abm0r")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0941176, 0.0901961, 0.0901961, 1)
+
+[node name="MapListBackground" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -566.0
+grow_horizontal = 0
+grow_vertical = 2
+color = Color(0.160784, 0.160784, 0.160784, 1)
+
+[node name="Ruwo" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.219608)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -324.0
+offset_top = -324.0
+offset_bottom = 324.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("3_il0bq")
+expand_mode = 1
+stretch_mode = 4
+
+[node name="MapList" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -565.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="MapListScrollContainer" type="ScrollContainer" parent="MapList"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 2
+script = ExtResource("2_tthvc")
+
+[node name="MapScrollVbox" type="VBoxContainer" parent="MapList/MapListScrollContainer"]
+layout_mode = 2
+
+[node name="ReloadMapList" type="Button" parent="MapList/MapListScrollContainer/MapScrollVbox"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_fonts/font = ExtResource("8_58afk")
+theme_override_font_sizes/font_size = 20
+text = "Reload
+"
+
+[node name="HSeparator" type="HSeparator" parent="MapList/MapListScrollContainer/MapScrollVbox"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pdf3y")
+
+[node name="MapButton" type="Button" parent="MapList/MapListScrollContainer/MapScrollVbox"]
+layout_mode = 2
+text = "                                                                                     
+                                                                                                                                      "
+script = ExtResource("3_mdhbe")
+
+[node name="SongName" type="Label" parent="MapList/MapListScrollContainer/MapScrollVbox/MapButton"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 15.0
+offset_top = 2.0
+offset_right = 16.0
+offset_bottom = 24.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("8_58afk")
+theme_override_font_sizes/font_size = 12
+text = "artist - song name"
+label_settings = SubResource("LabelSettings_keemo")
+
+[node name="Diff" type="Label" parent="MapList/MapListScrollContainer/MapScrollVbox/MapButton"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 407.0
+offset_top = -13.0
+offset_bottom = 13.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_58afk")
+theme_override_font_sizes/font_size = 14
+text = "i hate certain races"
+vertical_alignment = 1
+
+[node name="Mapper" type="Label" parent="MapList/MapListScrollContainer/MapScrollVbox/MapButton"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 16.0
+offset_top = -8.0
+offset_right = 16.0
+offset_bottom = 18.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_58afk")
+theme_override_font_sizes/font_size = 14
+text = "mapper - 99:99
+"
+
+[node name="Changeables" type="TabContainer" parent="."]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -301.0
+offset_right = -566.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Mods" type="TabBar" parent="Changeables"]
+visible = false
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="Settings" type="TabBar" parent="Changeables"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Changeables/Settings"]
+layout_mode = 2
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="SettingTypes" type="TabContainer" parent="Changeables/Settings"]
+layout_mode = 0
+offset_right = 586.0
+offset_bottom = 270.0
+theme = SubResource("Theme_2pltl")
+
+[node name="Note" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Note"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="AR" type="SpinBox" parent="Changeables/Settings/SettingTypes/Note"]
+layout_mode = 1
+offset_left = 32.0
+offset_right = 115.063
+offset_bottom = 31.0
+step = 0.01
+custom_arrow_step = 0.1
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Note/AR"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_right = -7.0
+grow_vertical = 2
+text = "AR: "
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SD" type="SpinBox" parent="Changeables/Settings/SettingTypes/Note"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 115.063
+offset_bottom = 63.0
+step = 0.01
+custom_arrow_step = 0.1
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Note/SD"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_right = -7.0
+grow_vertical = 2
+text = "SD: "
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UI" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+visible = false
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="EnableRuwoCheckbox" type="CheckBox" parent="Changeables/Settings/SettingTypes/UI"]
+layout_mode = 0
+offset_right = 24.0
+offset_bottom = 24.0
+button_pressed = true
+text = "Enable Ruwo on map list"
+
+[node name="SaveSettings" type="Button" parent="Changeables/Settings"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -119.0
+offset_bottom = 22.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("8_58afk")
+theme_override_font_sizes/font_size = 19
+text = "Save settings
+"
+
+[node name="Import" type="TabBar" parent="Changeables"]
+visible = false
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Changeables/Import"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="ImportFromTxtData" type="Button" parent="Changeables/Import/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.5
+offset_top = -126.0
+offset_right = 154.5
+offset_bottom = -82.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_25olc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
+text = "Import from .txt data"
+script = ExtResource("2_3ij4o")
+
+[node name="MapInfoPanel" type="Panel" parent="."]
+layout_mode = 1
+offset_right = 585.0
+offset_bottom = 347.0
+script = ExtResource("6_gvm5r")
+
+[node name="Jacket" type="TextureRect" parent="MapInfoPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -238.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_mw0vg")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="ArtistAndMapper" type="Label" parent="MapInfoPanel"]
+offset_left = 353.0
+offset_top = 24.0
+offset_right = 585.0
+offset_bottom = 52.0
+theme_override_fonts/font = ExtResource("8_58afk")
+text = "artist - mapper"
+label_settings = SubResource("LabelSettings_3su5l")
+
+[node name="SongLength" type="Label" parent="MapInfoPanel"]
+offset_left = 353.0
+offset_top = 44.0
+offset_right = 413.0
+offset_bottom = 70.0
+theme_override_fonts/font = ExtResource("8_58afk")
+text = "0:00"
+
+[node name="SongName" type="Label" parent="MapInfoPanel"]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 3.0
+offset_right = 584.0
+offset_bottom = 29.0
+theme_override_fonts/font = ExtResource("8_58afk")
+text = "song name"
+
+[node name="Max Combo" type="Label" parent="MapInfoPanel"]
+offset_left = 352.0
+offset_top = 133.0
+offset_right = 422.0
+offset_bottom = 159.0
+theme_override_fonts/font = ExtResource("8_58afk")
+text = "Max Combo: WIP"
+
+[node name="Accuracy" type="Label" parent="MapInfoPanel"]
+offset_left = 352.0
+offset_top = 156.0
+offset_right = 460.0
+offset_bottom = 182.0
+theme_override_fonts/font = ExtResource("8_58afk")
+text = "Accuracy: WIP"
+
+[node name="Misses" type="Label" parent="MapInfoPanel"]
+layout_mode = 0
+offset_left = 352.0
+offset_top = 109.0
+offset_right = 422.0
+offset_bottom = 135.0
+theme_override_fonts/font = ExtResource("8_58afk")
+text = "Misses: WIP"
+
+[node name="PlayButton" type="Button" parent="MapInfoPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 351.0
+offset_top = -35.0
+offset_right = -3.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("8_58afk")
+theme_override_font_sizes/font_size = 21
+text = "Play"
+
+[connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/ReloadMapList" to="MapList/MapListScrollContainer" method="_on_reload_map_list_pressed"]
+[connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapList/MapListScrollContainer/MapScrollVbox/MapButton" method="_on_pressed"]
+[connection signal="selected" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapInfoPanel" method="_on_map_button_selected"]
+[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/AR" to="." method="_on_ar_value_changed"]
+[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/SD" to="." method="_on_sd_value_changed"]
+[connection signal="toggled" from="Changeables/Settings/SettingTypes/UI/EnableRuwoCheckbox" to="." method="_on_enable_ruwo_checkbox_toggled"]
+[connection signal="pressed" from="Changeables/Settings/SaveSettings" to="." method="_on_save_settings_pressed"]
+[connection signal="pressed" from="MapInfoPanel/PlayButton" to="MapInfoPanel" method="_on_play_button_pressed"]

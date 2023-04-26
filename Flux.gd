@@ -1,30 +1,31 @@
 extends Node
 
 var maps = []
-var current_map: FluxMap
+var current_map = {}
 
 var settings = {
 	"note": {
 		"ar": 10.0,
 		"sd": 4.0,
+		"approach_time": 0.0,
 	},
 	"ui": {
 		"enable_ruwo": true,
 	},
 }
 
+var mods = {
+	"speed": 1.0,
+}
+
 @onready var time_manager: TimeManager = get_node("/root/TimeManager")
 
 func _ready():
 	pass
-	
-func set_current_map(id):
-	for map in maps:
-		if map.meta["id"] == id:
-			current_map = map
-			break
-	
-	
+
+func reload_game():
+	get_tree().change_scene_to_file("res://scenes/Loading.tscn")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

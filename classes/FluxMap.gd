@@ -6,11 +6,8 @@ var audio_data = []
 var diffs = {}
 const very_cool_seperator = "Ξζξ"
 
-class FluxNoteRawData:
-	var x: float
-	var y: float
-	var time: int
-	
+var combined_map_data = {}
+
 func get_start_of_audio_buffer(f_txt: String):
 	var a = f_txt.find(very_cool_seperator)
 	var b = f_txt.find(very_cool_seperator, a + 1)
@@ -39,7 +36,14 @@ func load_from_path(path):
 	
 	print(meta["title"] + " " + meta["artist"] + " " + meta["mapper"] + " " + meta["id"])
 	
-	Flux.maps.append(self)
+	combined_map_data = {
+		"meta": meta,
+		"diffs": diffs,
+		"jackets": jackets,
+		"audio_data": audio_data,
+	}
+	
+	Flux.maps.append(combined_map_data)
 	
 func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, jacket_path = ""):
 #	var audio_data = FileAccess.get_file_as_bytes(audio_path)
@@ -47,27 +51,27 @@ func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, jacket
 	
 	output.store_8(2) # version
 	
-	var meta = {}
-	meta["title"] = title
-	meta["artist"] = artist
-	meta["mapper"] = mapper
-	meta["id"] = id
-	meta["has_jacket"] = false # jackets are not supported yet
-	output.store_string(JSON.stringify(meta))
+	var meta_ = {}
+	meta_["title"] = title
+	meta_["artist"] = artist
+	meta_["mapper"] = mapper
+	meta_["id"] = id
+	meta_["has_jacket"] = false # jackets are not supported yet
+	output.store_string(JSON.stringify(meta_))
 	
 	output.store_string(very_cool_seperator)
 	
-	var diffs = {}
-	diffs["default"] = []
+	var diffs_ = {}
+	diffs_["default"] = []
 	
 	for i in txt_data.split(",").slice(1):
 		var note_data = i.replace("\r", "").replace("\n", "").split("|")
-		diffs["default"].append({
+		diffs_["default"].append({
 			"x": float(note_data[0]),
 			"y": float(note_data[1]),
 			"ms": int(note_data[2]),
 		})
-	output.store_string(JSON.stringify(diffs))
+	output.store_string(JSON.stringify(diffs_))
 	output.store_string(very_cool_seperator)
 	
 	var _jackets = {}

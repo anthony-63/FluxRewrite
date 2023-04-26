@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://rcifvei4302o"]
+
+[ext_resource type="Texture2D" uid="uid://dim6m2c6rupcg" path="res://images/flux.png" id="1_3v1d6"]
+[ext_resource type="Script" path="res://scripts/Note.gd" id="1_7bmq7"]
+
+[node name="NoteSprite" type="Sprite3D"]
+transform = Transform3D(0.090039, 0, 0, 0, 0.09, 0, 0, 0, 0.3, 0, 0, 0)
+texture = ExtResource("1_3v1d6")
+script = ExtResource("1_7bmq7")
