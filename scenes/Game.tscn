@@ -1,9 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://d2aj5xfcrqnty"]
+[gd_scene load_steps=6 format=3 uid="uid://bs5kpm6sgu7dw"]
 
 [ext_resource type="Script" path="res://scripts/game/Game.gd" id="1_8b1w1"]
 [ext_resource type="Texture2D" uid="uid://b7l6hubgl87s" path="res://prefabs/game_border.png" id="2_kcbcn"]
 [ext_resource type="FontFile" uid="uid://b5o12budjhyv7" path="res://fonts/font.ttf" id="3_f6rql"]
-[ext_resource type="Script" path="res://scripts/NoteManager.gd" id="4_kx0iq"]
+[ext_resource type="Script" path="res://scripts/game/NoteManager.gd" id="4_pvp60"]
 
 [sub_resource type="Environment" id="Environment_2pdyn"]
 background_mode = 1
@@ -43,4 +43,4 @@ font_size = 570
 environment = SubResource("Environment_2pdyn")
 
 [node name="NoteSpawner" type="Node3D" parent="."]
-script = ExtResource("4_kx0iq")
+script = ExtResource("4_pvp60")

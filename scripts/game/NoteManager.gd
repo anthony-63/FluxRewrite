@@ -1,6 +1,5 @@
 extends Node
 
-@onready var note_script = load("res://Scripts/Note.gd")
 @onready var note_scene = preload("res://scenes/NoteSprite.tscn")
 
 var note_index = 0

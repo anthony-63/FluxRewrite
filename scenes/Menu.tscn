@@ -1,14 +1,14 @@
 [gd_scene load_steps=21 format=3 uid="uid://dr4834nnm72sn"]
 
 [ext_resource type="Script" path="res://scripts/menu/UpdateVars.gd" id="1_7p613"]
+[ext_resource type="Script" path="res://scripts/Buttons/ImportFromTxt.gd" id="2_3ij4o"]
 [ext_resource type="Texture2D" uid="uid://5u7n2u4erb06" path="res://images/ruwo.png" id="3_il0bq"]
 [ext_resource type="Script" path="res://scripts/Buttons/MapButton.gd" id="3_mdhbe"]
 [ext_resource type="Script" path="res://scripts/menu/MapList.gd" id="3_pwoq8"]
-[ext_resource type="Script" path="res://scripts/menu/InitTxtDataImporter.gd" id="6_2xr01"]
 [ext_resource type="Texture2D" uid="uid://dim6m2c6rupcg" path="res://images/flux.png" id="6_mw0vg"]
 [ext_resource type="Script" path="res://scripts/menu/MapInfo.gd" id="7_yyn24"]
 [ext_resource type="FontFile" uid="uid://b5o12budjhyv7" path="res://fonts/font.ttf" id="8_58afk"]
-[ext_resource type="PackedScene" path="res://prefabs/transition.tscn" id="9_4cwsh"]
+[ext_resource type="PackedScene" uid="uid://dxmi7p40ic26a" path="res://prefabs/transition.tscn" id="9_4cwsh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pdf3y"]
 
@@ -351,7 +351,7 @@ grow_vertical = 2
 theme = SubResource("Theme_25olc")
 theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
 text = "Import from .txt data"
-script = ExtResource("6_2xr01")
+script = ExtResource("2_3ij4o")
 
 [node name="MapInfoPanel" type="Panel" parent="."]
 layout_mode = 1

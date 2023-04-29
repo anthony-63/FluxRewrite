@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://rcifvei4302o"]
+[gd_scene load_steps=3 format=3 uid="uid://b5vvljnqw6wo6"]
 
-[ext_resource type="Texture2D" uid="uid://dim6m2c6rupcg" path="res://images/flux.png" id="1_3v1d6"]
-[ext_resource type="Script" path="res://scripts/Note.gd" id="1_7bmq7"]
+[ext_resource type="Texture2D" uid="uid://c2mix74bxjker" path="res://images/note_placeholder.png" id="1_skqtm"]
+[ext_resource type="Script" path="res://scripts/game/Note.gd" id="2_50cy8"]
 
 [node name="NoteSprite" type="Sprite3D"]
-transform = Transform3D(0.090039, 0, 0, 0, 0.09, 0, 0, 0, 0.3, 0, 0, 0)
-texture = ExtResource("1_3v1d6")
-script = ExtResource("1_7bmq7")
+transform = Transform3D(0.090039, 0, 0, 0, 0.09, 0, 0, 0, 0.3, -0.00187546, -2.98023e-08, 0.000335693)
+texture = ExtResource("1_skqtm")
+script = ExtResource("2_50cy8")

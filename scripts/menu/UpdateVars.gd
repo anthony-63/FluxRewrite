@@ -25,7 +25,6 @@ func _on_sd_value_changed(value):
 	Flux.settings["note"]["sd"] = value
 	update_at()
 
-
 func _on_save_settings_pressed():
 	var f = FileAccess.open("user://settings.json", FileAccess.WRITE)
 	f.store_string(JSON.stringify(Flux.settings))
