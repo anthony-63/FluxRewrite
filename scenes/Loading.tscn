@@ -17,7 +17,7 @@ font_size = 30
 font = SubResource("SystemFont_swavl")
 font_size = 20
 
-[node name="Control" type="Control"]
+[node name="Control2" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

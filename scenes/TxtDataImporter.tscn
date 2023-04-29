@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://5gvlf2eqhkcl"]
+[gd_scene load_steps=9 format=3]
 
-[ext_resource type="Script" path="res://scripts/InitTxtDataImporter.gd" id="1_2dmkk"]
+[ext_resource type="Script" path="res://scripts/menu/InitTxtDataImporter.gd" id="1_2dmkk"]
 [ext_resource type="Script" path="res://scripts/Buttons/BackButton.gd" id="3_e0285"]
 
 [sub_resource type="Theme" id="Theme_y5y8q"]

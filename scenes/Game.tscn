@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8q6ec6fc4dvv"]
+[gd_scene load_steps=6 format=3 uid="uid://d2aj5xfcrqnty"]
 
-[ext_resource type="Script" path="res://scripts/Game.gd" id="1_ocmr2"]
+[ext_resource type="Script" path="res://scripts/game/Game.gd" id="1_8b1w1"]
 [ext_resource type="Texture2D" uid="uid://b7l6hubgl87s" path="res://prefabs/game_border.png" id="2_kcbcn"]
 [ext_resource type="FontFile" uid="uid://b5o12budjhyv7" path="res://fonts/font.ttf" id="3_f6rql"]
 [ext_resource type="Script" path="res://scripts/NoteManager.gd" id="4_kx0iq"]
@@ -9,7 +9,7 @@
 background_mode = 1
 
 [node name="Game" type="Node3D"]
-script = ExtResource("1_ocmr2")
+script = ExtResource("1_8b1w1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, 8.74228e-08, 1, -8.74228e-08, -7.64274e-15, -8.74228e-08, -1, -0.00288844, 6.85453e-07, -1.00438)
@@ -34,7 +34,7 @@ transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -3.099
 pixel_size = 0.0001
 double_sided = false
 alpha_antialiasing_mode = 2
-text = "0
+text = "0:00/0:00
 "
 font = ExtResource("3_f6rql")
 font_size = 570
