@@ -1,6 +1,6 @@
 extends ColorRect
 
-var wait_time:float = 1.0
+var wait_time:float = 0.3
 
 func _ready():
 	show()

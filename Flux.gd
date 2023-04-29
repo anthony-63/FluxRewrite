@@ -18,7 +18,7 @@ var mods = {
 	"speed": 1.0,
 }
 
-@onready var time_manager: TimeManager = get_node("/root/TimeManager")
+@onready var audio_manager: AudioManager = get_node("/root/AudioManager")
 
 func _ready():
 	pass

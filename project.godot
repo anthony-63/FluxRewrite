@@ -22,10 +22,10 @@ config/icon="res://images/flux.png"
 [autoload]
 
 Flux="*res://Flux.gd"
-FluxMap="*res://classes/FluxMap.gd"
-TimeManager="*res://classes/TimeManager.gd"
-AudioManager="*res://classes/AudioManager.gd"
-NoteManager="*res://scripts/game/NoteManager.gd"
+FluxMap="*res://scripts/io/FluxMap.gd"
+TimeManager="*res://scripts/game/managers/TimeManager.gd"
+AudioManager="*res://scripts/game/managers/AudioManager.gd"
+NoteManager="*res://scripts/game/managers/NoteManager.gd"
 
 [rendering]
 
