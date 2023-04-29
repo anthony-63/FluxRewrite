@@ -11,4 +11,8 @@ func _on_map_button_selected(map):
 
 func _on_play_button_pressed():
 	Flux.current_map = selected_map
+	$"../Transition/Animation".play("out")
+	
+
+func transition_finished():
 	get_tree().change_scene_to_file("res://scenes/Game.tscn")

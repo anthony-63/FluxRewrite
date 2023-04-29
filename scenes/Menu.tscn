@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cgm8bhsoxswr5"]
+[gd_scene load_steps=21 format=3 uid="uid://cgm8bhsoxswr5"]
 
 [ext_resource type="Script" path="res://scripts/UpdateVars.gd" id="1_abm0r"]
 [ext_resource type="Script" path="res://scripts/Buttons/ImportFromTxt.gd" id="2_3ij4o"]
@@ -8,10 +8,14 @@
 [ext_resource type="Script" path="res://scripts/MapInfo.gd" id="6_gvm5r"]
 [ext_resource type="Texture2D" uid="uid://dim6m2c6rupcg" path="res://images/flux.png" id="6_mw0vg"]
 [ext_resource type="FontFile" uid="uid://b5o12budjhyv7" path="res://fonts/font.ttf" id="8_58afk"]
+[ext_resource type="PackedScene" uid="uid://dxmi7p40ic26a" path="res://prefabs/transition.tscn" id="9_4cwsh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pdf3y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_keemo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukrn5"]
+bg_color = Color(0.0941176, 0.0784314, 0.0627451, 1)
 
 [sub_resource type="Theme" id="Theme_2pltl"]
 
@@ -23,10 +27,34 @@ default_font_size = 18
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mald1"]
 bg_color = Color(0.364706, 0.364706, 0.364706, 1)
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6ite"]
+bg_color = Color(0.0941176, 0.0784314, 0.0627451, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_3su5l"]
 font_size = 11
 
+[sub_resource type="Shader" id="Shader_0h38x"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float circle_size : hint_range(0.0, 1.05);
+uniform float screen_width;
+uniform float screen_height;
+
+void fragment() {
+	float ratio = screen_width / screen_height;
+	float dist = distance(vec2(0.5, 0.5), vec2(mix(0.5, UV.x, ratio), UV.y));
+	COLOR.a = step(circle_size, dist);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q58ik"]
+shader = SubResource("Shader_0h38x")
+shader_parameter/circle_size = 1.05
+shader_parameter/screen_width = 1920.0
+shader_parameter/screen_height = 1080.0
+
 [node name="Control" type="Control"]
+clip_contents = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -56,18 +84,18 @@ grow_vertical = 2
 color = Color(0.160784, 0.160784, 0.160784, 1)
 
 [node name="Ruwo" type="TextureRect" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0.219608)
 layout_mode = 1
-anchors_preset = 6
+anchors_preset = 3
 anchor_left = 1.0
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 0.5
+anchor_bottom = 1.0
 offset_left = -324.0
-offset_top = -324.0
-offset_bottom = 324.0
+offset_top = -648.0
 grow_horizontal = 0
-grow_vertical = 2
+grow_vertical = 0
 texture = ExtResource("3_il0bq")
 expand_mode = 1
 stretch_mode = 4
@@ -135,15 +163,18 @@ anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 407.0
+offset_left = 148.0
 offset_top = -13.0
+offset_right = -15.0
 offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("8_58afk")
 theme_override_font_sizes/font_size = 14
-text = "i hate certain races"
+text = "difficulty"
+horizontal_alignment = 2
 vertical_alignment = 1
+clip_text = true
 
 [node name="Mapper" type="Label" parent="MapList/MapListScrollContainer/MapScrollVbox/MapButton"]
 layout_mode = 1
@@ -172,9 +203,9 @@ offset_top = -301.0
 offset_right = -566.0
 grow_horizontal = 2
 grow_vertical = 0
+theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_ukrn5")
 
 [node name="Mods" type="TabBar" parent="Changeables"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -188,6 +219,7 @@ color = Color(0.141176, 0.141176, 0.141176, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Settings" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings"]
@@ -325,6 +357,7 @@ script = ExtResource("2_3ij4o")
 layout_mode = 1
 offset_right = 585.0
 offset_bottom = 347.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_b6ite")
 script = ExtResource("6_gvm5r")
 
 [node name="Jacket" type="TextureRect" parent="MapInfoPanel"]
@@ -340,15 +373,17 @@ expand_mode = 2
 stretch_mode = 4
 
 [node name="ArtistAndMapper" type="Label" parent="MapInfoPanel"]
+layout_mode = 0
 offset_left = 353.0
 offset_top = 24.0
 offset_right = 585.0
 offset_bottom = 52.0
 theme_override_fonts/font = ExtResource("8_58afk")
-text = "artist - mapper"
+text = "artist (mapper)"
 label_settings = SubResource("LabelSettings_3su5l")
 
 [node name="SongLength" type="Label" parent="MapInfoPanel"]
+layout_mode = 0
 offset_left = 353.0
 offset_top = 44.0
 offset_right = 413.0
@@ -366,20 +401,22 @@ theme_override_fonts/font = ExtResource("8_58afk")
 text = "song name"
 
 [node name="Max Combo" type="Label" parent="MapInfoPanel"]
+layout_mode = 0
 offset_left = 352.0
 offset_top = 133.0
 offset_right = 422.0
 offset_bottom = 159.0
 theme_override_fonts/font = ExtResource("8_58afk")
-text = "Max Combo: WIP"
+text = "Max Combo: x"
 
 [node name="Accuracy" type="Label" parent="MapInfoPanel"]
+layout_mode = 0
 offset_left = 352.0
 offset_top = 156.0
 offset_right = 460.0
 offset_bottom = 182.0
 theme_override_fonts/font = ExtResource("8_58afk")
-text = "Accuracy: WIP"
+text = "Accuracy: x"
 
 [node name="Misses" type="Label" parent="MapInfoPanel"]
 layout_mode = 0
@@ -388,7 +425,7 @@ offset_top = 109.0
 offset_right = 422.0
 offset_bottom = 135.0
 theme_override_fonts/font = ExtResource("8_58afk")
-text = "Misses: WIP"
+text = "Misses: x"
 
 [node name="PlayButton" type="Button" parent="MapInfoPanel"]
 visible = false
@@ -406,6 +443,16 @@ grow_vertical = 0
 theme_override_fonts/font = ExtResource("8_58afk")
 theme_override_font_sizes/font_size = 21
 text = "Play"
+
+[node name="Transition" parent="." instance=ExtResource("9_4cwsh")]
+z_index = 4096
+material = SubResource("ShaderMaterial_q58ik")
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/ReloadMapList" to="MapList/MapListScrollContainer" method="_on_reload_map_list_pressed"]
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapList/MapListScrollContainer/MapScrollVbox/MapButton" method="_on_pressed"]

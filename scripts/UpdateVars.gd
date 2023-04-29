@@ -3,7 +3,6 @@ extends Node
 func _ready():
 	$Changeables/Settings/SettingTypes/Note/AR.value = Flux.settings["note"]["ar"]
 	$Changeables/Settings/SettingTypes/Note/SD.value = Flux.settings["note"]["sd"]
-	
 
 func _process(delta):
 	if Flux.settings["ui"]["enable_ruwo"]:
@@ -20,11 +19,10 @@ func update_at():
 func _on_ar_value_changed(value):
 	Flux.settings["note"]["ar"] = value
 	update_at()
-	
+
 func _on_sd_value_changed(value):
 	Flux.settings["note"]["sd"] = value
 	update_at()
-
 
 func _on_save_settings_pressed():
 	var f = FileAccess.open("user://settings.json", FileAccess.WRITE)
