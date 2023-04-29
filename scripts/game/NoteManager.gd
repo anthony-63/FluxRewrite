@@ -17,7 +17,7 @@ func _process(delta):
 	if Flux.time_manager.current_time > Flux.current_map.diffs["default"][note_index]["ms"]:
 		var ndata = Flux.current_map.diffs["default"][note_index]
 		var note = note_scene.instantiate()
-		note.spawn_time = ndata["ms"] - ((Flux.settings["note"]["approach_time"] * 10000.0) * Flux.mods["speed"])
+		note.spawn_time = ndata["ms"] - ((Flux.settings["note"]["approach_time"]) * Flux.mods["speed"]) * 5000.0
 		note.index = note_index
 		add_child(note)
 		note_index += 1

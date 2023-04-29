@@ -15,12 +15,12 @@ func _ready():
 	pass
 
 func start(from:float=0):
-	last_time = Time.get_ticks_usec()
+	last_time = Time.get_ticks_msec()
 	real_time = from
 	playing = true
 
 func seek(from:float=0):
-	last_time = Time.get_ticks_usec()
+	last_time = Time.get_ticks_msec()
 	real_time += from - current_time
 
 func finish():
@@ -31,12 +31,12 @@ func just_paused():
 	pass
 	
 func just_unpaused():
-	last_time = Time.get_ticks_usec()
+	last_time = Time.get_ticks_msec()
 
 func _process(delta):
 	if !playing: return
-	var now = Time.get_ticks_usec()
-	var time = playback_speed * (now - last_time) / 1000.0
+	var now = Time.get_ticks_msec()
+	var time = playback_speed * (now - last_time)
 	last_time = now
 	real_time += time
 	current_time = real_time
