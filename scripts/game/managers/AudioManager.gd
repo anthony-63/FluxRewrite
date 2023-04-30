@@ -1,6 +1,5 @@
 extends TimeManager
 
-
 @onready var audio_player:AudioStreamPlayer
 
 var audio_stream:AudioStream:
@@ -10,6 +9,9 @@ var audio_stream:AudioStream:
 		length = value.get_length()
 		audio_stream = value
 var time_delay:float = 0
+
+func _ready():
+	audio_player = AudioStreamPlayer.new()
 
 func _set_offset():
 	time_delay = AudioServer.get_time_to_next_mix() + AudioServer.get_output_latency()
@@ -25,11 +27,16 @@ func _start_audio():
 	audio_player.play(real_time)
 	_set_offset()
 
+func play(music_stream: AudioStreamPlayer3D):
+	music_stream.stream = Flux.current_map.audio_stream
+	music_stream.play(0.0)
+	self.start()
+
 func _process(delta:float):
 	if !playing: return
 	super._process(delta)
 
-	if real_time >= 0 and !audio_player.playing and playback_speed > 0:
+	if real_time >= 0 and !playing and playback_speed > 0:
 		_start_audio()
 	if (real_time < 0 or playback_speed <= 0) and audio_player.playing:
 		audio_player.stop()

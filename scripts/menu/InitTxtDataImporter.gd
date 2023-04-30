@@ -52,4 +52,3 @@ func _on_convert_button_pressed():
 		return
 
 	FluxMap.conv_from_txt_audio($MapTxtData.text, $AudioPath.text, $Title.text, $Artist.text, $Mapper.text, $ID.text)
-

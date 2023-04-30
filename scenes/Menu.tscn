@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dr4834nnm72sn"]
+[gd_scene load_steps=21 format=3 uid="uid://dr4834nnm72sn"]
 
 [ext_resource type="Script" path="res://scripts/menu/UpdateVars.gd" id="1_7p613"]
 [ext_resource type="Script" path="res://scripts/Buttons/ImportFromTxt.gd" id="2_3ij4o"]
@@ -9,7 +9,6 @@
 [ext_resource type="Script" path="res://scripts/menu/MapInfo.gd" id="7_yyn24"]
 [ext_resource type="FontFile" uid="uid://b5o12budjhyv7" path="res://fonts/font.ttf" id="8_58afk"]
 [ext_resource type="PackedScene" uid="uid://dxmi7p40ic26a" path="res://prefabs/transition.tscn" id="9_4cwsh"]
-[ext_resource type="Script" path="res://scripts/menu/Transition.gd" id="10_a17og"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pdf3y"]
 
@@ -449,7 +448,6 @@ text = "Play"
 z_index = 4096
 material = SubResource("ShaderMaterial_q58ik")
 layout_mode = 1
-script = ExtResource("10_a17og")
 
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/ReloadMapList" to="MapList/MapListScrollContainer" method="_on_reload_map_list_pressed"]
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapList/MapListScrollContainer/MapScrollVbox/MapButton" method="_on_pressed"]

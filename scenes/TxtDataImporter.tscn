@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=9 format=3 uid="uid://dqcqjr1psbjxt"]
 
 [ext_resource type="Script" path="res://scripts/menu/InitTxtDataImporter.gd" id="1_2dmkk"]
 [ext_resource type="Script" path="res://scripts/Buttons/BackButton.gd" id="3_e0285"]
@@ -72,7 +72,7 @@ size = Vector2i(392, 162)
 ok_button_text = "Open"
 file_mode = 0
 access = 2
-filters = PackedStringArray("*.mp3", "*.wav")
+filters = PackedStringArray("*.mp3", "*.wav", "*.ogg")
 show_hidden_files = true
 
 [node name="BackButton" type="Button" parent="."]
@@ -247,5 +247,6 @@ vertical_alignment = 1
 [connection signal="file_selected" from="TextFileDialog" to="." method="_on_text_file_dialog_file_selected"]
 [connection signal="file_selected" from="AudioFileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="ConvertButton" to="." method="_on_convert_button_pressed"]
+[connection signal="pressed" from="OpenTextFile" to="." method="_on_open_text_file_pressed_bruh"]
 [connection signal="pressed" from="OpenTextFile" to="." method="_on_open_text_file_pressed"]
 [connection signal="pressed" from="OpenMp3File" to="." method="_on_open_mp_3_file_pressed"]

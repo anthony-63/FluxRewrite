@@ -13,5 +13,5 @@ func update(currtime: float):
 	self.transform.origin.x /= 14
 	self.transform.origin.y /= 14
 	
-	if self.transform.origin.z < -1.0:
+	if self.transform.origin.z < -0.8:
 		self.queue_free()
