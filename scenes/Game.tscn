@@ -1,7 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cg4d0tg1y1ct"]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Script" path="res://scripts/game/Game.gd" id="1_8b1w1"]
-[ext_resource type="Texture2D" uid="uid://b7l6hubgl87s" path="res://prefabs/game_border.png" id="2_kcbcn"]
+[ext_resource type="Texture2D" uid="uid://b7l6hubgl87s" path="res://prefabs/user/game_border.png" id="2_kcbcn"]
 [ext_resource type="FontFile" uid="uid://b5o12budjhyv7" path="res://fonts/font.ttf" id="3_f6rql"]
 [ext_resource type="Script" path="res://scripts/game/managers/NoteManager.gd" id="4_567p8"]
 

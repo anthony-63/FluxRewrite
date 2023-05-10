@@ -5,7 +5,8 @@ extends Node
 var note_index = 0
 
 func _ready():
-	pass
+	for note in Flux.current_map.diffs["default"]:
+		note["st"] = note["ms"] - ((Flux.settings["note"]["approach_time"]) * Flux.mods["speed"]) * 1000.0
 	
 func _process(delta):
 	if Flux.current_map == {}:
@@ -14,10 +15,10 @@ func _process(delta):
 	if note_index + 1 >= len(Flux.current_map.diffs.default):
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 		
-	if Flux.audio_manager.current_time > Flux.current_map.diffs["default"][note_index]["ms"]:
+	if Flux.audio_manager.current_time > Flux.current_map.diffs["default"][note_index].st:
 		var ndata = Flux.current_map.diffs["default"][note_index]
 		var note = note_scene.instantiate()
-		note.spawn_time = ndata["ms"] - ((Flux.settings["note"]["approach_time"]) * Flux.mods["speed"]) * 5000.0
+		note.spawn_time = Flux.current_map.diffs["default"][note_index].st
 		note.index = note_index
 		add_child(note)
 		note_index += 1

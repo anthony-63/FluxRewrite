@@ -1,6 +1,7 @@
 extends Node
 
 var maps = []
+var notesets = {}
 var current_map = {}
 
 var settings = {

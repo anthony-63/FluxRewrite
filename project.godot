@@ -25,9 +25,13 @@ Flux="*res://Flux.gd"
 FluxMap="*res://scripts/io/FluxMap.gd"
 TimeManager="*res://scripts/game/managers/TimeManager.gd"
 AudioManager="*res://scripts/game/managers/AudioManager.gd"
-NoteManager="*res://scripts/game/managers/NoteManager.gd"
+FluxNoteset="*res://scripts/io/FluxNoteset.gd"
 
 [rendering]
 
+renderer/rendering_method.mobile="forward_plus"
+renderer/rendering_method.web="forward_plus"
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 anti_aliasing/quality/use_taa=true
+anti_aliasing/quality/use_debanding=true
+occlusion_culling/use_occlusion_culling=true
