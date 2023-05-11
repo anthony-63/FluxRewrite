@@ -309,6 +309,40 @@ offset_bottom = 24.0
 button_pressed = true
 text = "Enable Ruwo on map list"
 
+[node name="Sound" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+visible = false
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Sound"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="MusicVolume" type="SpinBox" parent="Changeables/Settings/SettingTypes/Sound"]
+layout_mode = 0
+offset_left = 115.0
+offset_right = 198.063
+offset_bottom = 31.0
+max_value = 20.0
+rounded = true
+suffix = "db"
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Sound/MusicVolume"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -111.0
+offset_right = -2.0
+grow_vertical = 2
+text = "Music Volume"
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="SaveSettings" type="Button" parent="Changeables/Settings"]
 layout_mode = 1
 anchors_preset = 1
