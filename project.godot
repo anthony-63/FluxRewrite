@@ -5,6 +5,7 @@
 ; Format:
 ;   [section] ; section goes between []
 ;   param=value ; assign values to parameters
+; test comit 
 
 config_version=5
 
