@@ -17,9 +17,9 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukrn5"]
 bg_color = Color(0.0941176, 0.0784314, 0.0627451, 1)
 
-[sub_resource type="Theme" id="Theme_2pltl"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_hucv2"]
+
+[sub_resource type="Theme" id="Theme_2pltl"]
 
 [sub_resource type="Theme" id="Theme_25olc"]
 default_font_size = 18
@@ -206,7 +206,6 @@ grow_vertical = 0
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_ukrn5")
 
 [node name="Mods" type="TabBar" parent="Changeables"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -219,7 +218,29 @@ grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 metadata/_edit_use_anchors_ = true
 
+[node name="Speed" type="SpinBox" parent="Changeables/Mods"]
+offset_left = 54.0
+offset_right = 137.063
+offset_bottom = 31.0
+step = 0.01
+value = 1.0
+suffix = "x"
+custom_arrow_step = 0.1
+
+[node name="Label" type="Label" parent="Changeables/Mods/Speed"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -51.0
+offset_right = 1.0
+grow_vertical = 2
+text = "Speed:"
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Settings" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings"]
@@ -237,7 +258,6 @@ offset_bottom = 270.0
 theme = SubResource("Theme_2pltl")
 
 [node name="Note" type="TabBar" parent="Changeables/Settings/SettingTypes"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Note"]
@@ -311,6 +331,7 @@ button_pressed = true
 text = "Enable Ruwo on map list"
 
 [node name="Sound" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Sound"]
@@ -485,6 +506,7 @@ layout_mode = 1
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/ReloadMapList" to="MapList/MapListScrollContainer" method="_on_reload_map_list_pressed"]
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapList/MapListScrollContainer/MapScrollVbox/MapButton" method="_on_pressed"]
 [connection signal="selected" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapInfoPanel" method="_on_map_button_selected"]
+[connection signal="value_changed" from="Changeables/Mods/Speed" to="." method="_on_speed_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/AR" to="." method="_on_ar_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/SD" to="." method="_on_sd_value_changed"]
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/UI/EnableRuwoCheckbox" to="." method="_on_enable_ruwo_checkbox_toggled"]

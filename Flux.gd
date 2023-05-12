@@ -13,6 +13,9 @@ var default_settings = {
 	"ui": {
 		"enable_ruwo": true,
 	},
+	"sets": {
+		"noteset": "default"
+	},
 	"audio": {
 		"music_volume": 5.0,
 	}

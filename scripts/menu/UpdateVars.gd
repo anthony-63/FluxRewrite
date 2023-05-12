@@ -5,7 +5,7 @@ func _ready():
 	$Changeables/Settings/SettingTypes/Note/SD.value = Flux.settings["note"]["sd"]
 	$Changeables/Settings/SettingTypes/UI/EnableRuwoCheckbox.toggle_mode = Flux.settings["ui"]["enable_ruwo"]
 	$Changeables/Settings/SettingTypes/Sound/MusicVolume.value = Flux.settings["audio"]["music_volume"] * 100.0
-
+	
 func _process(delta):
 	if Flux.settings["ui"]["enable_ruwo"]:
 		$Ruwo.show()
@@ -32,3 +32,6 @@ func _on_sd_value_changed(value):
 
 func _on_music_volume_value_changed(value):
 	Flux.settings["audio"]["music_volume"] = value / 100.0
+
+func _on_speed_value_changed(value):
+	Flux.mods.speed = value
