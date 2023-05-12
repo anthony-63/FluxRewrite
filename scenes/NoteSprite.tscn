@@ -5,5 +5,6 @@
 
 [node name="NoteSprite" type="Sprite3D"]
 transform = Transform3D(0.090039, 0, 0, 0, 0.09, 0, 0, 0, 0.3, -0.00187546, -2.98023e-08, 0.000335693)
+pixel_size = 0.0015
 texture = ExtResource("1_skqtm")
 script = ExtResource("2_50cy8")
