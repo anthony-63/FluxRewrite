@@ -4,7 +4,7 @@ var maps = []
 var notesets = {}
 var current_map = {}
 
-var settings = {
+var default_settings = {
 	"note": {
 		"ar": 10.0,
 		"sd": 4.0,
@@ -13,7 +13,12 @@ var settings = {
 	"ui": {
 		"enable_ruwo": true,
 	},
+	"audio": {
+		"music_volume": 5.0,
+	}
 }
+
+var settings = default_settings
 
 var mods = {
 	"speed": 1.0,

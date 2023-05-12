@@ -206,6 +206,7 @@ grow_vertical = 0
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_ukrn5")
 
 [node name="Mods" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -219,7 +220,6 @@ color = Color(0.141176, 0.141176, 0.141176, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Settings" type="TabBar" parent="Changeables"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings"]
@@ -237,6 +237,7 @@ offset_bottom = 270.0
 theme = SubResource("Theme_2pltl")
 
 [node name="Note" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Note"]
@@ -310,7 +311,6 @@ button_pressed = true
 text = "Enable Ruwo on map list"
 
 [node name="Sound" type="TabBar" parent="Changeables/Settings/SettingTypes"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Sound"]
@@ -327,9 +327,8 @@ layout_mode = 0
 offset_left = 115.0
 offset_right = 198.063
 offset_bottom = 31.0
-max_value = 20.0
 rounded = true
-suffix = "db"
+suffix = "%"
 
 [node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Sound/MusicVolume"]
 layout_mode = 1
@@ -489,5 +488,6 @@ layout_mode = 1
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/AR" to="." method="_on_ar_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/SD" to="." method="_on_sd_value_changed"]
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/UI/EnableRuwoCheckbox" to="." method="_on_enable_ruwo_checkbox_toggled"]
+[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Sound/MusicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="pressed" from="Changeables/Settings/SaveSettings" to="." method="_on_save_settings_pressed"]
 [connection signal="pressed" from="MapInfoPanel/PlayButton" to="MapInfoPanel" method="_on_play_button_pressed"]

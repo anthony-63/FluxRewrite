@@ -45,10 +45,25 @@ func load_notesets():
 		
 		load_notesets()
 	finished_loading_notesets = true
+
+func validate_settings(settings_dict: Dictionary):
+	for cat in Flux.default_settings.keys():
+		if not cat in settings_dict:
+			return false
+		for setting in cat.keys():
+			if not setting in settings_dict[cat]:
+				return false
+	return true
+
+
 func load_settings():
 	if FileAccess.file_exists("user://settings.json"):
 		var f = FileAccess.get_file_as_string("user://settings.json")
-		Flux.settings = JSON.parse_string(f)
+		var settings_dict = JSON.parse_string(f)
+		if validate_settings(settings_dict):
+			Flux.settings = settings_dict
+		else:
+			print("Invalid settings file, using default.")
 	finished_loading_settings = true
 
 
