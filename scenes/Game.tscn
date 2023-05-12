@@ -44,4 +44,4 @@ environment = SubResource("Environment_2pdyn")
 [node name="NoteSpawner" type="Node3D" parent="."]
 script = ExtResource("4_567p8")
 
-[node name="MusicStream" type="AudioStreamPlayer3D" parent="."]
+[node name="MusicStream" type="AudioStreamPlayer" parent="."]

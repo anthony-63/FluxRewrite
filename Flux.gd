@@ -23,7 +23,6 @@ var mods = {
 
 func _ready():
 	pass
-
 func reload_game():
 	get_tree().change_scene_to_file("res://scenes/Loading.tscn")
 

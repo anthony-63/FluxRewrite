@@ -27,7 +27,7 @@ func _start_audio():
 	audio_player.play(real_time)
 	_set_offset()
 
-func play(music_stream: AudioStreamPlayer3D):
+func play(music_stream: AudioStreamPlayer):
 	music_stream.stream = Flux.current_map.audio_stream
 	music_stream.play(0.0)
 	self.start()
