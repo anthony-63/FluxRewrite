@@ -213,6 +213,7 @@ grow_vertical = 0
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_ukrn5")
 
 [node name="Mods" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -273,7 +274,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Settings" type="TabBar" parent="Changeables"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings"]
@@ -291,6 +291,7 @@ offset_bottom = 270.0
 theme = SubResource("Theme_2pltl")
 
 [node name="Note" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Note"]
@@ -423,6 +424,54 @@ offset_top = 3.0
 offset_right = -4.0
 offset_bottom = 29.0
 text = "Noteset:"
+
+[node name="Cursor" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Cursor"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="CursorScale" type="SpinBox" parent="Changeables/Settings/SettingTypes/Cursor"]
+offset_left = 53.0
+offset_right = 136.063
+offset_bottom = 31.0
+step = 0.01
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Cursor/CursorScale"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -47.0
+offset_right = -2.0
+grow_vertical = 2
+text = "Scale:"
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CursorSensitivity" type="SpinBox" parent="Changeables/Settings/SettingTypes/Cursor"]
+offset_left = 90.0
+offset_top = 32.0
+offset_right = 173.063
+offset_bottom = 63.0
+step = 0.01
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Cursor/CursorSensitivity"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -84.0
+grow_vertical = 2
+text = "Sensitivity:"
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="SaveSettings" type="Button" parent="Changeables/Settings"]
 layout_mode = 1

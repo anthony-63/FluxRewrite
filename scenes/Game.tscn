@@ -1,9 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://nco2gd3ylcrw"]
+[gd_scene load_steps=8 format=3 uid="uid://nco2gd3ylcrw"]
 
 [ext_resource type="Script" path="res://scripts/game/Game.gd" id="1_8b1w1"]
 [ext_resource type="Texture2D" uid="uid://rcehjeafqa81" path="res://prefabs/user/border.png" id="2_uviet"]
 [ext_resource type="FontFile" uid="uid://b5o12budjhyv7" path="res://fonts/font.ttf" id="3_f6rql"]
 [ext_resource type="Script" path="res://scripts/game/managers/NoteManager.gd" id="4_567p8"]
+[ext_resource type="Script" path="res://scripts/game/Cursor.gd" id="5_he3ju"]
+[ext_resource type="Texture2D" uid="uid://dk8bu7ktdhcw" path="res://prefabs/user/cursor.png" id="5_s5dj5"]
 
 [sub_resource type="Environment" id="Environment_2pdyn"]
 background_mode = 1
@@ -45,3 +47,8 @@ environment = SubResource("Environment_2pdyn")
 script = ExtResource("4_567p8")
 
 [node name="MusicStream" type="AudioStreamPlayer" parent="."]
+
+[node name="Cursor" type="Sprite3D" parent="."]
+pixel_size = 0.0001
+texture = ExtResource("5_s5dj5")
+script = ExtResource("5_he3ju")

@@ -10,6 +10,10 @@ var default_settings = {
 		"sd": 4.0,
 		"approach_time": 0.0,
 	},
+	"cursor": {
+		"sensitivity": 0.2,
+		"scale": 1.9,
+	},
 	"ui": {
 		"enable_ruwo": true,
 	},

@@ -1,10 +1,13 @@
 extends Node
 
 func _ready():
-	$Changeables/Settings/SettingTypes/Note/AR.value = Flux.settings["note"]["ar"]
-	$Changeables/Settings/SettingTypes/Note/SD.value = Flux.settings["note"]["sd"]
-	$Changeables/Settings/SettingTypes/UI/EnableRuwoCheckbox.toggle_mode = Flux.settings["ui"]["enable_ruwo"]
-	$Changeables/Settings/SettingTypes/Sound/MusicVolume.value = Flux.settings["audio"]["music_volume"] * 100.0
+	$Changeables/Settings/SettingTypes/Note/AR.value = Flux.settings.note.ar
+	$Changeables/Settings/SettingTypes/Note/SD.value = Flux.settings.note.sd
+	$Changeables/Settings/SettingTypes/UI/EnableRuwoCheckbox.toggle_mode = Flux.settings.ui.enable_ruwo
+	$Changeables/Settings/SettingTypes/Sound/MusicVolume.value = Flux.settings.audio.music_volume * 100.0
+	$Changeables/Settings/SettingTypes/Cursor/CursorScale.value = Flux.settings.cursor.scale
+	$Changeables/Settings/SettingTypes/Cursor/CursorSensitivity.value = Flux.settings.cursor.sensitivity
+	
 	for noteset in Flux.notesets.keys():
 		$Changeables/Settings/SettingTypes/Sets/Noteset.add_item(noteset)
 
