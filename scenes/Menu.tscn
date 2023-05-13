@@ -206,6 +206,7 @@ grow_vertical = 0
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_ukrn5")
 
 [node name="Mods" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -239,8 +240,30 @@ label_settings = SubResource("LabelSettings_hucv2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Settings" type="TabBar" parent="Changeables"]
+[node name="Seek" type="SpinBox" parent="Changeables/Mods"]
 visible = false
+offset_left = 54.0
+offset_top = 32.0
+offset_right = 137.063
+offset_bottom = 63.0
+max_value = 999999.0
+rounded = true
+suffix = "s"
+custom_arrow_step = 0.1
+
+[node name="Label" type="Label" parent="Changeables/Mods/Seek"]
+layout_mode = 1
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_left = -51.0
+offset_right = 1.0
+grow_vertical = 2
+text = "Seek:"
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings" type="TabBar" parent="Changeables"]
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings"]
@@ -258,6 +281,7 @@ offset_bottom = 270.0
 theme = SubResource("Theme_2pltl")
 
 [node name="Note" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Note"]
@@ -362,6 +386,33 @@ text = "Music Volume"
 label_settings = SubResource("LabelSettings_hucv2")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Sets" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Sets"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="Noteset" type="OptionButton" parent="Changeables/Settings/SettingTypes/Sets"]
+layout_mode = 0
+offset_left = 76.0
+offset_top = 4.0
+offset_right = 249.0
+offset_bottom = 32.0
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Sets/Noteset"]
+layout_mode = 0
+offset_left = -70.0
+offset_top = 3.0
+offset_right = -4.0
+offset_bottom = 29.0
+text = "Noteset:"
 
 [node name="SaveSettings" type="Button" parent="Changeables/Settings"]
 layout_mode = 1
@@ -507,6 +558,7 @@ layout_mode = 1
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapList/MapListScrollContainer/MapScrollVbox/MapButton" method="_on_pressed"]
 [connection signal="selected" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapInfoPanel" method="_on_map_button_selected"]
 [connection signal="value_changed" from="Changeables/Mods/Speed" to="." method="_on_speed_value_changed"]
+[connection signal="value_changed" from="Changeables/Mods/Seek" to="." method="_on_seek_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/AR" to="." method="_on_ar_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/SD" to="." method="_on_sd_value_changed"]
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/UI/EnableRuwoCheckbox" to="." method="_on_enable_ruwo_checkbox_toggled"]

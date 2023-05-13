@@ -25,6 +25,7 @@ var settings = default_settings
 
 var mods = {
 	"speed": 1.0,
+	"seek": 0,
 }
 
 @onready var audio_manager: AudioManager = get_node("/root/AudioManager")

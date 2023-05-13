@@ -10,5 +10,6 @@ func _on_map_button_selected(map):
 	$PlayButton.visible = true
 
 func _on_play_button_pressed():
+	print(Flux.settings.sets.noteset)
 	Flux.current_map = selected_map
 	get_tree().change_scene_to_file("res://scenes/Game.tscn")

@@ -5,8 +5,11 @@ func _ready():
 	$Changeables/Settings/SettingTypes/Note/SD.value = Flux.settings["note"]["sd"]
 	$Changeables/Settings/SettingTypes/UI/EnableRuwoCheckbox.toggle_mode = Flux.settings["ui"]["enable_ruwo"]
 	$Changeables/Settings/SettingTypes/Sound/MusicVolume.value = Flux.settings["audio"]["music_volume"] * 100.0
-	
+	for noteset in Flux.notesets.keys():
+		$Changeables/Settings/SettingTypes/Sets/Noteset.add_item(noteset)
+
 func _process(delta):
+	Flux.settings.sets.noteset = $Changeables/Settings/SettingTypes/Sets/Noteset.get_item_text($Changeables/Settings/SettingTypes/Sets/Noteset.selected)
 	if Flux.settings["ui"]["enable_ruwo"]:
 		$Ruwo.show()
 	else:
@@ -35,3 +38,6 @@ func _on_music_volume_value_changed(value):
 
 func _on_speed_value_changed(value):
 	Flux.mods.speed = value
+
+func _on_seek_value_changed(value):
+	Flux.mods.seek = value
