@@ -23,20 +23,20 @@ texture = ExtResource("2_uviet")
 
 [node name="TimeIntoMap" type="Label3D" parent="HUD"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -3.09944e-06, -1.60594, 0.000213027)
-pixel_size = 0.0001
+pixel_size = 0.003
 double_sided = false
 text = "0:00/0:00
 "
 font = ExtResource("3_f6rql")
-font_size = 1500
+font_size = 49
 
 [node name="MapName" type="Label3D" parent="HUD"]
 transform = Transform3D(-1, -0.0003963, 0.000613279, -0.000238369, 0.971063, 0.238822, -0.000690175, 0.238822, -0.971063, -3.09944e-06, -1.77697, 0.000213027)
-pixel_size = 0.0001
+pixel_size = 0.003
 double_sided = false
 text = "Billy Sick - Balls In Your Jaws"
 font = ExtResource("3_f6rql")
-font_size = 1500
+font_size = 50
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2pdyn")

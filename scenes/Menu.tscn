@@ -206,7 +206,6 @@ grow_vertical = 0
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_ukrn5")
 
 [node name="Mods" type="TabBar" parent="Changeables"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -220,6 +219,7 @@ color = Color(0.141176, 0.141176, 0.141176, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="Speed" type="SpinBox" parent="Changeables/Mods"]
+layout_mode = 0
 offset_left = 54.0
 offset_right = 137.063
 offset_bottom = 31.0
@@ -242,6 +242,7 @@ vertical_alignment = 1
 
 [node name="Seek" type="SpinBox" parent="Changeables/Mods"]
 visible = false
+layout_mode = 0
 offset_left = 54.0
 offset_top = 32.0
 offset_right = 137.063
@@ -264,6 +265,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Settings" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings"]
@@ -281,7 +283,6 @@ offset_bottom = 270.0
 theme = SubResource("Theme_2pltl")
 
 [node name="Note" type="TabBar" parent="Changeables/Settings/SettingTypes"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Note"]
@@ -388,6 +389,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Sets" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Sets"]
