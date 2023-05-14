@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://nco2gd3ylcrw"]
+[gd_scene load_steps=11 format=3 uid="uid://nco2gd3ylcrw"]
 
 [ext_resource type="Script" path="res://scripts/game/Game.gd" id="1_8b1w1"]
 [ext_resource type="Texture2D" uid="uid://rcehjeafqa81" path="res://prefabs/user/border.png" id="2_uviet"]
@@ -6,9 +6,30 @@
 [ext_resource type="Script" path="res://scripts/game/managers/NoteManager.gd" id="4_567p8"]
 [ext_resource type="Script" path="res://scripts/game/Cursor.gd" id="5_he3ju"]
 [ext_resource type="Texture2D" uid="uid://dk8bu7ktdhcw" path="res://prefabs/user/cursor.png" id="5_s5dj5"]
+[ext_resource type="PackedScene" uid="uid://dxmi7p40ic26a" path="res://prefabs/transition.tscn" id="7_tq6j5"]
 
 [sub_resource type="Environment" id="Environment_2pdyn"]
 background_mode = 1
+
+[sub_resource type="Shader" id="Shader_0h38x"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform float circle_size : hint_range(0.0, 1.05);
+uniform float screen_width;
+uniform float screen_height;
+
+void fragment() {
+	float ratio = screen_width / screen_height;
+	float dist = distance(vec2(0.5, 0.5), vec2(mix(0.5, UV.x, ratio), UV.y));
+	COLOR.a = step(circle_size, dist);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6fa0p"]
+shader = SubResource("Shader_0h38x")
+shader_parameter/circle_size = 1.05
+shader_parameter/screen_width = 1920.0
+shader_parameter/screen_height = 1080.0
 
 [node name="Game" type="Node3D"]
 script = ExtResource("1_8b1w1")
@@ -52,3 +73,9 @@ script = ExtResource("4_567p8")
 pixel_size = 0.0001
 texture = ExtResource("5_s5dj5")
 script = ExtResource("5_he3ju")
+
+[node name="Transition" parent="." instance=ExtResource("7_tq6j5")]
+z_index = 4096
+material = SubResource("ShaderMaterial_6fa0p")
+
+[editable path="Transition"]

@@ -3,6 +3,7 @@ extends Node
 var maps = []
 var notesets = {}
 var current_map = {}
+var transition_time:float = 1
 
 var default_settings = {
 	"note": {
@@ -11,11 +12,11 @@ var default_settings = {
 		"approach_time": 0.0,
 	},
 	"cursor": {
-		"sensitivity": 0.2,
+		"sensitivity": 1,
 		"scale": 1.9,
 	},
 	"ui": {
-		"enable_ruwo": true,
+		"enable_ruwo": true, # YEAHHHHH ! ! ! ! ! !
 	},
 	"sets": {
 		"noteset": "default"
@@ -38,10 +39,6 @@ func _ready():
 	pass
 func reload_game():
 	get_tree().change_scene_to_file("res://scenes/Loading.tscn")
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
 
 func ms_to_min_sec_str(ms):
 	var min = int(float(ms) * 0.001) / 60

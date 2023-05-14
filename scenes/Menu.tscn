@@ -40,7 +40,7 @@ font_size = 18
 font = ExtResource("8_58afk")
 font_size = 18
 
-[sub_resource type="Shader" id="Shader_0h38x"]
+[sub_resource type="Shader" id="Shader_81pu1"]
 code = "shader_type canvas_item;
 render_mode unshaded;
 
@@ -55,7 +55,7 @@ void fragment() {
 }"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q58ik"]
-shader = SubResource("Shader_0h38x")
+shader = SubResource("Shader_81pu1")
 shader_parameter/circle_size = 1.05
 shader_parameter/screen_width = 1920.0
 shader_parameter/screen_height = 1080.0
@@ -141,6 +141,7 @@ text = "Reload
 "
 
 [node name="HSeparator" type="HSeparator" parent="MapList/MapListScrollContainer/MapScrollVbox"]
+visible = false
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_pdf3y")
 
@@ -213,7 +214,6 @@ grow_vertical = 0
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_ukrn5")
 
 [node name="Mods" type="TabBar" parent="Changeables"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -274,6 +274,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Settings" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings"]
@@ -291,7 +292,6 @@ offset_bottom = 270.0
 theme = SubResource("Theme_2pltl")
 
 [node name="Note" type="TabBar" parent="Changeables/Settings/SettingTypes"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Note"]
@@ -426,6 +426,7 @@ offset_bottom = 29.0
 text = "Noteset:"
 
 [node name="Cursor" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Cursor"]
@@ -438,6 +439,7 @@ grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 
 [node name="CursorScale" type="SpinBox" parent="Changeables/Settings/SettingTypes/Cursor"]
+layout_mode = 0
 offset_left = 53.0
 offset_right = 136.063
 offset_bottom = 31.0
@@ -456,6 +458,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CursorSensitivity" type="SpinBox" parent="Changeables/Settings/SettingTypes/Cursor"]
+layout_mode = 0
 offset_left = 90.0
 offset_top = 32.0
 offset_right = 173.063
@@ -467,6 +470,7 @@ layout_mode = 1
 anchors_preset = 9
 anchor_bottom = 1.0
 offset_left = -84.0
+offset_right = 1.0
 grow_vertical = 2
 text = "Sensitivity:"
 label_settings = SubResource("LabelSettings_hucv2")
@@ -649,3 +653,5 @@ layout_mode = 1
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Sound/MusicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="pressed" from="Changeables/Settings/SaveSettings" to="." method="_on_save_settings_pressed"]
 [connection signal="pressed" from="MapInfoPanel/PlayButton" to="MapInfoPanel" method="_on_play_button_pressed"]
+
+[editable path="Transition"]
