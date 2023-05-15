@@ -28,7 +28,7 @@ func update(currtime: float):
 	a2.scale.x = Flux.settings.game.hitbox
 	a2.scale.y = Flux.settings.game.hitbox
 
-	if Flux.cursor_area.overlaps_area(a2): # this dont work....
+	if Flux.cursor_area.overlaps_area(a2) && hittable: # this dont work....
 		hittable = false
 		unhittable = true
 		Flux.game_stats.hits += 1
