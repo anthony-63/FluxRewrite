@@ -20,3 +20,6 @@ func _ready():
 func _process(delta):
 	$HUD/TimeIntoMap.text = Flux.ms_to_min_sec_str(Flux.audio_manager.current_time) + "/" + Flux.ms_to_min_sec_str(Flux.current_map.diffs["default"][-1]["ms"])
 	$HUD/Misses/MissAmount.text = str(Flux.game_stats.misses)
+	$HUD/Hits/HitAmount.text = str(Flux.game_stats.hits)
+	$HUD/Total/TotalAmount.text = str(Flux.game_stats.misses + Flux.game_stats.hits)
+	

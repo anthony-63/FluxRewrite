@@ -62,7 +62,7 @@ font = ExtResource("3_f6rql")
 font_size = 50
 
 [node name="Misses" type="Label3D" parent="HUD"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.83039, -0.519404, 0.000479102)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.83288, -0.400792, 0.00155461)
 pixel_size = 0.003
 double_sided = false
 text = "Misses"
@@ -70,6 +70,39 @@ font = ExtResource("3_f6rql")
 font_size = 49
 
 [node name="MissAmount" type="Label3D" parent="HUD/Misses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.163797, 0)
+pixel_size = 0.003
+double_sided = false
+text = "0"
+font = ExtResource("3_f6rql")
+font_size = 49
+
+[node name="Hits" type="Label3D" parent="HUD"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.83039, -0.769405, 0.000479102)
+pixel_size = 0.003
+double_sided = false
+text = "Hits"
+font = ExtResource("3_f6rql")
+font_size = 49
+
+[node name="HitAmount" type="Label3D" parent="HUD/Hits"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.163797, 0)
+pixel_size = 0.003
+double_sided = false
+text = "0"
+font = ExtResource("3_f6rql")
+font_size = 49
+
+[node name="Total" type="Label3D" parent="HUD"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.83349, -1.13537, 0.000432968)
+pixel_size = 0.003
+double_sided = false
+text = "Total
+"
+font = ExtResource("3_f6rql")
+font_size = 49
+
+[node name="TotalAmount" type="Label3D" parent="HUD/Total"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.163797, 0)
 pixel_size = 0.003
 double_sided = false
