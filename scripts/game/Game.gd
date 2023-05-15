@@ -10,7 +10,7 @@ func _ready():
 	Flux.audio_manager.length = Flux.current_map.diffs["default"][-1]["ms"]
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(Flux.settings.audio.music_volume))
 	
-	await get_tree().create_timer(1.5).timeout	
+	await get_tree().create_timer(Flux.default_settings.game.wait_time).timeout
 	
 	Flux.audio_manager.play($MusicStream)
 	Flux.audio_manager.playback_speed = Flux.mods.speed

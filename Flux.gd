@@ -19,7 +19,8 @@ var default_settings = {
 	},
 	"game": {
 		"hitwindow": 58,
-		"hitbox": 1.14
+		"hitbox": 1.14,
+		"wait_time": 1.5,
 	},
 	"cursor": {
 		"sensitivity": 1,
