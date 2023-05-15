@@ -61,6 +61,22 @@ text = "Billy Sick - Balls In Your Jaws"
 font = ExtResource("3_f6rql")
 font_size = 50
 
+[node name="Misses" type="Label3D" parent="HUD"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1.83039, -0.519404, 0.000479102)
+pixel_size = 0.003
+double_sided = false
+text = "Misses"
+font = ExtResource("3_f6rql")
+font_size = 49
+
+[node name="MissAmount" type="Label3D" parent="HUD/Misses"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.163797, 0)
+pixel_size = 0.003
+double_sided = false
+text = "0"
+font = ExtResource("3_f6rql")
+font_size = 49
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2pdyn")
 

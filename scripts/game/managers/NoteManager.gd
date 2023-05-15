@@ -22,7 +22,8 @@ func _process(delta):
 		var note = note_scene.instantiate()
 		note.spawn_time = Flux.current_map.diffs["default"][note_index].st
 		note.index = note_index
-		
+		note.hittable = false
+		note.ms = ndata.ms
 		note.texture = noteset[note_index % len(noteset)]
 		add_child(note)
 		note_index += 1
