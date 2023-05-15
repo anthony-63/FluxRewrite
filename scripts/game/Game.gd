@@ -22,4 +22,3 @@ func _process(delta):
 	$HUD/Misses/MissAmount.text = str(Flux.game_stats.misses)
 	$HUD/Hits/HitAmount.text = str(Flux.game_stats.hits)
 	$HUD/Total/TotalAmount.text = str(Flux.game_stats.misses + Flux.game_stats.hits)
-	

@@ -9,6 +9,16 @@ var unhittable: bool
 func _ready():
 	self.scale = Vector3.ONE*0.865
 
+func check_hit():
+	var r1 = {
+		"x": self.transform.origin.x + (self.scale.x / 2.0), 
+		"y": self.transform.origin.y + (self.scale.y / 2.0),
+		"w": Flux.settings.game.hitbox,
+		"h": Flux.settings.game.hitbox,
+	}
+	var r2 = Flux.cursor_info
+	# troller
+	return (r1.x < r2.x + r2.w && r1.x + r1.w > r2.x && r1.y < r2.y + r2.h && r1.h + r1.y > r2.y)
 func update(currtime: float):
 	var current_note = Flux.current_map.diffs["default"][index]
 	var time = (float(current_note.ms) - currtime) / (float(current_note.ms) - spawn_time)
@@ -20,17 +30,10 @@ func update(currtime: float):
 		unhittable = true
 		Flux.game_stats.misses += 1
 	
-	$debug_label.text = "%s\n%s" % [str(hittable), str(unhittable)]
-	
-	var a2 = Area2D.new()
-	a2.transform.origin.x = self.transform.origin.x
-	a2.transform.origin.y = self.transform.origin.y
-	a2.scale.x = Flux.settings.game.hitbox
-	a2.scale.y = Flux.settings.game.hitbox
-
-	if Flux.cursor_area.overlaps_area(a2) && hittable: # this dont work....
+	if check_hit() && hittable:
 		hittable = false
 		unhittable = true
+		self.visible = false
 		Flux.game_stats.hits += 1
 	
 	if self.transform.origin.z < -2.0:

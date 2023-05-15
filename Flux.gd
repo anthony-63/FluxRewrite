@@ -4,7 +4,13 @@ var maps = []
 var notesets = {}
 var current_map = {}
 var transition_time:float = 1
-var cursor_area: Area2D
+
+var cursor_info: Dictionary = {
+	"x": 0.0,
+	"y": 0.0,
+	"w": 0.2625,
+	"h": 0.2625,
+}
 
 var game_stats = {
 	"misses": 0,
@@ -47,7 +53,7 @@ var mods = {
 @onready var audio_manager: AudioManager = get_node("/root/AudioManager")
 
 func _ready():
-	cursor_area = Area2D.new()
+	pass
 	
 func reload_game():
 	get_tree().change_scene_to_file("res://scenes/Loading.tscn")
