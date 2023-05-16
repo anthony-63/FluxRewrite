@@ -70,6 +70,7 @@ func _process(_delta):
 	thread.wait_to_finish()
 	thread.start(load_notesets)
 	thread.wait_to_finish()
+	FluxNoteset.load_default_noteset()
 	
 	if finished_loading_maps and finished_loading_settings and finished_loading_notesets:
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")

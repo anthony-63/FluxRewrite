@@ -27,5 +27,7 @@ func load_default_noteset():
 	Flux.notesets["default"] = []
 	
 	for file in files:
-		var itex: ImageTexture = load(file)
+		var res = load(file)
+		var itex = ImageTexture.new()
+		itex.set_image(res)
 		Flux.notesets["default"].append(itex)

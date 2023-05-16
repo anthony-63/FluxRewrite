@@ -16,6 +16,10 @@ var cursor_info: Dictionary = {
 var game_stats = {
 	"misses": 0,
 	"hits": 0,
+	"hp": 0.0,
+	"max_hp": 5.0,
+	"hp_per_hit": 0.5,
+	"hp_per_miss": 1.0,
 }
 
 var default_settings = {
@@ -40,7 +44,7 @@ var default_settings = {
 		"noteset": "default"
 	},
 	"audio": {
-		"music_volume": 5.0, # db
+		"music_volume": 0.5, # %
 	}
 }
 

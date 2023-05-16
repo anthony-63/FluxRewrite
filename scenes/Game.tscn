@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://nco2gd3ylcrw"]
+[gd_scene load_steps=15 format=3 uid="uid://nco2gd3ylcrw"]
 
 [ext_resource type="Script" path="res://scripts/game/Game.gd" id="1_8b1w1"]
 [ext_resource type="Texture2D" uid="uid://rcehjeafqa81" path="res://prefabs/user/border.png" id="2_uviet"]
@@ -8,6 +8,15 @@
 [ext_resource type="Texture2D" uid="uid://dk8bu7ktdhcw" path="res://prefabs/user/cursor.png" id="5_s5dj5"]
 [ext_resource type="PackedScene" uid="uid://dxmi7p40ic26a" path="res://prefabs/transition.tscn" id="7_tq6j5"]
 [ext_resource type="Script" path="res://scripts/game/managers/AudioManager.gd" id="8_bg3u7"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewf8k"]
+bg_color = Color(0.92549, 0.423529, 0.352941, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kgtn"]
+bg_color = Color(0.392157, 0.690196, 0.196078, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_lsoql"]
+viewport_path = NodePath("HUD/SubViewport")
 
 [sub_resource type="Environment" id="Environment_2pdyn"]
 background_mode = 1
@@ -109,6 +118,29 @@ double_sided = false
 text = "0"
 font = ExtResource("3_f6rql")
 font_size = 49
+
+[node name="HealthBarViewport" type="SubViewport" parent="HUD"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1280, 50)
+render_target_update_mode = 4
+
+[node name="HealthBarProgress" type="ProgressBar" parent="HUD/HealthBarViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_ewf8k")
+theme_override_styles/fill = SubResource("StyleBoxFlat_4kgtn")
+max_value = 5.0
+value = 0.5
+show_percentage = false
+
+[node name="HealthBarSprite" type="Sprite3D" parent="HUD"]
+transform = Transform3D(-0.41171, 0, -1.187e-06, 0, 0.261822, 0, 3.59928e-08, 0, -13.5776, 0, 1.58168, 0)
+pixel_size = 0.005
+texture = SubResource("ViewportTexture_lsoql")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2pdyn")
