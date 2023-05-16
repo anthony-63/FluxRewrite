@@ -49,12 +49,10 @@ var settings = default_settings
 var mods = {
 	"speed": 1.0,
 	"seek": 0,
+	"endseek": -1
 }
 
 @onready var audio_manager: AudioManager = get_node("/root/AudioManager")
-
-func _ready():
-	pass
 	
 func _process(delta):
 	if Input.is_action_just_pressed("toggle_fullscreen"):
