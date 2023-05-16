@@ -7,10 +7,10 @@ var transition_time:float = 1
 var fullscreen = false
 
 var cursor_info: Dictionary = {
-	"x": 0.0,
-	"y": 0.0,
-	"w": 0.2625,
-	"h": 0.2625,
+	"x": 0.0, # m
+	"y": 0.0, # m
+	"w": 0.2625, # m
+	"h": 0.2625, # m
 }
 
 var game_stats = {
@@ -20,27 +20,27 @@ var game_stats = {
 
 var default_settings = {
 	"note": {
-		"ar": 10.0,
-		"sd": 4.0,
-		"approach_time": 0.0,
+		"ar": 10.0, # m/s
+		"sd": 4.0, # m
+		"approach_time": 0.0, # s
 	},
 	"game": {
-		"hitwindow": 58,
-		"hitbox": 1.14,
-		"wait_time": 1.5,
+		"hitwindow": 58, # ms
+		"hitbox": 1.14, # m
+		"wait_time": 1.5, # s
 	},
 	"cursor": {
-		"sensitivity": 1,
-		"scale": 1.9,
+		"sensitivity": 1, # m/s
+		"scale": 1.9, # m
 	},
 	"ui": {
-		"enable_ruwo": true, # YEAHHHHH ! ! ! ! ! !
+		"enable_ruwo": true,
 	},
 	"sets": {
 		"noteset": "default"
 	},
 	"audio": {
-		"music_volume": 5.0,
+		"music_volume": 5.0, # db
 	}
 }
 
@@ -49,7 +49,7 @@ var settings = default_settings
 var mods = {
 	"speed": 1.0,
 	"seek": 0,
-	"endseek": -1
+	"endseek": -1,
 }
 
 @onready var audio_manager: AudioManager = get_node("/root/AudioManager")
@@ -63,6 +63,12 @@ func _process(delta):
 
 func reload_game():
 	get_tree().change_scene_to_file("res://scenes/Loading.tscn")
+
+func reload_game_stylish():
+	if $"..".has_node("Transition"):
+		$"../Transition".transition_out()
+		await get_tree().create_timer(transition_time).timeout
+		get_tree().change_scene_to_file("res://scenes/Loading.tscn")
 
 func ms_to_min_sec_str(ms):
 	var min = int(float(ms) * 0.001) / 60
