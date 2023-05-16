@@ -43,5 +43,5 @@ func _process(_delta):
 	try_finish()
 
 func try_finish():
-	if current_time > length:
+	if current_time > length + 3000:
 		finish()

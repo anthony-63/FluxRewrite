@@ -52,13 +52,12 @@ var mods = {
 	"endseek": -1,
 }
 
-@onready var audio_manager: AudioManager = get_node("/root/AudioManager")
-	
+func _ready():
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 func _process(_delta):
 	if Input.is_action_just_pressed("toggle_fullscreen"):
 		if fullscreen: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		else: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
-		
 		fullscreen = !fullscreen
 
 func reload_game():

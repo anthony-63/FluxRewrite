@@ -9,6 +9,9 @@ func _on_map_button_selected(map):
 	selected_map = map
 	$PlayButton.visible = true
 
+func _process(_delta):
+	pass
+	
 func _on_play_button_pressed():
 	$"../Transition".transition_out()
 	await get_tree().create_timer(Flux.transition_time).timeout

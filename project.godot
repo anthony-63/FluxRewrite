@@ -24,7 +24,6 @@ config/icon="res://images/flux.png"
 Flux="*res://Flux.gd"
 FluxMap="*res://scripts/io/FluxMap.gd"
 TimeManager="*res://scripts/game/managers/TimeManager.gd"
-AudioManager="*res://scripts/game/managers/AudioManager.gd"
 FluxNoteset="*res://scripts/io/FluxNoteset.gd"
 
 [display]
