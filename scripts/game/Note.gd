@@ -24,17 +24,17 @@ func update(currtime: float):
 	var time = (float(current_note.ms) - currtime) / (float(current_note.ms) - spawn_time)
 	self.transform.origin = Vector3(-current_note.x + 1.0, -current_note.y + 1.0, time * Flux.settings["note"]["sd"])
 	
-	if currtime >= ms and not unhittable: hittable = true
-	if currtime >= ms + (Flux.settings.game.hitwindow * 2) and hittable: 
-		hittable = false
-		unhittable = true
-		Flux.game_stats.misses += 1
-	
 	if check_hit() and hittable:
 		hittable = false
 		unhittable = true
 		self.visible = false
 		Flux.game_stats.hits += 1
+	if currtime >= ms and not unhittable: hittable = true
+	
+	if currtime >= ms + (Flux.settings.game.hitwindow) and hittable: 
+		hittable = false
+		unhittable = true
+		Flux.game_stats.misses += 1
 	
 	if self.transform.origin.z < -2.0:
 		queue_free()

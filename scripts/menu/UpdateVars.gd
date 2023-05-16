@@ -44,3 +44,6 @@ func _on_speed_value_changed(value):
 
 func _on_seek_value_changed(value):
 	Flux.mods.seek = value
+
+func _on_cursor_sensitivity_value_changed(value):
+	Flux.settings.cursor.sensitivity = value
