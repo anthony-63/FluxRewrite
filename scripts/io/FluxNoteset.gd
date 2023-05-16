@@ -17,3 +17,15 @@ func load_noteset(dir: String):
 		var itex = ImageTexture.create_from_image(i)
 		
 		Flux.notesets[dir].append(itex)
+
+func load_default_noteset():
+	var files = []
+	
+	files.append("res://prefabs/user/default_noteset/1.png")
+	files.append("res://prefabs/user/default_noteset/2.png")
+	
+	Flux.notesets["default"] = []
+	
+	for file in files:
+		var itex: ImageTexture = load(file)
+		Flux.notesets["default"].append(itex)

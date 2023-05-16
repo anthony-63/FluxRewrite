@@ -9,6 +9,7 @@ func _ready():
 	$Changeables/Settings/SettingTypes/Cursor/CursorScale.value = Flux.settings.cursor.scale
 	$Changeables/Settings/SettingTypes/Cursor/CursorSensitivity.value = Flux.settings.cursor.sensitivity
 	$Changeables/Mods/Speed.value = Flux.mods.speed
+	
 	for noteset in Flux.notesets.keys():
 		$Changeables/Settings/SettingTypes/Sets/Noteset.add_item(noteset)
 

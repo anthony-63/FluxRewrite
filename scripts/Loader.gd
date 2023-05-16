@@ -26,6 +26,7 @@ func load_maps():
 
 func load_notesets():
 	Flux.notesets = {}
+	FluxNoteset.load_default_noteset()
 	var noteset_dir = DirAccess.open("user://notesets")
 	if noteset_dir:
 		for dir in noteset_dir.get_directories():
@@ -36,13 +37,6 @@ func load_notesets():
 	else:
 		var user_dir = DirAccess.open("user://")
 		user_dir.make_dir("notesets")
-		
-		noteset_dir = DirAccess.open("user://notesets")
-		noteset_dir.make_dir("default")
-		
-		noteset_dir.copy("res://prefabs/user/default_noteset/1.png", "user://notesets/default/1.png")	
-		noteset_dir.copy("res://prefabs/user/default_noteset/2.png", "user://notesets/default/2.png")	
-		
 		load_notesets()
 	finished_loading_notesets = true
 

@@ -39,5 +39,5 @@ func update(currtime: float):
 	if self.transform.origin.z < -1.5:
 		self.visible = false
 		
-	if self.transform.origin.z < -10.0:
+	if self.transform.origin.z < -15.0:
 		queue_free()
