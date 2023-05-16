@@ -27,6 +27,18 @@ TimeManager="*res://scripts/game/managers/TimeManager.gd"
 AudioManager="*res://scripts/game/managers/AudioManager.gd"
 FluxNoteset="*res://scripts/io/FluxNoteset.gd"
 
+[display]
+
+window/vsync/vsync_mode=0
+
+[input]
+
+toggle_fullscreen={
+"deadzone": 0.53,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194342,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+
 [rendering]
 
 renderer/rendering_method.mobile="forward_plus"

@@ -18,19 +18,19 @@ func check_hit():
 	}
 	var r2 = Flux.cursor_info
 	# troller
-	return (r1.x < r2.x + r2.w && r1.x + r1.w > r2.x && r1.y < r2.y + r2.h && r1.h + r1.y > r2.y)
+	return (r1.x < r2.x + r2.w and r1.x + r1.w > r2.x and r1.y < r2.y + r2.h and r1.h + r1.y > r2.y)
 func update(currtime: float):
 	var current_note = Flux.current_map.diffs["default"][index]
 	var time = (float(current_note.ms) - currtime) / (float(current_note.ms) - spawn_time)
 	self.transform.origin = Vector3(-current_note.x + 1.0, -current_note.y + 1.0, time * Flux.settings["note"]["sd"])
 	
-	if currtime >= ms && not unhittable: hittable = true
-	if currtime >= ms + Flux.settings.game.hitwindow && hittable: 
+	if currtime >= ms and not unhittable: hittable = true
+	if currtime >= ms + Flux.settings.game.hitwindow and hittable: 
 		hittable = false
 		unhittable = true
 		Flux.game_stats.misses += 1
 	
-	if check_hit() && hittable:
+	if check_hit() and hittable:
 		hittable = false
 		unhittable = true
 		self.visible = false

@@ -4,6 +4,7 @@ var maps = []
 var notesets = {}
 var current_map = {}
 var transition_time:float = 1
+var fullscreen = false
 
 var cursor_info: Dictionary = {
 	"x": 0.0,
@@ -55,6 +56,13 @@ var mods = {
 func _ready():
 	pass
 	
+func _process(delta):
+	if Input.is_action_just_pressed("toggle_fullscreen"):
+		if fullscreen: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+		else: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+		
+		fullscreen = !fullscreen
+
 func reload_game():
 	get_tree().change_scene_to_file("res://scenes/Loading.tscn")
 
