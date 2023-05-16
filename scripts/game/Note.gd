@@ -25,7 +25,7 @@ func update(currtime: float):
 	self.transform.origin = Vector3(-current_note.x + 1.0, -current_note.y + 1.0, time * Flux.settings["note"]["sd"])
 	
 	if currtime >= ms and not unhittable: hittable = true
-	if currtime >= ms + Flux.settings.game.hitwindow and hittable: 
+	if currtime >= ms + (Flux.settings.game.hitwindow * 2) and hittable: 
 		hittable = false
 		unhittable = true
 		Flux.game_stats.misses += 1
