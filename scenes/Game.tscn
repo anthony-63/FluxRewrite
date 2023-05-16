@@ -16,7 +16,7 @@ bg_color = Color(0.92549, 0.423529, 0.352941, 1)
 bg_color = Color(0.392157, 0.690196, 0.196078, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_lsoql"]
-viewport_path = NodePath("HUD/SubViewport")
+viewport_path = NodePath("HUD/HealthBarViewport")
 
 [sub_resource type="Environment" id="Environment_2pdyn"]
 background_mode = 1
@@ -122,7 +122,7 @@ font_size = 49
 [node name="HealthBarViewport" type="SubViewport" parent="HUD"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1280, 50)
+size = Vector2i(1280, 300)
 render_target_update_mode = 4
 
 [node name="HealthBarProgress" type="ProgressBar" parent="HUD/HealthBarViewport"]
@@ -138,7 +138,7 @@ value = 0.5
 show_percentage = false
 
 [node name="HealthBarSprite" type="Sprite3D" parent="HUD"]
-transform = Transform3D(-0.41171, 0, -1.187e-06, 0, 0.261822, 0, 3.59928e-08, 0, -13.5776, 0, 1.58168, 0)
+transform = Transform3D(-0.406559, 0, -5.17463e-07, 0, 0.0355695, 0, 6.13888e-08, 0, -3.427, 0, 1.58168, 0)
 pixel_size = 0.005
 texture = SubResource("ViewportTexture_lsoql")
 
