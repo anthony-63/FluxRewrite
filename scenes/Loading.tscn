@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://wjuh5us04303"]
+[gd_scene load_steps=9 format=3 uid="uid://wjuh5us04303"]
 
 [ext_resource type="Texture2D" uid="uid://dim6m2c6rupcg" path="res://images/flux.png" id="1_kg7b2"]
 [ext_resource type="Script" path="res://scripts/Loader.gd" id="1_xco3o"]
 [ext_resource type="Texture2D" uid="uid://5u7n2u4erb06" path="res://images/ruwo.png" id="2_d173d"]
+[ext_resource type="PackedScene" uid="uid://dxmi7p40ic26a" path="res://prefabs/transition.tscn" id="4_xongx"]
 
 [sub_resource type="SystemFont" id="SystemFont_aq8c5"]
 subpixel_positioning = 0
@@ -104,3 +105,7 @@ grow_vertical = 0
 texture = ExtResource("2_d173d")
 expand_mode = 1
 stretch_mode = 4
+
+[node name="Transition" parent="." instance=ExtResource("4_xongx")]
+layout_mode = 0
+anchors_preset = 0
