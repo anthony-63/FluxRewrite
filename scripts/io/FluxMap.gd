@@ -123,7 +123,7 @@ func load_from_path(path):
 
 	Flux.maps.append(combined_map_data)
 	
-func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, jacket_path = ""):
+func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, _jacket_path = ""):
 #	var audio_data = FileAccess.get_file_as_bytes(audio_path)
 	var output = FileAccess.open("user://maps/%s.flux" % id, FileAccess.WRITE)
 	

@@ -11,7 +11,7 @@ func _ready():
 	for noteset in Flux.notesets.keys():
 		$Changeables/Settings/SettingTypes/Sets/Noteset.add_item(noteset)
 
-func _process(delta):
+func _process(_delta):
 	Flux.settings.sets.noteset = $Changeables/Settings/SettingTypes/Sets/Noteset.get_item_text($Changeables/Settings/SettingTypes/Sets/Noteset.selected)
 	if Flux.settings["ui"]["enable_ruwo"]:
 		$Ruwo.show()

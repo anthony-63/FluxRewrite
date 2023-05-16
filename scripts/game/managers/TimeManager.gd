@@ -33,7 +33,7 @@ func just_paused():
 func just_unpaused():
 	last_time = Time.get_ticks_msec()
 
-func _process(delta):
+func _process(_delta):
 	if !playing: return
 	var now = Time.get_ticks_msec()
 	var time = playback_speed * (now - last_time)

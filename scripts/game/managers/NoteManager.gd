@@ -8,7 +8,7 @@ func _ready():
 	for note in Flux.current_map.diffs["default"]:
 		note["st"] = note["ms"] - ((Flux.settings["note"]["approach_time"]) * Flux.mods["speed"]) * 1000.0
 	
-func _process(delta):
+func _process(_delta):
 	if Flux.current_map == {}:
 		return
 	

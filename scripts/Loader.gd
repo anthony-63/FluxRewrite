@@ -69,7 +69,7 @@ func load_settings():
 			print("Invalid settings file, using default.")
 	finished_loading_settings = true
 
-func _process(delta):
+func _process(_delta):
 	thread.start(load_settings)
 	thread.wait_to_finish()	
 	thread.start(load_maps)

@@ -30,7 +30,7 @@ var default_settings = {
 		"wait_time": 1.5, # s
 	},
 	"cursor": {
-		"sensitivity": 1, # m/s
+		"sensitivity": 1.0, # m/s
 		"scale": 1.9, # m
 	},
 	"ui": {
@@ -54,7 +54,7 @@ var mods = {
 
 @onready var audio_manager: AudioManager = get_node("/root/AudioManager")
 	
-func _process(delta):
+func _process(_delta):
 	if Input.is_action_just_pressed("toggle_fullscreen"):
 		if fullscreen: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		else: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
@@ -71,6 +71,6 @@ func reload_game_stylish():
 		get_tree().change_scene_to_file("res://scenes/Loading.tscn")
 
 func ms_to_min_sec_str(ms):
-	var min = int(float(ms) * 0.001) / 60
-	var sec = int(float(ms) * 0.001) % 60
-	return str(min) + ":" + ("%02d" % sec)
+	var mins = int(float(ms) * 0.001) / 60
+	var secs = int(float(ms) * 0.001) % 60
+	return str(mins) + ":" + ("%02d" % secs)
