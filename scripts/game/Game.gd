@@ -12,6 +12,7 @@ func _ready():
 	
 	await get_tree().create_timer(Flux.default_settings.game.wait_time).timeout
 	
+#	Flux.audio_manager.seek(-Flux.default_settings.game.wait_time)
 	Flux.audio_manager.play($MusicStream)
 	Flux.audio_manager.playback_speed = Flux.mods.speed
 #	Flux.audio_manager.seek(Flux.mods.seek)

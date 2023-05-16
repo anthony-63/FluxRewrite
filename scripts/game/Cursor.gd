@@ -9,5 +9,5 @@ func _process(delta):
 
 func _input(ev):
 	if ev is InputEventMouseMotion:
-		self.transform.origin.x = clamp(self.transform.origin.x - (ev.relative.x * (Flux.settings.cursor.sensitivity / 100)), -1.5, 1.5)
-		self.transform.origin.y = clamp(self.transform.origin.y - (ev.relative.y * (Flux.settings.cursor.sensitivity / 100)), $"../HUD/Border".scale.x * -1.5, $"../HUD/Border".scale.x * 1.5)
+		self.transform.origin.x = clamp(self.transform.origin.x - (ev.relative.x * (Flux.settings.cursor.sensitivity / 100)), $"../HUD/Border".scale.x * -1.5, $"../HUD/Border".scale.x * 1.5)
+		self.transform.origin.y = clamp(self.transform.origin.y - (ev.relative.y * (Flux.settings.cursor.sensitivity / 100)), $"../HUD/Border".scale.y * -1.5, $"../HUD/Border".scale.y * 1.5)
