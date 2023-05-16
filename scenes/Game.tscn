@@ -36,7 +36,6 @@ script = ExtResource("1_8b1w1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, 8.74228e-08, 1, -8.74228e-08, -7.64274e-15, -8.74228e-08, -1, 0, 0, -3.5)
-fov = 80.0
 
 [node name="HUD" type="Node3D" parent="."]
 
