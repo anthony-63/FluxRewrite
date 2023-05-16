@@ -1,10 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5vvljnqw6wo6"]
+[gd_scene load_steps=5 format=3 uid="uid://b5vvljnqw6wo6"]
 
+[ext_resource type="Shader" path="res://scripts/game/NoteSpriteUpscaler.gdshader" id="1_it0tx"]
 [ext_resource type="Texture2D" uid="uid://c2mix74bxjker" path="res://images/note_placeholder.png" id="1_skqtm"]
 [ext_resource type="Script" path="res://scripts/game/Note.gd" id="2_50cy8"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iippm"]
+shader = ExtResource("1_it0tx")
+shader_parameter/THRESHOLD = 0.1
+shader_parameter/AA_SCALE = 2.0
+
 [node name="NoteSprite" type="Sprite3D"]
 transform = Transform3D(0.090039, 0, 0, 0, 0.09, 0, 0, 0, 0.3, -0.00187546, -2.98023e-08, 0.000335693)
+material_overlay = SubResource("ShaderMaterial_iippm")
 pixel_size = 0.0015
 texture = ExtResource("1_skqtm")
 script = ExtResource("2_50cy8")
