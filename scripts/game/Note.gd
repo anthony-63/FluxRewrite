@@ -36,5 +36,8 @@ func update(currtime: float):
 		unhittable = true
 		Flux.game_stats.misses += 1
 	
-	if self.transform.origin.z < -2.0:
+	if self.transform.origin.z < -1.5:
+		self.visible = false
+		
+	if self.transform.origin.z < -10.0:
 		queue_free()
