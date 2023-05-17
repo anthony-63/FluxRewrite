@@ -5,6 +5,7 @@ var notesets = {}
 var current_map = {}
 var transition_time:float = 1
 var fullscreen = false
+var update_selected_map = false
 
 var cursor_info: Dictionary = {
 	"x": 0.0, # m
@@ -13,9 +14,20 @@ var cursor_info: Dictionary = {
 	"h": 0.2625, # m
 }
 
+var map_finished_info = {
+	"max_combo": 0,
+	"misses": 0,
+	"accuracy": 0,
+	"passed": false,
+	"played": false,
+}
+
 var game_stats = {
 	"misses": 0,
 	"hits": 0,
+	"combo": 0,
+	"max_combo": 0,
+	
 	"hp": 0.0,
 	"max_hp": 5.0,
 	"hp_per_hit": 0.5,

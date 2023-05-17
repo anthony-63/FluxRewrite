@@ -1,5 +1,6 @@
 extends Node3D
 
+
 func _ready():
 	Flux.game_stats.hp = Flux.game_stats.max_hp
 	
@@ -23,21 +24,45 @@ func _ready():
 func reset_game():
 		Flux.game_stats.misses = 0
 		Flux.game_stats.hits = 0
+		Flux.game_stats.max_combo = 0
+		Flux.game_stats.combo = 0
+		Flux.game_stats.hp = Flux.game_stats.max_hp
+		
 		$NoteSpawner.note_index = 0
 		for child in $NoteSpawner.get_children():
 			child.queue_free()
 
+func set_all_finished_info():
+	Flux.map_finished_info.misses = Flux.game_stats.misses
+	Flux.map_finished_info.max_combo = Flux.game_stats.max_combo
+	Flux.map_finished_info.accuracy = (float(Flux.game_stats.hits) / float(Flux.game_stats.hits + Flux.game_stats.misses)) * 100.0
+	Flux.map_finished_info.played = true
+	Flux.update_selected_map = true
+	
 func game_finished():
+	Flux.map_finished_info.passed = true
+	set_all_finished_info()
 	get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 
 func _process(_delta):
 	$HUD/TimeIntoMap.text = Flux.ms_to_min_sec_str($AudioManager.current_time) + "/" + Flux.ms_to_min_sec_str(Flux.current_map.diffs["default"][-1]["ms"])
 	$HUD/Misses/MissAmount.text = str(Flux.game_stats.misses)
 	$HUD/Hits/HitAmount.text = str(Flux.game_stats.hits)
+	$HUD/Combo.text = str(Flux.game_stats.combo)
 	$HUD/Total/TotalAmount.text = str(Flux.game_stats.hits + Flux.game_stats.misses)
 	
 	$HUD/HealthBarViewport/HealthBarProgress.max_value = Flux.game_stats.max_hp
 	$HUD/HealthBarViewport/HealthBarProgress.value = Flux.game_stats.hp
 	
+	if Flux.game_stats.hp == 0.0:
+		set_all_finished_info()
+		$HUD/FailedText.show()
+		await get_tree().create_timer(1.5).timeout
+		$HUD/FailedText.hide()
+		
+		get_tree().change_scene_to_file("res://scenes/Menu.tscn")		
+	
 	if Input.is_action_just_pressed("leave_map"):
+		set_all_finished_info()
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+		

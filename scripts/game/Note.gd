@@ -28,8 +28,13 @@ func update(currtime: float):
 	if check_hit() and hittable:
 		hittable = false
 		unhittable = true
-		Flux.game_stats.hp = clamp(Flux.game_stats.hp + Flux.game_stats.hp_per_hit, 0.0, Flux.game_stats.max_hp)
 		self.visible = false
+		Flux.game_stats.hp = clamp(Flux.game_stats.hp + Flux.game_stats.hp_per_hit, 0.0, Flux.game_stats.max_hp)
+		Flux.game_stats.combo += 1
+		
+		if Flux.game_stats.combo > Flux.game_stats.max_combo:
+			Flux.game_stats.max_combo = Flux.game_stats.combo
+		
 		Flux.game_stats.hits += 1
 	
 	if currtime >= ms and not unhittable: hittable = true
@@ -37,6 +42,7 @@ func update(currtime: float):
 		hittable = false
 		unhittable = true
 		Flux.game_stats.hp = clamp(Flux.game_stats.hp - Flux.game_stats.hp_per_miss, 0.0, Flux.game_stats.max_hp)
+		Flux.game_stats.combo = 0
 		Flux.game_stats.misses += 1
 	
 	if self.transform.origin.z < -1.5:

@@ -142,6 +142,24 @@ transform = Transform3D(-0.406559, 0, -5.17463e-07, 0, 0.0355695, 0, 6.13888e-08
 pixel_size = 0.005
 texture = SubResource("ViewportTexture_lsoql")
 
+[node name="Combo" type="Label3D" parent="HUD"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.70957, 0)
+pixel_size = 0.003
+double_sided = false
+text = "0"
+font = ExtResource("3_f6rql")
+font_size = 49
+
+[node name="FailedText" type="Label3D" parent="HUD"]
+transform = Transform3D(-1, -0.0003963, 0.000613279, -0.000238369, 0.971063, 0.238822, -0.000690175, 0.238822, -0.971063, 0, 0, 0)
+visible = false
+pixel_size = 0.003
+double_sided = false
+modulate = Color(1, 0.454902, 0.439216, 1)
+text = "Failed!"
+font = ExtResource("3_f6rql")
+font_size = 85
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2pdyn")
 
