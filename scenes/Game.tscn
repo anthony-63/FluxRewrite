@@ -143,12 +143,15 @@ pixel_size = 0.005
 texture = SubResource("ViewportTexture_lsoql")
 
 [node name="Combo" type="Label3D" parent="HUD"]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.70957, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.42671, -1.33952, 0)
 pixel_size = 0.003
 double_sided = false
-text = "0"
+modulate = Color(0.619608, 0.619608, 0.619608, 0.0901961)
+text = "0x"
 font = ExtResource("3_f6rql")
-font_size = 49
+font_size = 76
+horizontal_alignment = 2
+width = 600.0
 
 [node name="FailedText" type="Label3D" parent="HUD"]
 transform = Transform3D(-1, -0.0003963, 0.000613279, -0.000238369, 0.971063, 0.238822, -0.000690175, 0.238822, -0.971063, 0, 0, 0)

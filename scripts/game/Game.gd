@@ -48,7 +48,7 @@ func _process(_delta):
 	$HUD/TimeIntoMap.text = Flux.ms_to_min_sec_str($AudioManager.current_time) + "/" + Flux.ms_to_min_sec_str(Flux.current_map.diffs["default"][-1]["ms"])
 	$HUD/Misses/MissAmount.text = str(Flux.game_stats.misses)
 	$HUD/Hits/HitAmount.text = str(Flux.game_stats.hits)
-	$HUD/Combo.text = str(Flux.game_stats.combo)
+	$HUD/Combo.text = str(Flux.game_stats.combo) + "x"
 	$HUD/Total/TotalAmount.text = str(Flux.game_stats.hits + Flux.game_stats.misses)
 	
 	$HUD/HealthBarViewport/HealthBarProgress.max_value = Flux.game_stats.max_hp
