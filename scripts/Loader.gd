@@ -7,6 +7,7 @@ var finished_loading_settings = false
 var finished_loading_notesets = false
 
 func load_maps():
+	# Clear maps so they dont duplicate when reloading
 	Flux.maps = []
 	var map_dir = DirAccess.open("user://maps")
 	if map_dir:
@@ -64,6 +65,8 @@ func load_settings():
 	finished_loading_settings = true
 
 func _process(_delta):
+	# the whole point of this was to render the loading screen at the same time
+	# it doesnt.
 	thread.start(load_settings)
 	thread.wait_to_finish()	
 	thread.start(load_maps)
@@ -72,6 +75,7 @@ func _process(_delta):
 	thread.wait_to_finish()
 	FluxNoteset.load_default_noteset()
 	
+	# This is also probably a bad way to do this. 
 	if finished_loading_maps and finished_loading_settings and finished_loading_notesets:
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 
