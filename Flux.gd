@@ -7,6 +7,8 @@ var transition_time:float = 1
 var fullscreen = false
 var update_selected_map = false
 
+const version_string = "FluxRewrite v0.2"
+
 var cursor_info: Dictionary = {
 	"x": 0.0, # m
 	"y": 0.0, # m

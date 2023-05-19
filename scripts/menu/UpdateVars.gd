@@ -9,6 +9,7 @@ func _ready():
 	$Changeables/Settings/SettingTypes/Cursor/CursorScale.value = Flux.settings.cursor.scale
 	$Changeables/Settings/SettingTypes/Cursor/CursorSensitivity.value = Flux.settings.cursor.sensitivity
 	$Changeables/Mods/Speed.value = Flux.mods.speed
+	$MapInfoPanel/Version.text = Flux.version_string
 	
 	for noteset in Flux.notesets.keys():
 		$Changeables/Settings/SettingTypes/Sets/Noteset.add_item(noteset)
@@ -16,9 +17,9 @@ func _ready():
 func _process(_delta):
 	Flux.settings.sets.noteset = $Changeables/Settings/SettingTypes/Sets/Noteset.get_item_text($Changeables/Settings/SettingTypes/Sets/Noteset.selected)
 	if Flux.settings["ui"]["enable_ruwo"]:
-		$Ruwo.show()
+		$MapList/Ruwo.show()
 	else:
-		$Ruwo.hide()
+		$MapList/Ruwo.hide()
 
 func update_at():
 	Flux.settings["note"]["approach_time"] = Flux.settings["note"]["sd"] / Flux.settings["note"]["ar"]

@@ -1,6 +1,11 @@
 extends Node3D
 
 
+func update_mods():
+	if Flux.mods.speed != 1.0:
+		$HUD/Mods.show()
+		$HUD/Mods/ModsString.text += "S" + str(round(Flux.mods.speed * 100.0)) + "\n"
+	
 func _ready():
 	Flux.game_stats.hp = Flux.game_stats.max_hp
 	
@@ -8,6 +13,8 @@ func _ready():
 	$AudioManager.connect("finished", game_finished)
 	$Transition.show()
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	update_mods()
 	
 	$HUD/MapName.text = Flux.current_map.meta.artist + " - " + Flux.current_map.meta.title
 	$AudioManager.length = Flux.current_map.diffs["default"][-1]["ms"]

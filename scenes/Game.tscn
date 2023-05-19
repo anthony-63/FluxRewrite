@@ -163,6 +163,23 @@ text = "Failed!"
 font = ExtResource("3_f6rql")
 font_size = 85
 
+[node name="Mods" type="Label3D" parent="HUD"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.83249, -0.348976, 0.00155461)
+visible = false
+pixel_size = 0.003
+double_sided = false
+text = "Mods"
+font = ExtResource("3_f6rql")
+font_size = 49
+
+[node name="ModsString" type="Label3D" parent="HUD/Mods"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0650738, 0)
+pixel_size = 0.003
+double_sided = false
+font = ExtResource("3_f6rql")
+font_size = 49
+vertical_alignment = 0
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2pdyn")
 
