@@ -10,7 +10,7 @@ func update(data):
 	$SongName.text = "%s - %s" % [data.meta.artist, data.meta.title]
 	$Mapper.text = "%s - %s" % [data.meta.mapper, Flux.ms_to_min_sec_str(data.diffs.default[-1].ms)]
 	
-	$Diff.text = "default"
+	$Diff.text = "none"
 
 func _on_pressed():
 	selected.emit(map_data)
