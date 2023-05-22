@@ -20,7 +20,7 @@ func _ready():
 	update_mods()
 	
 	$HUD/MapName.text = Flux.current_map.meta.artist + " - " + Flux.current_map.meta.title
-	$AudioManager.length = Flux.current_map.diffs["default"][-1]["ms"]
+	$AudioManager.length = Flux.current_map.diffs.default[-1].ms
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(Flux.settings.audio.music_volume))
 	
 	await get_tree().create_timer(Flux.default_settings.game.wait_time).timeout

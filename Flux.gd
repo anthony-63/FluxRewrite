@@ -95,3 +95,9 @@ func ms_to_min_sec_str(ms):
 	var mins = int(float(ms) * 0.001) / 60
 	var secs = int(float(ms) * 0.001) % 60
 	return str(mins) + ":" + ("%02d" % secs)
+
+func get_map_len_str(map):
+	var map_len = "err:err"
+	if len(map.diffs.default) > 0:
+		map_len = Flux.ms_to_min_sec_str(map.diffs.default[-1].ms)
+	return map_len

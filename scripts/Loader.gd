@@ -23,8 +23,9 @@ func load_maps():
 	else:
 		var user_dir = DirAccess.open("user://")
 		user_dir.make_dir("maps")
+	load_sspms()
 	finished_loading_maps = true
-
+	
 func load_notesets():
 	Flux.notesets = {}
 	FluxNoteset.load_default_noteset()
@@ -40,6 +41,22 @@ func load_notesets():
 		user_dir.make_dir("notesets")
 		load_notesets()
 	finished_loading_notesets = true
+
+func load_sspms():
+	var map_dir = DirAccess.open("user://sspm")
+	if map_dir:
+		var files = map_dir.get_files()
+		for map_path in files:
+			if not map_path.ends_with(".sspm"):
+				map_dir.get_next()
+				continue
+				
+			$FluxImage/CurrentMap.text = map_path
+			
+			Sspm2Flux.flux_from_sspm(map_path)
+	else:
+		var user_dir = DirAccess.open("user://")
+		user_dir.make_dir("sspm")
 
 func validate_settings(settings_dict: Dictionary):
 	for cat in Flux.default_settings.keys():
@@ -67,12 +84,10 @@ func load_settings():
 func _process(_delta):
 	# the whole point of this was to render the loading screen at the same time
 	# it doesnt.
-	thread.start(load_settings)
-	thread.wait_to_finish()	
-	thread.start(load_maps)
-	thread.wait_to_finish()
-	thread.start(load_notesets)
-	thread.wait_to_finish()
+	load_settings()
+	load_maps()
+	load_notesets()
+
 	FluxNoteset.load_default_noteset()
 	
 	# This is also probably a bad way to do this. 

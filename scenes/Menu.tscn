@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://5u7n2u4erb06" path="res://images/ruwo.png" id="3_il0bq"]
 [ext_resource type="Script" path="res://scripts/menu/MapList.gd" id="3_pwoq8"]
 [ext_resource type="Script" path="res://scripts/buttons/MapButton.gd" id="5_6w867"]
-[ext_resource type="Script" path="res://scripts/buttons/ImportFromTxt.gd" id="6_122fk"]
+[ext_resource type="Script" path="res://scripts/menu/Import.gd" id="6_4dtfb"]
 [ext_resource type="Texture2D" uid="uid://dim6m2c6rupcg" path="res://images/flux.png" id="6_mw0vg"]
 [ext_resource type="Script" path="res://scripts/menu/MapInfo.gd" id="7_yyn24"]
 [ext_resource type="FontFile" uid="uid://b5o12budjhyv7" path="res://fonts/font.ttf" id="8_58afk"]
@@ -171,7 +171,7 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_left = 15.0
 offset_top = 17.0
-offset_right = 16.0
+offset_right = -106.0
 offset_bottom = 44.0
 grow_horizontal = 2
 theme_override_fonts/font = ExtResource("8_58afk")
@@ -179,6 +179,7 @@ theme_override_font_sizes/font_size = 12
 text = "Billy Sick - Balls In Your Jaws
 "
 label_settings = SubResource("LabelSettings_keemo")
+clip_text = true
 
 [node name="Diff" type="Label" parent="MapList/MapListScrollContainer/MapScrollVbox/MapButton"]
 layout_mode = 1
@@ -230,6 +231,7 @@ grow_vertical = 0
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_ukrn5")
 
 [node name="Mods" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -509,8 +511,8 @@ text = "Save settings
 "
 
 [node name="Import" type="TabBar" parent="Changeables"]
-visible = false
 layout_mode = 2
+script = ExtResource("6_4dtfb")
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Import"]
 layout_mode = 1
@@ -520,6 +522,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
+
+[node name="ImportFromSSPMV2" type="Button" parent="Changeables/Import/ColorRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -154.5
+offset_top = -70.0
+offset_right = 154.5
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_25olc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
+text = "Import from sspmv2"
 
 [node name="ImportFromTxtData" type="Button" parent="Changeables/Import/ColorRect"]
 layout_mode = 1
@@ -537,7 +556,6 @@ grow_vertical = 2
 theme = SubResource("Theme_25olc")
 theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
 text = "Import from .txt data"
-script = ExtResource("6_122fk")
 
 [node name="MapInfoPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -715,6 +733,7 @@ layout_mode = 1
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Sound/MusicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Cursor/CursorSensitivity" to="." method="_on_cursor_sensitivity_value_changed"]
 [connection signal="pressed" from="Changeables/Settings/SaveSettings" to="." method="_on_save_settings_pressed"]
+[connection signal="pressed" from="Changeables/Import/ColorRect/ImportFromTxtData" to="Changeables/Import" method="_on_import_from_txt_data_pressed"]
 [connection signal="pressed" from="MapInfoPanel/PlayButton" to="MapInfoPanel" method="_on_play_button_pressed"]
 
 [editable path="Transition"]

@@ -7,8 +7,12 @@ var map_data = {}
 func update(data):
 	map_data = data
 	
-	$SongName.text = "%s - %s" % [data.meta.artist, data.meta.title]
-	$Mapper.text = "%s - %s" % [data.meta.mapper, Flux.ms_to_min_sec_str(data.diffs.default[-1].ms)]
+	if data.artist_sep:
+		$SongName.text = "%s - %s" % [data.meta.artist, data.meta.title]
+	else:
+		$SongName.text = data.meta.title
+		
+	$Mapper.text = "%s - %s" % [data.meta.mapper, Flux.get_map_len_str(data)]
 	
 	$Diff.text = "none"
 

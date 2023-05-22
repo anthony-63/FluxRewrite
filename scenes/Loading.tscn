@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://wjuh5us04303"]
+[gd_scene load_steps=10 format=3 uid="uid://wjuh5us04303"]
 
 [ext_resource type="Texture2D" uid="uid://dim6m2c6rupcg" path="res://images/flux.png" id="1_kg7b2"]
 [ext_resource type="Script" path="res://scripts/Loader.gd" id="1_xco3o"]
@@ -17,6 +17,20 @@ font_size = 30
 [sub_resource type="LabelSettings" id="LabelSettings_fab16"]
 font = SubResource("SystemFont_swavl")
 font_size = 20
+
+[sub_resource type="GDScript" id="GDScript_fjby1"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+"
 
 [node name="Control2" type="Control"]
 layout_mode = 3
@@ -113,3 +127,6 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 grow_horizontal = 1
 grow_vertical = 1
+
+[node name="MapLoader" type="Node2D" parent="."]
+script = SubResource("GDScript_fjby1")

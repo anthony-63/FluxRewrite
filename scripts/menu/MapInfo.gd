@@ -3,9 +3,14 @@ extends Node
 var selected_map = {}
 
 func update_map_info():
-	$ArtistAndMapper.text = "%s/%s" % [selected_map.meta.artist, selected_map.meta.mapper]
+	if selected_map.artist_sep:
+		$ArtistAndMapper.text = "%s/%s" % [selected_map.meta.artist, selected_map.meta.mapper]
+	else:
+		$ArtistAndMapper.text = selected_map.meta.mapper
+			
 	$SongName.text = selected_map.meta.title
-	$SongLength.text = Flux.ms_to_min_sec_str(selected_map.diffs.default[-1].ms)
+	
+	$SongLength.text = Flux.get_map_len_str(selected_map)
 
 func _on_map_button_selected(map):
 	selected_map = map
