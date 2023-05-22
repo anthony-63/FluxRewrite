@@ -6,6 +6,9 @@ func _ready():
 func _process(_delta):
 	Flux.cursor_info.x = self.transform.origin.x + (self.scale.x / 2.0)
 	Flux.cursor_info.y = self.transform.origin.y + (self.scale.y / 2.0)
+	if Flux.settings.debug.show_cursor_hitbox:
+
+		$"../Draw3D".cube(Vector3(self.transform.origin.x,  self.transform.origin.y, self.transform.origin.z), Basis.IDENTITY.scaled(Vector3(Flux.settings.cursor.scale / 10.0, Flux.settings.cursor.scale / 10.0, 0.0)), Color.GREEN)
 
 func _input(ev):
 	if ev is InputEventMouseMotion:
@@ -16,6 +19,7 @@ func _input(ev):
 			clamp(self.transform.origin.y, $"../HUD/Border".scale.y * -1.5, $"../HUD/Border".scale.y * 1.5),
 			0
 		)
+		
 #		print("\nclamp coords\nx<{CXA}, {CXB}>\ny<{CYA}, {CYB}>".format({
 #			"CXA": $"../HUD/Border".scale.x * -1.5,
 #			"CXB": $"../HUD/Border".scale.x * 1.5,

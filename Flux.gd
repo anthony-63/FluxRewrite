@@ -42,6 +42,10 @@ var default_settings = {
 		"sd": 4.0, # m
 		"approach_time": 0.0, # s
 	},
+	"debug": {
+		"show_note_hitbox": true,
+		"show_cursor_hitbox": true,
+	},
 	"game": {
 		"hitwindow": 58, # ms
 		"hitbox": 1.14, # m

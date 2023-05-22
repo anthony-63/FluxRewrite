@@ -8,6 +8,9 @@ func update_mods():
 	
 func _ready():
 	Flux.game_stats.hp = Flux.game_stats.max_hp
+	var draw = Draw3D.new()
+	draw.name = "Draw3D"
+	add_child(draw)
 	
 	reset_game()
 	$AudioManager.connect("finished", game_finished)
@@ -60,6 +63,8 @@ func _process(_delta):
 	
 	$HUD/HealthBarViewport/HealthBarProgress.max_value = Flux.game_stats.max_hp
 	$HUD/HealthBarViewport/HealthBarProgress.value = Flux.game_stats.hp
+	
+	$Draw3D.clear()
 	
 	if Flux.game_stats.hp == 0.0:
 		set_all_finished_info()

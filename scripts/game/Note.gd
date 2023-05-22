@@ -45,8 +45,11 @@ func update(currtime: float):
 		Flux.game_stats.combo = 0
 		Flux.game_stats.misses += 1
 	
+	if Flux.settings.debug.show_note_hitbox:
+		$"../../Draw3D".cube(Vector3(self.transform.origin.x,  self.transform.origin.y, self.transform.origin.z), Basis.IDENTITY.scaled(Vector3(Flux.settings.game.hitbox / 2.0, Flux.settings.game.hitbox / 2.0, 0.0)), Color.GREEN)
+	
 	if self.transform.origin.z < -1.5:
 		self.visible = false
-
+	
 	if self.transform.origin.z < -15.0:
 		queue_free()

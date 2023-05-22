@@ -154,7 +154,7 @@ horizontal_alignment = 2
 width = 600.0
 
 [node name="FailedText" type="Label3D" parent="HUD"]
-transform = Transform3D(-1, -0.0003963, 0.000613279, -0.000238369, 0.971063, 0.238822, -0.000690175, 0.238822, -0.971063, 0, 0, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
 visible = false
 pixel_size = 0.003
 double_sided = false
