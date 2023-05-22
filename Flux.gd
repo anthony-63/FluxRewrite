@@ -43,8 +43,8 @@ var default_settings = {
 		"approach_time": 0.0, # s
 	},
 	"debug": {
-		"show_note_hitbox": true,
-		"show_cursor_hitbox": true,
+		"show_note_hitbox": false,
+		"show_cursor_hitbox": false,
 	},
 	"game": {
 		"hitwindow": 58, # ms
