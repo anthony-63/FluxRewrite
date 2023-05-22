@@ -539,34 +539,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
 text = "Import from .txt data"
 script = ExtResource("6_122fk")
 
-[node name="Debug" type="TabBar" parent="Changeables"]
-visible = false
-layout_mode = 2
-
-[node name="ColorRect" type="ColorRect" parent="Changeables/Debug"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.141176, 0.141176, 0.141176, 1)
-
-[node name="ShowNoteHitbox" type="CheckBox" parent="Changeables/Debug"]
-layout_mode = 0
-offset_right = 24.0
-offset_bottom = 24.0
-button_pressed = true
-text = "Enable note hitboxes"
-
-[node name="ShowCursorHitbox" type="CheckBox" parent="Changeables/Debug"]
-layout_mode = 0
-offset_top = 24.0
-offset_right = 188.0
-offset_bottom = 55.0
-button_pressed = true
-text = "Enable cursor hitbox"
-
 [node name="MapInfoPanel" type="Panel" parent="."]
 layout_mode = 1
 anchors_preset = 15
@@ -743,8 +715,6 @@ layout_mode = 1
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Sound/MusicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Cursor/CursorSensitivity" to="." method="_on_cursor_sensitivity_value_changed"]
 [connection signal="pressed" from="Changeables/Settings/SaveSettings" to="." method="_on_save_settings_pressed"]
-[connection signal="toggled" from="Changeables/Debug/ShowNoteHitbox" to="." method="_on_show_note_hitbox_toggled"]
-[connection signal="toggled" from="Changeables/Debug/ShowCursorHitbox" to="." method="_on_show_cursor_hitbox_toggled"]
 [connection signal="pressed" from="MapInfoPanel/PlayButton" to="MapInfoPanel" method="_on_play_button_pressed"]
 
 [editable path="Transition"]

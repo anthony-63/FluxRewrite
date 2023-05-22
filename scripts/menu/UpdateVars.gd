@@ -8,8 +8,6 @@ func _ready():
 	$Changeables/Settings/SettingTypes/Sound/MusicVolume.value = Flux.settings.audio.music_volume * 100.0
 	$Changeables/Settings/SettingTypes/Cursor/CursorScale.value = Flux.settings.cursor.scale
 	$Changeables/Settings/SettingTypes/Cursor/CursorSensitivity.value = Flux.settings.cursor.sensitivity
-	$Changeables/Debug/ShowNoteHitbox.toggle_mode = Flux.settings.debug.show_note_hitbox
-	$Changeables/Debug/ShowCursorHitbox.toggle_mode = Flux.settings.debug.show_cursor_hitbox
 	
 	$Changeables/Mods/Speed.value = Flux.mods.speed
 	$MapInfoPanel/Version.text = Flux.version_string
@@ -53,9 +51,3 @@ func _on_seek_value_changed(value):
 
 func _on_cursor_sensitivity_value_changed(value):
 	Flux.settings.cursor.sensitivity = value
-
-func _on_show_note_hitbox_toggled(button_pressed):
-	Flux.settings.debug.show_note_hitbox = button_pressed
-
-func _on_show_cursor_hitbox_toggled(button_pressed):
-	Flux.settings.debug.show_cursor_hitbox = button_pressed
