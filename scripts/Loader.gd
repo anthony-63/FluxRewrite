@@ -2,9 +2,9 @@ extends Node
 
 var thread: Thread = Thread.new()
 
-var finished_loading_maps = false
-var finished_loading_settings = false
-var finished_loading_notesets = false
+signal finished_loading_maps
+signal finished_loading_settings
+signal finished_loading_notesets
 var to_convert = []
 func load_maps():
 	# Clear maps so they dont duplicate when reloading
@@ -29,7 +29,7 @@ func load_maps():
 		var user_dir = DirAccess.open("user://")
 		user_dir.make_dir("maps")
 	
-	finished_loading_maps = true
+	finished_loading_maps.emit()
 	
 func load_notesets():
 	Flux.notesets = {}
@@ -45,7 +45,7 @@ func load_notesets():
 		var user_dir = DirAccess.open("user://")
 		user_dir.make_dir("notesets")
 		load_notesets()
-	finished_loading_notesets = true
+	finished_loading_notesets.emit()
 
 func load_sspms():
 	var map_dir = DirAccess.open("user://maps")
@@ -84,7 +84,7 @@ func load_settings():
 
 		else:
 			print("Invalid settings file, using default.")
-	finished_loading_settings = true
+	finished_loading_settings.emit()
 
 func _process(_delta):
 	# the whole point of this was to render the loading screen at the same time
@@ -96,6 +96,8 @@ func _process(_delta):
 	FluxNoteset.load_default_noteset()
 	
 	# This is also probably a bad way to do this. 
-	if finished_loading_maps and finished_loading_settings and finished_loading_notesets:
-		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+	await finished_loading_maps
+	await finished_loading_notesets
+	await finished_loading_settings
+	get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 
