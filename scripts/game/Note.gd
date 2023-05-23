@@ -39,7 +39,7 @@ func update(currtime: float):
 		Flux.game_stats.hits += 1
 	
 	if currtime >= ms and not unhittable: hittable = true
-	if currtime >= ms + (Flux.settings.game.hitwindow) and hittable: 
+	if currtime >= ms + Flux.settings.game.hitwindow and hittable: 
 		hittable = false
 		unhittable = true
 		Flux.game_stats.hp = clamp(Flux.game_stats.hp - Flux.game_stats.hp_per_miss, 0.0, Flux.game_stats.max_hp)

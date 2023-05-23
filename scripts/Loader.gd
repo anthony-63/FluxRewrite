@@ -13,6 +13,9 @@ signal load_single_noteset
 
 var to_convert = []
 
+func _ready():
+	pass
+
 func load_maps():
 	# Clear maps so they dont duplicate when reloading
 	Flux.maps = []
@@ -97,6 +100,7 @@ func load_settings():
 func _process(_delta):
 	# the whole point of this was to render the loading screen at the same time
 	# it doesnt.
+	
 	load_settings()
 	load_maps()
 	load_notesets()

@@ -31,6 +31,10 @@ Sspm2Flux="*res://scripts/io/SSPM2Flux.gd"
 
 window/vsync/vsync_mode=0
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/discord-sdk-gd/plugin.cfg", "res://addons/draw3d/plugin.cfg")
+
 [input]
 
 toggle_fullscreen={
