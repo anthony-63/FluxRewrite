@@ -635,7 +635,7 @@ theme_override_styles/separator = SubResource("StyleBoxFlat_kttam")
 
 [node name="Label4" type="Label" parent="Changeables/Credits/VBoxContainer"]
 layout_mode = 2
-text = "Cocolennon#3949 - Providing tons of feedback and testing flux."
+text = "Coco Lennon - Providing tons of feedback and testing flux."
 label_settings = SubResource("LabelSettings_ltw7d")
 
 [node name="HSeparator3" type="HSeparator" parent="Changeables/Credits/VBoxContainer"]
