@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://d1dimg4gwxobu"]
+[gd_scene load_steps=16 format=3 uid="uid://d1dimg4gwxobu"]
 
 [ext_resource type="Script" path="res://scripts/game/Game.gd" id="1_8b1w1"]
 [ext_resource type="Texture2D" uid="uid://rcehjeafqa81" path="res://prefabs/user/border.png" id="2_uviet"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dk8bu7ktdhcw" path="res://prefabs/user/cursor.png" id="5_s5dj5"]
 [ext_resource type="PackedScene" uid="uid://dxmi7p40ic26a" path="res://prefabs/transition.tscn" id="7_tq6j5"]
 [ext_resource type="Script" path="res://scripts/game/managers/AudioManager.gd" id="8_bg3u7"]
+[ext_resource type="Script" path="res://scripts/game/InvisCursor.gd" id="9_gku1u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewf8k"]
 bg_color = Color(0.92549, 0.423529, 0.352941, 1)
@@ -199,5 +200,9 @@ material = SubResource("ShaderMaterial_6fa0p")
 
 [node name="AudioManager" type="Node3D" parent="."]
 script = ExtResource("8_bg3u7")
+
+[node name="InvisCursor" type="Sprite3D" parent="."]
+visible = false
+script = ExtResource("9_gku1u")
 
 [editable path="Transition"]

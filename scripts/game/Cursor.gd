@@ -12,8 +12,11 @@ func _process(_delta):
 
 func _input(ev):
 	if ev is InputEventMouseMotion:
-		self.transform.origin.x -= (ev.relative.x * (Flux.settings.cursor.sensitivity / 100))
-		self.transform.origin.y -= (ev.relative.y * (Flux.settings.cursor.sensitivity / 100))
+		if Flux.settings.game.spin:
+			self.transform.origin = $"../InvisCursor".transform.origin
+		else:
+			self.transform.origin.x -= (ev.relative.x * (Flux.settings.cursor.sensitivity / 100))
+			self.transform.origin.y -= (ev.relative.y * (Flux.settings.cursor.sensitivity / 100))
 		self.transform.origin = Vector3(
 			clamp(self.transform.origin.x, $"../HUD/Border".scale.x * -1.5, $"../HUD/Border".scale.x * 1.5),
 			clamp(self.transform.origin.y, $"../HUD/Border".scale.y * -1.5, $"../HUD/Border".scale.y * 1.5),

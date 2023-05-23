@@ -79,7 +79,7 @@ func load_settings():
 			Flux.settings = settings_dict
 			Flux.settings.debug.show_note_hitbox = Flux.default_settings.debug.show_note_hitbox
 			Flux.settings.debug.show_cursor_hitbox = Flux.default_settings.debug.show_cursor_hitbox
-			
+
 		else:
 			print("Invalid settings file, using default.")
 	finished_loading_settings = true

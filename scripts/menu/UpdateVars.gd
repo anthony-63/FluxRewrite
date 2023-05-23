@@ -9,6 +9,7 @@ func _ready():
 	$Changeables/Settings/SettingTypes/Sound/SoundVbox/MusicVolHbox/MusicVolume.value = Flux.settings.audio.music_volume * 100.0
 	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorScaleHbox/CursorScale.value = Flux.settings.cursor.scale
 	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorSensHbox/CursorSensitivity.value = Flux.settings.cursor.sensitivity
+	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/SpinHbox/EnableSpin.button_pressed = Flux.settings.game.spin
 	$Changeables/Mods/ModsVbox/SpeedHbox/Speed.value = Flux.mods.speed
 	$MapInfoPanel/Version.text = Flux.version_string
 	
@@ -55,3 +56,7 @@ func _on_cursor_scale_value_changed(value):
 
 func _on_enable_fade_toggled(button_pressed):
 	Flux.settings.note.fade = button_pressed
+
+
+func _on_enable_spin_toggled(button_pressed):
+	Flux.settings.game.spin = button_pressed

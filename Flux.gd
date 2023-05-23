@@ -7,7 +7,7 @@ var transition_time:float = 1
 var fullscreen = false
 var update_selected_map = false
 
-const version_string = "FluxRewrite v0.2"
+const version_string = "FluxRewrite v0.3 ALPHA"
 
 var cursor_info: Dictionary = {
 	"x": 0.0, # m
@@ -51,6 +51,7 @@ var default_settings = {
 		"hitwindow": 58, # ms
 		"hitbox": 1.14, # m
 		"wait_time": 1.5, # s
+		"spin": true,
 	},
 	"cursor": {
 		"sensitivity": 1.0, # m/s
