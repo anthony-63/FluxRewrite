@@ -24,6 +24,8 @@ func check_map_data(map_data: String):
 	var splitted_noid = splitted.slice(1)
 	for note in splitted_noid:
 		var note_data = note.split("|")
+		for note in note_data:
+			if not note.is_valid_float() || not note.is_valid_int() 
 		if len(note_data) != 3:
 			return false
 	return true

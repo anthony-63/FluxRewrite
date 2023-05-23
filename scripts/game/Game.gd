@@ -19,7 +19,7 @@ func _ready():
 	
 	update_mods()
 	
-	if Flux.current_map.artist_sep:
+	if not Flux.current_map.meta.artist == "":
 		$HUD/MapName.text = Flux.current_map.meta.artist + " - " + Flux.current_map.meta.title
 	else:
 		$HUD/MapName.text = Flux.current_map.meta.title

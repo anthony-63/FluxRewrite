@@ -55,7 +55,7 @@ pixel_size = 0.0025
 texture = ExtResource("2_uviet")
 
 [node name="TimeIntoMap" type="Label3D" parent="HUD"]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.00100446, -1.60591, 0.000479102)
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.00100446, 1.60401, 0.000479102)
 pixel_size = 0.003
 double_sided = false
 text = "0:00/0:00
@@ -64,7 +64,7 @@ font = ExtResource("3_f6rql")
 font_size = 49
 
 [node name="MapName" type="Label3D" parent="HUD"]
-transform = Transform3D(-1, -0.0003963, 0.000613279, -0.000238369, 0.971063, 0.238822, -0.000690175, 0.238822, -0.971063, -3.09944e-06, -1.77697, 0.000213027)
+transform = Transform3D(-1, -0.0003963, 0.000613279, -0.000632765, 0.889464, -0.457004, -0.000364376, -0.457004, -0.889464, -3.09944e-06, 1.78837, 0.000213027)
 pixel_size = 0.003
 double_sided = false
 text = "Billy Sick - Balls In Your Jaws"
@@ -139,7 +139,7 @@ value = 0.5
 show_percentage = false
 
 [node name="HealthBarSprite" type="Sprite3D" parent="HUD"]
-transform = Transform3D(-0.406559, 0, -5.17463e-07, 0, 0.0355695, 0, 6.13888e-08, 0, -3.427, 0, 1.58168, 0)
+transform = Transform3D(-0.406559, 0, -5.17463e-07, 0, 0.0355695, 0, 6.13888e-08, 0, -3.427, 0, -1.59695, 0)
 pixel_size = 0.005
 texture = SubResource("ViewportTexture_lsoql")
 

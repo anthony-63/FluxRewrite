@@ -5,10 +5,15 @@ var thread: Thread = Thread.new()
 var finished_loading_maps = false
 var finished_loading_settings = false
 var finished_loading_notesets = false
-
+var to_convert = []
 func load_maps():
 	# Clear maps so they dont duplicate when reloading
 	Flux.maps = []
+	load_sspms()
+	for i in to_convert:
+		FluxMap.sspm_to_flux(i.path, i.data)
+	to_convert = []
+	
 	var map_dir = DirAccess.open("user://maps")
 	if map_dir:
 		var files = map_dir.get_files()
@@ -23,7 +28,7 @@ func load_maps():
 	else:
 		var user_dir = DirAccess.open("user://")
 		user_dir.make_dir("maps")
-	load_sspms()
+	
 	finished_loading_maps = true
 	
 func load_notesets():
@@ -43,20 +48,17 @@ func load_notesets():
 	finished_loading_notesets = true
 
 func load_sspms():
-	var map_dir = DirAccess.open("user://sspm")
-	if map_dir:
-		var files = map_dir.get_files()
-		for map_path in files:
-			if not map_path.ends_with(".sspm"):
-				map_dir.get_next()
-				continue
-				
-			$FluxImage/CurrentMap.text = map_path
+	var map_dir = DirAccess.open("user://maps")
+	
+	var files = map_dir.get_files()
+	for map_path in files:
+		if not map_path.ends_with(".sspm"):
+			map_dir.get_next()
+			continue
 			
-			Sspm2Flux.flux_from_sspm(map_path)
-	else:
-		var user_dir = DirAccess.open("user://")
-		user_dir.make_dir("sspm")
+		$FluxImage/CurrentMap.text = map_path
+		
+		Sspm2Flux.flux_from_sspm(to_convert, map_path)
 
 func validate_settings(settings_dict: Dictionary):
 	for cat in Flux.default_settings.keys():

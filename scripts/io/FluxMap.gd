@@ -2,7 +2,7 @@ extends Node
 
 var meta = {}
 var jackets = {}
-var audio_stream = [] 
+var audio_stream: AudioStream
 var diffs = {}
 const very_cool_seperator = "Ξζξ"
 
@@ -12,7 +12,7 @@ func get_start_of_audio_buffer(f_txt: String):
 	var a = f_txt.find(very_cool_seperator)
 	var b = f_txt.find(very_cool_seperator, a + 1)
 	var c = f_txt.find(very_cool_seperator, b + 1)
-	return c
+	return c + 12
 
 func load_from_path(path):
 	var file_txt_a = FileAccess.get_file_as_string("user://maps/%s" % path)
@@ -36,13 +36,22 @@ func load_from_path(path):
 		
 	var audio_bytes = file_bytes.slice(get_start_of_audio_buffer(file_txt_a))
 	
-	audio_stream = AudioStreamMP3.new()
-	audio_stream.data = audio_bytes
-	
-	print(meta["title"] + " " + meta["artist"] + " " + meta["mapper"] + " " + meta["id"])
+	var format = Flux.get_audio_format(audio_bytes)
+	match format:
+		Flux.AudioFormat.WAV:
+			audio_stream = AudioStreamWAV.new()
+			audio_stream.data = audio_bytes
+		Flux.AudioFormat.OGG:
+			audio_stream = AudioStreamOggVorbis.new()
+			audio_stream.packet_sequence = Flux.get_ogg_packet_sequence(audio_bytes)
+		Flux.AudioFormat.MP3:
+			audio_stream = AudioStreamMP3.new()
+			audio_stream.data = audio_bytes
+		_:
+			print("File: %s, Invalid format. Magic: %s" % [path, audio_bytes.slice(0,3)])
+			return
 	
 	combined_map_data = {
-		"artist_sep": true,
 		"meta": meta,
 		"diffs": diffs,
 		"jackets": jackets,
@@ -50,6 +59,19 @@ func load_from_path(path):
 	}
 
 	Flux.maps.append(combined_map_data)
+
+func sspm_to_flux(sspm_path, combined_map_data):
+	var file = FileAccess.open("user://maps/%s.flux" % combined_map_data.meta.id, FileAccess.WRITE)
+	print("converting: %s" % sspm_path)
+	file.store_8(2) # version
+	file.store_string(JSON.stringify(combined_map_data.meta))
+	file.store_string(very_cool_seperator)
+	file.store_string(JSON.stringify(combined_map_data.diffs))
+	file.store_string(very_cool_seperator)
+	var _jackets = {}
+	file.store_string(" " + very_cool_seperator)
+	file.store_buffer(combined_map_data.audio_buffer)
+	DirAccess.remove_absolute("user://maps/%s" % sspm_path)
 	
 func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, _jacket_path = ""):
 #	var audio_data = FileAccess.get_file_as_bytes(audio_path)

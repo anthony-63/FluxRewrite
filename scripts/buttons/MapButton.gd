@@ -7,7 +7,7 @@ var map_data = {}
 func update(data):
 	map_data = data
 	
-	if data.artist_sep:
+	if not data.meta.artist == "":
 		$SongName.text = "%s - %s" % [data.meta.artist, data.meta.title]
 	else:
 		$SongName.text = data.meta.title

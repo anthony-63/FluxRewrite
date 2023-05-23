@@ -3,7 +3,7 @@ extends Node
 var selected_map = {}
 
 func update_map_info():
-	if selected_map.artist_sep:
+	if not selected_map.meta.artist == "":
 		$ArtistAndMapper.text = "%s/%s" % [selected_map.meta.artist, selected_map.meta.mapper]
 	else:
 		$ArtistAndMapper.text = selected_map.meta.mapper

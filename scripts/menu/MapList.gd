@@ -17,7 +17,6 @@ func update_maps():
 	
 	for map in Flux.maps:
 		map_button_data.append(map)
-		print("Data: %s - %s, %s - %s" % [map.meta.artist, map.meta.title, map.meta.mapper, Flux.get_map_len_str(map)])
 	var i = 0
 	for data in map_button_data:
 		var button = $MapScrollVbox/MapButton.duplicate()

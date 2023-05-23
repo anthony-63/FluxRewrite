@@ -1,12 +1,5 @@
 extends Node
 
-enum AudioFormat {
-	OGG,
-	WAV,
-	MP3,
-	UNKNOWN,
-}
-
 class Map:
 	enum Difficulty { # LEGACY SUPPORT
 		UNKNOWN,
@@ -60,66 +53,16 @@ class Mapset:
 	var creator: String
 	var cover:Texture
 	var audio:AudioStream
+	var audio_buffer: PackedByteArray
 	var maps:Array
 
 const SIGNATURE:PackedByteArray = [0x53,0x53,0x2b,0x6d]
 
-static func get_ogg_packet_sequence(data:PackedByteArray):
-	var packets = []
-	var granule_positions = []
-	var sampling_rate = 0
-	var pos = 0
-	while pos < data.size():
-		# Parse the Ogg packet header
-		var header = data.slice(pos, pos + 27)
-		pos += 27
-		# Check the capture pattern
-		if header.slice(0, 4) != "OggS".to_ascii_buffer():
-			break
-		# Get the packet type
-		var packet_type = header.decode_u8(5)
-#		print("packet type: %s" % packet_type)
-		# Get the granule position
-		var granule_position = header.decode_u64(6)
-#		print("granule position: %s" % granule_position)
-		granule_positions.append(granule_position)
-		# Get the page sequence number
-#		var sequence_number = header.decode_u32(18)
-#		print("sequence number: %s" % sequence_number)
-		# Get the segment table
-		var segment_table_length = header.decode_u8(26)
-#		print("segment table length: %s" % segment_table_length)
-		var segment_table = data.slice(pos, pos + segment_table_length)
-		pos += segment_table_length
-		# Get the packet data
-		var packet_data = []
-		var appending = false
-		for i in range(segment_table_length):
-			var segment_size = segment_table.decode_u8(i)
-			var segment = data.slice(pos, pos + segment_size)
-			if appending: packet_data.back().append_array(segment)
-			else: packet_data.append(segment)
-			appending = segment_size == 255
-			pos += segment_size
-		# Add the packet data to the array
-		packets.append(packet_data)
-		if sampling_rate == 0 and packet_type == 2:
-			var info_header = packet_data[0]
-			if info_header.slice(1, 7).get_string_from_ascii() != "vorbis":
-				break
-			sampling_rate = info_header.decode_u32(12)
-	var packet_sequence = OggPacketSequence.new()
-	packet_sequence.sampling_rate = sampling_rate
-	packet_sequence.granule_positions = granule_positions
-	packet_sequence.packet_data = packets
-	return packet_sequence
-
-func flux_from_sspm(path: String):
+func flux_from_sspm(to_conv: Array, path: String):
 	var mapset = read_from_file(path)
 	var maps = []
 	
 	var combined_map_data = {
-		"artist_sep": false,
 		"meta": {
 			"artist": "",
 			"title": mapset.name,
@@ -132,15 +75,16 @@ func flux_from_sspm(path: String):
 		},
 		"jackets": {},
 		"audio_stream": mapset.audio,
+		"audio_buffer": mapset.audio_buffer,
 	}
 	print("parsing: {ver: ", mapset.format, ", name: \"", mapset.name, "\", mapper: \"", mapset.creator, ", broken: ", mapset.broken, "}")
 	if mapset.broken: return
 	for note in mapset.maps[0].notes:
 		combined_map_data.diffs.default.append({"ms": note.time * 1000.0, "x": note.x, "y": note.y})
-	Flux.maps.append(combined_map_data)
+	to_conv.append({"path": path, "data": combined_map_data})
 
 static func read_from_file(path:String,full:bool=false,index:int=0) -> Mapset:
-	var file = FileAccess.open("user://sspm/%s" % path,FileAccess.READ)
+	var file = FileAccess.open("user://maps/%s" % path,FileAccess.READ)
 	assert(file != null)
 	assert(file.get_buffer(4) == SIGNATURE)
 	var set = Mapset.new()
@@ -218,41 +162,29 @@ static func deserialise_v3_data(data:String,map:Map):
 		map.notes.append(note)
 	map.data = parsed
 
-static func get_audio_format(buffer:PackedByteArray):
-	if buffer.slice(0,4) == PackedByteArray([0x4F,0x67,0x67,0x53]): return AudioFormat.OGG
-
-	if (buffer.slice(0,4) == PackedByteArray([0x52,0x49,0x46,0x46])
-	and buffer.slice(8,12) == PackedByteArray([0x57,0x41,0x56,0x45])): return AudioFormat.WAV
-
-	if (buffer.slice(0,2) == PackedByteArray([0xFF,0xFB])
-	or buffer.slice(0,2) == PackedByteArray([0xFF,0xF3])
-	or buffer.slice(0,2) == PackedByteArray([0xFF,0xFA])
-	or buffer.slice(0,2) == PackedByteArray([0xFF,0xF2])
-	or buffer.slice(0,3) == PackedByteArray([0x49,0x44,0x33])): return AudioFormat.MP3
-
-	return AudioFormat.UNKNOWN
-
 static func _cover(image:Image,set:Mapset):
 	var texture = ImageTexture.create_from_image(image)
 	set.cover = texture
+
 static func _audio(buffer:PackedByteArray,set:Mapset):
-	var format = get_audio_format(buffer)
+	var format = Flux.get_audio_format(buffer)
 	match format:
-		AudioFormat.WAV:
+		Flux.AudioFormat.WAV:
 			var stream = AudioStreamWAV.new()
 			stream.data = buffer
 			set.audio = stream
-		AudioFormat.OGG:
+		Flux.AudioFormat.OGG:
 			var stream = AudioStreamOggVorbis.new()
-			stream.packet_sequence = get_ogg_packet_sequence(buffer)
+			stream.packet_sequence = Flux.get_ogg_packet_sequence(buffer)
 			set.audio = stream
-		AudioFormat.MP3:
+		Flux.AudioFormat.MP3:
 			var stream = AudioStreamMP3.new()
 			stream.data = buffer
 			set.audio = stream
 		_:
 			print("I don't recognise this format! %s" % buffer.slice(0,3))
 			set.broken = true
+	set.audio_buffer = buffer
 
 static func _sspmv1(file:FileAccess,set:Mapset,full:bool):
 	file.seek(file.get_position()+2) # Header reserved space or something
@@ -291,8 +223,8 @@ static func _sspmv1(file:FileAccess,set:Mapset,full:bool):
 		return
 	var music_length = file.get_64()
 	var music_buffer = file.get_buffer(music_length)
-	var music_format = get_audio_format(music_buffer)
-	if music_format == AudioFormat.UNKNOWN:
+	var music_format = Flux.get_audio_format(music_buffer)
+	if music_format == Flux.AudioFormat.UNKNOWN:
 		set.broken = true
 	else:
 		_audio(music_buffer,set)
