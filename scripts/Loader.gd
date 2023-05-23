@@ -3,9 +3,16 @@ extends Node
 var thread: Thread = Thread.new()
 
 signal finished_loading_maps
+signal load_single_map
+
 signal finished_loading_settings
+signal load_single_setting
+
 signal finished_loading_notesets
+signal load_single_noteset
+
 var to_convert = []
+
 func load_maps():
 	# Clear maps so they dont duplicate when reloading
 	Flux.maps = []
@@ -24,7 +31,7 @@ func load_maps():
 				
 			$FluxImage/CurrentMap.text = map_path
 			
-			FluxMap.load_from_path(map_path)
+			await FluxMap.load_from_path(map_path)
 	else:
 		var user_dir = DirAccess.open("user://")
 		user_dir.make_dir("maps")
@@ -62,11 +69,11 @@ func load_sspms():
 
 func validate_settings(settings_dict: Dictionary):
 	for cat in Flux.default_settings.keys():
-		if not cat in settings_dict:
+		if not cat in settings_dict.keys():
 			print("Invalid cat: %s" % cat)
 			return false
 
-		for setting in settings_dict[cat].keys():
+		for setting in settings_dict[cat].keys(): # fix this later
 			if not setting in settings_dict[cat]:
 				print("Invalid setting %s in cat %s" % [setting, cat])
 				return false
@@ -81,9 +88,10 @@ func load_settings():
 			Flux.settings = settings_dict
 			Flux.settings.debug.show_note_hitbox = Flux.default_settings.debug.show_note_hitbox
 			Flux.settings.debug.show_cursor_hitbox = Flux.default_settings.debug.show_cursor_hitbox
-
 		else:
+			Flux.settings = Flux.default_settings # just to be sure
 			print("Invalid settings file, using default.")
+	
 	finished_loading_settings.emit()
 
 func _process(_delta):

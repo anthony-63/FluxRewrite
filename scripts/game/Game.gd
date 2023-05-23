@@ -67,7 +67,10 @@ func _process(_delta):
 	$HUD/HealthBarViewport/HealthBarProgress.max_value = Flux.game_stats.max_hp
 	$HUD/HealthBarViewport/HealthBarProgress.value = Flux.game_stats.hp
 	if Flux.settings.game.spin:
-		$Camera3D.look_at($InvisCursor.transform.origin)
+		$Camera3D.look_at($InvisCursor.transform.origin, Vector3.UP)
+	else:
+		$Camera3D.global_transform.origin.x = $Cursor.global_transform.origin.x * Flux.get_setting("game", "parallax")
+		$Camera3D.global_transform.origin.y = $Cursor.global_transform.origin.y * Flux.get_setting("game", "parallax")
 	
 	$Draw3D.clear()
 	

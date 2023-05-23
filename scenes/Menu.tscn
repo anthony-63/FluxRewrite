@@ -246,6 +246,7 @@ grow_vertical = 0
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_ukrn5")
 
 [node name="Mods" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -285,7 +286,6 @@ suffix = "x"
 custom_arrow_step = 0.1
 
 [node name="Settings" type="TabBar" parent="Changeables"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings"]
@@ -303,6 +303,7 @@ offset_bottom = 270.0
 theme = SubResource("Theme_2pltl")
 
 [node name="Note" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Note"]
@@ -466,7 +467,6 @@ custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
 [node name="Cursor" type="TabBar" parent="Changeables/Settings/SettingTypes"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Cursor"]
@@ -514,6 +514,21 @@ vertical_alignment = 1
 [node name="CursorSensitivity" type="SpinBox" parent="Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorSensHbox"]
 layout_mode = 2
 step = 0.01
+
+[node name="ParallaxHbox" type="HBoxContainer" parent="Changeables/Settings/SettingTypes/Cursor/CursorVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Cursor/CursorVbox/ParallaxHbox"]
+layout_mode = 2
+text = "Parallax:"
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Parallax" type="SpinBox" parent="Changeables/Settings/SettingTypes/Cursor/CursorVbox/ParallaxHbox"]
+layout_mode = 2
+min_value = -100.0
+step = 0.0
 
 [node name="SpinHbox" type="HBoxContainer" parent="Changeables/Settings/SettingTypes/Cursor/CursorVbox"]
 layout_mode = 2
@@ -831,6 +846,7 @@ layout_mode = 1
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Sound/SoundVbox/MusicVolHbox/MusicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorScaleHbox/CursorScale" to="." method="_on_cursor_scale_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorSensHbox/CursorSensitivity" to="." method="_on_cursor_sensitivity_value_changed"]
+[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/ParallaxHbox/Parallax" to="." method="_on_parallax_value_changed"]
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/SpinHbox/EnableSpin" to="." method="_on_enable_spin_toggled"]
 [connection signal="pressed" from="Changeables/Settings/SaveSettings" to="." method="_on_save_settings_pressed"]
 [connection signal="pressed" from="Changeables/Import/VBoxContainer/ImportFromTxtData" to="Changeables/Import" method="_on_import_from_txt_data_pressed"]

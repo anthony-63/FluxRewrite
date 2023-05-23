@@ -51,7 +51,8 @@ var default_settings = {
 		"hitwindow": 58, # ms
 		"hitbox": 1.14, # m
 		"wait_time": 1.5, # s
-		"spin": true,
+		"parallax": 0.25,
+		"spin": false,
 	},
 	"cursor": {
 		"sensitivity": 1.0, # m/s
@@ -71,9 +72,9 @@ var default_settings = {
 var settings = default_settings
 
 var mods = {
-	"speed": 1.0,
-	"seek": 0,
-	"endseek": -1,
+	"speed": 1.0, # %
+	"seek": 0, # s
+	"endseek": -1, # s
 }
 
 func _ready():
@@ -84,6 +85,12 @@ func _process(_delta):
 		if fullscreen: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 		else: DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		fullscreen = !fullscreen
+
+func get_setting(category:String, setting:String):
+	if setting in settings.get(category):
+		return settings.get(category).get(setting)
+	else:
+		return default_settings.get(category).get(setting)
 
 func reload_game():
 	get_tree().change_scene_to_file("res://scenes/Loading.tscn")
