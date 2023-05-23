@@ -77,6 +77,9 @@ func load_settings():
 		var settings_dict = JSON.parse_string(f)
 		if validate_settings(settings_dict):
 			Flux.settings = settings_dict
+			Flux.settings.debug.show_note_hitbox = Flux.default_settings.debug.show_note_hitbox
+			Flux.settings.debug.show_cursor_hitbox = Flux.default_settings.debug.show_cursor_hitbox
+			
 		else:
 			print("Invalid settings file, using default.")
 	finished_loading_settings = true

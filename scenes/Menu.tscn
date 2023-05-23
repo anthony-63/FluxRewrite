@@ -794,6 +794,7 @@ layout_mode = 1
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/NoteVbox/SDHbox/SD" to="." method="_on_sd_value_changed"]
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/UI/UIVbox/EnableRuwoCheckbox" to="." method="_on_enable_ruwo_checkbox_toggled"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Sound/SoundVbox/MusicVolHbox/MusicVolume" to="." method="_on_music_volume_value_changed"]
+[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorScaleHbox/CursorScale" to="." method="_on_cursor_scale_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorSensHbox/CursorSensitivity" to="." method="_on_cursor_sensitivity_value_changed"]
 [connection signal="pressed" from="Changeables/Settings/SaveSettings" to="." method="_on_save_settings_pressed"]
 [connection signal="pressed" from="Changeables/Import/VBoxContainer/ImportFromTxtData" to="Changeables/Import" method="_on_import_from_txt_data_pressed"]
