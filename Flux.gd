@@ -41,6 +41,7 @@ var default_settings = {
 		"ar": 10.0, # m/s
 		"sd": 4.0, # m
 		"approach_time": 0.0, # s
+		"fade": false,
 	},
 	"debug": {
 		"show_note_hitbox": false,

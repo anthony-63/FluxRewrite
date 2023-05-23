@@ -63,12 +63,12 @@ func validate_settings(settings_dict: Dictionary):
 		if not cat in settings_dict:
 			print("Invalid cat: %s" % cat)
 			return false
-		if typeof(settings_dict[cat]) == TYPE_DICTIONARY:
-			for setting in settings_dict[cat].keys():
-				if not setting in settings_dict[cat]:
-					print("Invalid setting %s in cat %s" % [setting, cat])
-					return false
-		
+
+		for setting in settings_dict[cat].keys():
+			if not setting in settings_dict[cat]:
+				print("Invalid setting %s in cat %s" % [setting, cat])
+				return false
+
 	return true
 
 func load_settings():

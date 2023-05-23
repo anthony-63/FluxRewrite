@@ -5,6 +5,7 @@ var ms
 var index
 var hittable: bool
 var unhittable: bool
+var mod_color: Color
 
 func _ready():
 	self.scale = Vector3.ONE*0.865
@@ -47,6 +48,12 @@ func update(currtime: float):
 	
 	if Flux.settings.debug.show_note_hitbox:
 		$"../../Draw3D".cube(Vector3(self.transform.origin.x,  self.transform.origin.y, self.transform.origin.z), Basis.IDENTITY.scaled(Vector3(Flux.settings.game.hitbox / 2.0, Flux.settings.game.hitbox / 2.0, 0.0)), Color.GREEN)
+	
+	if Flux.settings.note.fade:
+		mod_color = Color(1.0, 1.0, 1.0, 1.0 - time)
+	else:
+		mod_color = Color(1.0, 1.0, 1.0)
+	self.modulate = mod_color
 	
 	if self.transform.origin.z < -1.5:
 		self.visible = false
