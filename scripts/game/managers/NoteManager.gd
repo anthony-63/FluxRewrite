@@ -7,7 +7,7 @@ var spawn_new_notes = true
 
 func _ready():
 	for note in Flux.current_map.diffs["default"]:
-		note["st"] = note["ms"] - ((Flux.settings["note"]["approach_time"]) * Flux.mods["speed"]) * 1000.0
+		note["st"] = note["ms"] - (Flux.get_setting("note", "approach_time") * Flux.mods["speed"]) * 1000.0
 	
 func _process(_delta):
 	if Flux.current_map == {}:
@@ -15,7 +15,7 @@ func _process(_delta):
 	if note_index + 1 >= len(Flux.current_map.diffs.default):
 		spawn_new_notes = false
 	
-	var noteset = Flux.notesets[Flux.settings.sets.noteset]
+	var noteset = Flux.notesets[Flux.get_setting("sets", "noteset")]
 	
 	if spawn_new_notes:
 		if $"../AudioManager".current_time > Flux.current_map.diffs["default"][note_index].st:

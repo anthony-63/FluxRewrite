@@ -1,12 +1,12 @@
 extends Node
 
 func _ready():
-	self.scale = Vector3.ONE * Flux.settings.cursor.scale
+	self.scale = Vector3.ONE * Flux.get_setting("cursor", "scale")
 
 func _input(ev):
 	if ev is InputEventMouseMotion:
-		self.transform.origin.x -= (ev.relative.x * (Flux.settings.cursor.sensitivity / 100))
-		self.transform.origin.y -= (ev.relative.y * (Flux.settings.cursor.sensitivity / 100))
+		self.transform.origin.x -= (ev.relative.x * (Flux.get_setting("cursor", "sensitivity") / 100))
+		self.transform.origin.y -= (ev.relative.y * (Flux.get_setting("cursor", "sensitivity") / 100))
 		
 #		print("\nclamp coords\nx<{CXA}, {CXB}>\ny<{CYA}, {CYB}>".format({
 #			"CXA": $"../HUD/Border".scale.x * -1.5,

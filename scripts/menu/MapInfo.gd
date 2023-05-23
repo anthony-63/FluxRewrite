@@ -43,6 +43,5 @@ func _process(_delta):
 func _on_play_button_pressed():
 	$"../Transition".transition_out()
 	await get_tree().create_timer(Flux.transition_time).timeout
-	print(Flux.settings.sets.noteset)
 	Flux.current_map = selected_map
 	get_tree().change_scene_to_file("res://scenes/Game.tscn")

@@ -25,8 +25,8 @@ func _ready():
 		$HUD/MapName.text = Flux.current_map.meta.title
 		
 	$AudioManager.length = Flux.current_map.diffs.default[-1].ms
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(Flux.settings.audio.music_volume))
-	await get_tree().create_timer(Flux.default_settings.game.wait_time).timeout
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(Flux.get_setting("audio", "music_volume")))
+	await get_tree().create_timer(Flux.get_setting("game", "wait_time")).timeout
 	
 #	Flux.audio_manager.seek(-Flux.default_settings.game.wait_time)
 	$AudioManager.play($MusicStream)
@@ -66,7 +66,7 @@ func _process(_delta):
 	
 	$HUD/HealthBarViewport/HealthBarProgress.max_value = Flux.game_stats.max_hp
 	$HUD/HealthBarViewport/HealthBarProgress.value = Flux.game_stats.hp
-	if Flux.settings.game.spin:
+	if Flux.get_setting("game", "spin"):
 		$Camera3D.look_at($InvisCursor.transform.origin, Vector3.UP)
 	else:
 		$Camera3D.global_transform.origin.x = $Cursor.global_transform.origin.x * Flux.get_setting("game", "parallax")

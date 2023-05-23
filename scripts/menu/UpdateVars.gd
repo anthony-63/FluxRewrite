@@ -25,25 +25,25 @@ func _process(_delta):
 		$MapList/Ruwo.hide()
 
 func update_at():
-	Flux.settings["note"]["approach_time"] = Flux.get_setting("note", "sd") / Flux.get_setting("note", "ar")
+	Flux.settings.note.approach_time = Flux.get_setting("note", "sd") / Flux.get_setting("note", "ar")
 
 func _on_save_settings_pressed():
 	var f = FileAccess.open("user://settings.json", FileAccess.WRITE)
 	f.store_string(JSON.stringify(Flux.settings))
 
 func _on_enable_ruwo_checkbox_toggled(button_pressed):
-	Flux.settings["ui"]["enable_ruwo"] = button_pressed
+	Flux.settings.ui.enable_ruwo = button_pressed
 
 func _on_ar_value_changed(value):
-	Flux.settings["note"]["ar"] = value
+	Flux.settings.note.ar = value
 	update_at()
 
 func _on_sd_value_changed(value):
-	Flux.settings["note"]["sd"] = value
+	Flux.settings.note.sd = value
 	update_at()
 
 func _on_music_volume_value_changed(value):
-	Flux.settings["audio"]["music_volume"] = value / 100.0
+	Flux.settings.audio.music_volume = value / 100.0
 
 func _on_speed_value_changed(value):
 	Flux.mods.speed = value
