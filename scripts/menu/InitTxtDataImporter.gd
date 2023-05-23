@@ -3,7 +3,6 @@ extends Node
 func _ready():
 	pass
 
-
 func _on_open_mp_3_file_pressed():
 	$AudioFileDialog.popup_centered(Vector2(get_window().size.x / 2.0, get_window().size.y / 2.0))
 
