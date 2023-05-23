@@ -86,5 +86,7 @@ func _process(_delta):
 	
 	if Input.is_action_just_pressed("leave_map"):
 		set_all_finished_info()
+		$Transition.transition_out()
+		await get_tree().create_timer(Flux.transition_time).timeout		
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 		
