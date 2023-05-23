@@ -2,21 +2,21 @@ extends Node
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	$Changeables/Settings/SettingTypes/Note/AR.value = Flux.settings.note.ar
-	$Changeables/Settings/SettingTypes/Note/SD.value = Flux.settings.note.sd
-	$Changeables/Settings/SettingTypes/UI/EnableRuwoCheckbox.toggle_mode = Flux.settings.ui.enable_ruwo
-	$Changeables/Settings/SettingTypes/Sound/MusicVolume.value = Flux.settings.audio.music_volume * 100.0
-	$Changeables/Settings/SettingTypes/Cursor/CursorScale.value = Flux.settings.cursor.scale
-	$Changeables/Settings/SettingTypes/Cursor/CursorSensitivity.value = Flux.settings.cursor.sensitivity
+	$Changeables/Settings/SettingTypes/Note/NoteVbox/ARHbox/AR.value = Flux.settings.note.ar
+	$Changeables/Settings/SettingTypes/Note/NoteVbox/SDHbox/SD.value = Flux.settings.note.sd
+	$Changeables/Settings/SettingTypes/UI/UIVbox/EnableRuwoCheckbox.toggle_mode = Flux.settings.ui.enable_ruwo
+	$Changeables/Settings/SettingTypes/Sound/SoundVbox/MusicVolHbox/MusicVolume.value = Flux.settings.audio.music_volume * 100.0
+	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorScaleHbox/CursorScale.value = Flux.settings.cursor.scale
+	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorSensHbox/CursorSensitivity.value = Flux.settings.cursor.sensitivity
 	
-	$Changeables/Mods/Speed.value = Flux.mods.speed
+	$Changeables/Mods/ModsVbox/SpeedHbox/Speed.value = Flux.mods.speed
 	$MapInfoPanel/Version.text = Flux.version_string
 	
 	for noteset in Flux.notesets.keys():
-		$Changeables/Settings/SettingTypes/Sets/Noteset.add_item(noteset)
+		$Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.add_item(noteset)
 
 func _process(_delta):
-	Flux.settings.sets.noteset = $Changeables/Settings/SettingTypes/Sets/Noteset.get_item_text($Changeables/Settings/SettingTypes/Sets/Noteset.selected)
+	Flux.settings.sets.noteset = $Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.get_item_text($Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.selected)
 	if Flux.settings["ui"]["enable_ruwo"]:
 		$MapList/Ruwo.show()
 	else:
@@ -45,9 +45,6 @@ func _on_music_volume_value_changed(value):
 
 func _on_speed_value_changed(value):
 	Flux.mods.speed = value
-
-func _on_seek_value_changed(value):
-	Flux.mods.seek = value
-
+	
 func _on_cursor_sensitivity_value_changed(value):
 	Flux.settings.cursor.sensitivity = value

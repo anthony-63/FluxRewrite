@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://1uoi6aia1qhh"]
+[gd_scene load_steps=30 format=3 uid="uid://1uoi6aia1qhh"]
 
 [ext_resource type="Script" path="res://scripts/menu/UpdateVars.gd" id="1_7p613"]
 [ext_resource type="Texture2D" uid="uid://5u7n2u4erb06" path="res://images/ruwo.png" id="3_il0bq"]
@@ -30,11 +30,20 @@ bg_color = Color(0.0941176, 0.0784314, 0.0627451, 1)
 
 [sub_resource type="Theme" id="Theme_2pltl"]
 
+[sub_resource type="Theme" id="Theme_5d22k"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kttam"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
 [sub_resource type="Theme" id="Theme_25olc"]
 default_font_size = 18
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mald1"]
 bg_color = Color(0.364706, 0.364706, 0.364706, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ltw7d"]
+font = ExtResource("8_58afk")
+font_size = 15
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_b6ite"]
 bg_color = Color(0.0941176, 0.0784314, 0.0627451, 1)
@@ -244,52 +253,31 @@ grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="Speed" type="SpinBox" parent="Changeables/Mods"]
-layout_mode = 0
-offset_left = 55.0
-offset_top = 1.0
-offset_right = 138.063
-offset_bottom = 32.0
-step = 0.01
-value = 1.0
-suffix = "x"
-custom_arrow_step = 0.1
-
-[node name="Label" type="Label" parent="Changeables/Mods/Speed"]
+[node name="ModsVbox" type="VBoxContainer" parent="Changeables/Mods"]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -51.0
-offset_right = 1.0
+offset_left = 6.0
+grow_horizontal = 2
 grow_vertical = 2
+
+[node name="SpeedHbox" type="HBoxContainer" parent="Changeables/Mods/ModsVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Mods/ModsVbox/SpeedHbox"]
+layout_mode = 2
 text = "Speed:"
 label_settings = SubResource("LabelSettings_hucv2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Seek" type="SpinBox" parent="Changeables/Mods"]
-visible = false
-layout_mode = 0
-offset_left = 54.0
-offset_top = 32.0
-offset_right = 137.063
-offset_bottom = 63.0
-max_value = 999999.0
-rounded = true
-suffix = "s"
+[node name="Speed" type="SpinBox" parent="Changeables/Mods/ModsVbox/SpeedHbox"]
+layout_mode = 2
+step = 0.01
+value = 1.0
+suffix = "x"
 custom_arrow_step = 0.1
-
-[node name="Label" type="Label" parent="Changeables/Mods/Seek"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_left = -51.0
-offset_right = 1.0
-grow_vertical = 2
-text = "Seek:"
-label_settings = SubResource("LabelSettings_hucv2")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Settings" type="TabBar" parent="Changeables"]
 visible = false
@@ -305,11 +293,12 @@ color = Color(0.141176, 0.141176, 0.141176, 1)
 
 [node name="SettingTypes" type="TabContainer" parent="Changeables/Settings"]
 layout_mode = 0
-offset_right = 586.0
+offset_right = 488.0
 offset_bottom = 270.0
 theme = SubResource("Theme_2pltl")
 
 [node name="Note" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Note"]
@@ -321,48 +310,46 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 
-[node name="AR" type="SpinBox" parent="Changeables/Settings/SettingTypes/Note"]
+[node name="NoteVbox" type="VBoxContainer" parent="Changeables/Settings/SettingTypes/Note"]
 layout_mode = 1
-offset_left = 32.0
-offset_right = 115.063
-offset_bottom = 31.0
-max_value = 200.0
-step = 0.01
-custom_arrow_step = 0.1
-
-[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Note/AR"]
-layout_mode = 1
-anchors_preset = 9
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -28.0
-offset_right = -7.0
+offset_left = 4.0
+grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ARHbox" type="HBoxContainer" parent="Changeables/Settings/SettingTypes/Note/NoteVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Note/NoteVbox/ARHbox"]
+layout_mode = 2
 text = "AR: "
 label_settings = SubResource("LabelSettings_hucv2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="SD" type="SpinBox" parent="Changeables/Settings/SettingTypes/Note"]
-layout_mode = 0
-offset_left = 32.0
-offset_top = 32.0
-offset_right = 115.063
-offset_bottom = 63.0
+[node name="AR" type="SpinBox" parent="Changeables/Settings/SettingTypes/Note/NoteVbox/ARHbox"]
+layout_mode = 2
 max_value = 200.0
 step = 0.01
 custom_arrow_step = 0.1
 
-[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Note/SD"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_left = -28.0
-offset_right = -7.0
-grow_vertical = 2
+[node name="SDHbox" type="HBoxContainer" parent="Changeables/Settings/SettingTypes/Note/NoteVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Note/NoteVbox/SDHbox"]
+layout_mode = 2
 text = "SD: "
 label_settings = SubResource("LabelSettings_hucv2")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="SD" type="SpinBox" parent="Changeables/Settings/SettingTypes/Note/NoteVbox/SDHbox"]
+layout_mode = 2
+max_value = 200.0
+step = 0.01
+custom_arrow_step = 0.1
 
 [node name="UI" type="TabBar" parent="Changeables/Settings/SettingTypes"]
 visible = false
@@ -377,10 +364,16 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 
-[node name="EnableRuwoCheckbox" type="CheckBox" parent="Changeables/Settings/SettingTypes/UI"]
-layout_mode = 0
-offset_right = 24.0
-offset_bottom = 24.0
+[node name="UIVbox" type="VBoxContainer" parent="Changeables/Settings/SettingTypes/UI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EnableRuwoCheckbox" type="CheckBox" parent="Changeables/Settings/SettingTypes/UI/UIVbox"]
+layout_mode = 2
 button_pressed = true
 text = "Enable Ruwo on map list"
 
@@ -397,25 +390,29 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 
-[node name="MusicVolume" type="SpinBox" parent="Changeables/Settings/SettingTypes/Sound"]
-layout_mode = 0
-offset_left = 115.0
-offset_right = 198.063
-offset_bottom = 31.0
-rounded = true
-suffix = "%"
-
-[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Sound/MusicVolume"]
+[node name="SoundVbox" type="VBoxContainer" parent="Changeables/Settings/SettingTypes/Sound"]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -111.0
-offset_right = -2.0
+offset_left = 5.0
+grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MusicVolHbox" type="HBoxContainer" parent="Changeables/Settings/SettingTypes/Sound/SoundVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Sound/SoundVbox/MusicVolHbox"]
+layout_mode = 2
 text = "Music Volume"
 label_settings = SubResource("LabelSettings_hucv2")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="MusicVolume" type="SpinBox" parent="Changeables/Settings/SettingTypes/Sound/SoundVbox/MusicVolHbox"]
+layout_mode = 2
+rounded = true
+suffix = "%"
 
 [node name="Sets" type="TabBar" parent="Changeables/Settings/SettingTypes"]
 visible = false
@@ -430,23 +427,27 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 
-[node name="Noteset" type="OptionButton" parent="Changeables/Settings/SettingTypes/Sets"]
-layout_mode = 0
-offset_left = 76.0
-offset_top = 4.0
-offset_right = 249.0
-offset_bottom = 32.0
+[node name="SetsVbox" type="VBoxContainer" parent="Changeables/Settings/SettingTypes/Sets"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Sets/Noteset"]
-layout_mode = 0
-offset_left = -70.0
-offset_top = 3.0
-offset_right = -4.0
-offset_bottom = 29.0
+[node name="NotesetHbox" type="HBoxContainer" parent="Changeables/Settings/SettingTypes/Sets/SetsVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox"]
+layout_mode = 2
 text = "Noteset:"
 
+[node name="Noteset" type="OptionButton" parent="Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
 [node name="Cursor" type="TabBar" parent="Changeables/Settings/SettingTypes"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Cursor"]
@@ -458,44 +459,42 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 
-[node name="CursorScale" type="SpinBox" parent="Changeables/Settings/SettingTypes/Cursor"]
-layout_mode = 0
-offset_left = 53.0
-offset_right = 136.063
-offset_bottom = 31.0
-step = 0.01
-
-[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Cursor/CursorScale"]
+[node name="CursorVbox" type="VBoxContainer" parent="Changeables/Settings/SettingTypes/Cursor"]
 layout_mode = 1
-anchors_preset = 9
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -47.0
-offset_right = -2.0
+offset_left = 6.0
+grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CursorScaleHbox" type="HBoxContainer" parent="Changeables/Settings/SettingTypes/Cursor/CursorVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorScaleHbox"]
+layout_mode = 2
 text = "Scale:"
 label_settings = SubResource("LabelSettings_hucv2")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CursorSensitivity" type="SpinBox" parent="Changeables/Settings/SettingTypes/Cursor"]
-layout_mode = 0
-offset_left = 90.0
-offset_top = 32.0
-offset_right = 173.063
-offset_bottom = 63.0
+[node name="CursorScale" type="SpinBox" parent="Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorScaleHbox"]
+layout_mode = 2
 step = 0.01
 
-[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Cursor/CursorSensitivity"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_left = -84.0
-offset_right = 1.0
-grow_vertical = 2
+[node name="CursorSensHbox" type="HBoxContainer" parent="Changeables/Settings/SettingTypes/Cursor/CursorVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorSensHbox"]
+layout_mode = 2
 text = "Sensitivity:"
 label_settings = SubResource("LabelSettings_hucv2")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="CursorSensitivity" type="SpinBox" parent="Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorSensHbox"]
+layout_mode = 2
+step = 0.01
 
 [node name="SaveSettings" type="Button" parent="Changeables/Settings"]
 layout_mode = 1
@@ -511,6 +510,7 @@ text = "Save settings
 "
 
 [node name="Import" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 script = ExtResource("6_4dtfb")
 
@@ -523,39 +523,103 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 
-[node name="ImportFromSSPMV2" type="Button" parent="Changeables/Import/ColorRect"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Changeables/Import"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -154.5
-offset_top = -70.0
-offset_right = 154.5
-offset_bottom = -26.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 38.0
+offset_top = 6.0
+offset_right = -31.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="HSeparator2" type="HSeparator" parent="Changeables/Import/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_5d22k")
+theme_override_styles/separator = SubResource("StyleBoxFlat_kttam")
+
+[node name="ImportFromTxtData" type="Button" parent="Changeables/Import/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme = SubResource("Theme_25olc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
+text = "Import from .txt data"
+
+[node name="HSeparator" type="HSeparator" parent="Changeables/Import/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_5d22k")
+theme_override_styles/separator = SubResource("StyleBoxFlat_kttam")
+
+[node name="ImportFromSSPMV2" type="Button" parent="Changeables/Import/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
 theme = SubResource("Theme_25olc")
 theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
 text = "Import from sspmv2"
 
-[node name="ImportFromTxtData" type="Button" parent="Changeables/Import/ColorRect"]
+[node name="Credits" type="TabBar" parent="Changeables"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Changeables/Credits"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -154.5
-offset_top = -126.0
-offset_right = 154.5
-offset_bottom = -82.0
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = SubResource("Theme_25olc")
-theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
-text = "Import from .txt data"
+color = Color(0.141176, 0.141176, 0.141176, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Changeables/Credits"]
+layout_mode = 2
+offset_left = 1.0
+offset_top = 8.0
+offset_right = 488.0
+offset_bottom = 272.0
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="Changeables/Credits/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Credits"
+
+[node name="Label2" type="Label" parent="Changeables/Credits/VBoxContainer"]
+layout_mode = 2
+text = "Anya Sterling-Palmari: Starting the game and most contributions."
+label_settings = SubResource("LabelSettings_ltw7d")
+
+[node name="HSeparator" type="HSeparator" parent="Changeables/Credits/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_5d22k")
+theme_override_styles/separator = SubResource("StyleBoxFlat_kttam")
+
+[node name="Label3" type="Label" parent="Changeables/Credits/VBoxContainer"]
+layout_mode = 2
+text = "Paisley \"fide\" Raylan - Co-owning flux, and contributing tons! And also
+probably being my biggest motivation to continuing with the rewrite."
+label_settings = SubResource("LabelSettings_ltw7d")
+
+[node name="HSeparator2" type="HSeparator" parent="Changeables/Credits/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_5d22k")
+theme_override_styles/separator = SubResource("StyleBoxFlat_kttam")
+
+[node name="Label4" type="Label" parent="Changeables/Credits/VBoxContainer"]
+layout_mode = 2
+text = "Cocolennon#3949 - Providing tons of feedback and testing flux."
+label_settings = SubResource("LabelSettings_ltw7d")
+
+[node name="HSeparator3" type="HSeparator" parent="Changeables/Credits/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_5d22k")
+theme_override_styles/separator = SubResource("StyleBoxFlat_kttam")
+
+[node name="Label5" type="Label" parent="Changeables/Credits/VBoxContainer"]
+layout_mode = 2
+text = "cat person - Being one of the first to test and provide feedback on the
+origional flux. Also motivating me to continue writing flux."
+label_settings = SubResource("LabelSettings_ltw7d")
 
 [node name="MapInfoPanel" type="Panel" parent="."]
 layout_mode = 1
@@ -725,15 +789,14 @@ layout_mode = 1
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/ReloadMapList" to="MapList/MapListScrollContainer" method="_on_reload_map_list_pressed"]
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapList/MapListScrollContainer/MapScrollVbox/MapButton" method="_on_pressed"]
 [connection signal="selected" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapInfoPanel" method="_on_map_button_selected"]
-[connection signal="value_changed" from="Changeables/Mods/Speed" to="." method="_on_speed_value_changed"]
-[connection signal="value_changed" from="Changeables/Mods/Seek" to="." method="_on_seek_value_changed"]
-[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/AR" to="." method="_on_ar_value_changed"]
-[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/SD" to="." method="_on_sd_value_changed"]
-[connection signal="toggled" from="Changeables/Settings/SettingTypes/UI/EnableRuwoCheckbox" to="." method="_on_enable_ruwo_checkbox_toggled"]
-[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Sound/MusicVolume" to="." method="_on_music_volume_value_changed"]
-[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Cursor/CursorSensitivity" to="." method="_on_cursor_sensitivity_value_changed"]
+[connection signal="value_changed" from="Changeables/Mods/ModsVbox/SpeedHbox/Speed" to="." method="_on_speed_value_changed"]
+[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/NoteVbox/ARHbox/AR" to="." method="_on_ar_value_changed"]
+[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/NoteVbox/SDHbox/SD" to="." method="_on_sd_value_changed"]
+[connection signal="toggled" from="Changeables/Settings/SettingTypes/UI/UIVbox/EnableRuwoCheckbox" to="." method="_on_enable_ruwo_checkbox_toggled"]
+[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Sound/SoundVbox/MusicVolHbox/MusicVolume" to="." method="_on_music_volume_value_changed"]
+[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorSensHbox/CursorSensitivity" to="." method="_on_cursor_sensitivity_value_changed"]
 [connection signal="pressed" from="Changeables/Settings/SaveSettings" to="." method="_on_save_settings_pressed"]
-[connection signal="pressed" from="Changeables/Import/ColorRect/ImportFromTxtData" to="Changeables/Import" method="_on_import_from_txt_data_pressed"]
+[connection signal="pressed" from="Changeables/Import/VBoxContainer/ImportFromTxtData" to="Changeables/Import" method="_on_import_from_txt_data_pressed"]
 [connection signal="pressed" from="MapInfoPanel/PlayButton" to="MapInfoPanel" method="_on_play_button_pressed"]
 
 [editable path="Transition"]

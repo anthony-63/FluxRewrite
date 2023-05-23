@@ -72,7 +72,7 @@ func _process(_delta):
 		await get_tree().create_timer(1.5).timeout
 		$HUD/FailedText.hide()
 		
-		get_tree().change_scene_to_file("res://scenes/Menu.tscn")		
+		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 	
 	if Input.is_action_just_pressed("leave_map"):
 		set_all_finished_info()

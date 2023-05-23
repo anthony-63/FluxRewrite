@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://nco2gd3ylcrw"]
+[gd_scene load_steps=15 format=3 uid="uid://d1dimg4gwxobu"]
 
 [ext_resource type="Script" path="res://scripts/game/Game.gd" id="1_8b1w1"]
 [ext_resource type="Texture2D" uid="uid://rcehjeafqa81" path="res://prefabs/user/border.png" id="2_uviet"]
