@@ -26,7 +26,6 @@ FluxMap="*res://scripts/io/FluxMap.gd"
 TimeManager="*res://scripts/game/managers/TimeManager.gd"
 FluxNoteset="*res://scripts/io/FluxNoteset.gd"
 Sspm2Flux="*res://scripts/io/SSPM2Flux.gd"
-DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
 
 [display]
 
@@ -34,7 +33,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/draw3d/plugin.cfg", "res://addons/discord-sdk-gd/plugin.cfg")
+enabled=PackedStringArray("res://addons/discord-sdk-gd/plugin.cfg", "res://addons/draw3d/plugin.cfg")
 
 [input]
 
