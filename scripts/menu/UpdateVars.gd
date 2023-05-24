@@ -14,8 +14,12 @@ func _ready():
 	$Changeables/Mods/ModsVbox/SpeedHbox/Speed.value = Flux.mods.speed
 	$MapInfoPanel/Version.text = Flux.version_string
 	
+	var current_id = 0
 	for noteset in Flux.notesets.keys():
 		$Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.add_item(noteset)
+		if Flux.get_setting("sets", "noteset") == noteset:
+			$Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.selected = current_id
+		current_id = current_id + 1
 
 func _process(_delta):
 	Flux.settings.sets.noteset = $Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.get_item_text($Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.selected)
@@ -62,3 +66,6 @@ func _on_enable_spin_toggled(button_pressed):
 
 func _on_parallax_value_changed(value):
 	Flux.settings.game.parallax = value
+
+func _on_noteset_item_selected(index):
+	Flux.settings.sets.noteset = $Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.get_item_text(index)
