@@ -9,13 +9,6 @@ var update_selected_map = false
 
 const version_string = "FluxRewrite v0.3 ALPHA"
 
-var cursor_info: Dictionary = {
-	"x": 0.0, # m
-	"y": 0.0, # m
-	"w": 0.2625, # m
-	"h": 0.2625, # m
-}
-
 var map_finished_info = {
 	"max_combo": 0,
 	"misses": 0,
@@ -45,7 +38,7 @@ var default_settings = {
 	},
 	"debug": {
 		"show_note_hitbox": false,
-		"show_cursor_hitbox": false,
+		"show_cursor_hitbox": true,
 	},
 	"game": {
 		"hitwindow": 58, # ms

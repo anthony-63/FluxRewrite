@@ -74,15 +74,15 @@ func _process(_delta):
 	
 	$Draw3D.clear()
 	
-	if Flux.game_stats.hp == 0.0:
-		set_all_finished_info()
-		$HUD/FailedText.show()
-		await get_tree().create_timer(0.5).timeout
-		$Transition.transition_out()
-		await get_tree().create_timer(Flux.transition_time).timeout
-		$HUD/FailedText.hide()
-		
-		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+#	if Flux.game_stats.hp == 0.0:
+#		set_all_finished_info()
+#		$HUD/FailedText.show()
+#		await get_tree().create_timer(0.5).timeout
+#		$Transition.transition_out()
+#		await get_tree().create_timer(Flux.transition_time).timeout
+#		$HUD/FailedText.hide()
+#
+#		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 	
 	if Input.is_action_just_pressed("leave_map"):
 		set_all_finished_info()

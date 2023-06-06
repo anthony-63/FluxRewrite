@@ -4,12 +4,8 @@ func _ready():
 	self.scale = Vector3.ONE * Flux.get_setting("cursor", "scale")
 
 func _process(_delta):
-	Flux.cursor_info.x = self.transform.origin.x + (self.scale.x / 2.0)
-	Flux.cursor_info.y = self.transform.origin.y + (self.scale.y / 2.0)
-	if Flux.get_setting("debug", "show_cursor_hitbox"):
-
-		$"../Draw3D".cube(Vector3(self.transform.origin.x,  self.transform.origin.y, self.transform.origin.z), Basis.IDENTITY.scaled(Vector3(Flux.settings.cursor.scale / 10.0, Flux.settings.cursor.scale / 10.0, 0.0)), Color.GREEN)
-
+	$Area.transform.origin.z = 0.0
+	
 func _input(ev):
 	if ev is InputEventMouseMotion:
 		if Flux.get_setting("game", "spin"):
