@@ -18,7 +18,7 @@ func update(currtime: float):
 	
 	$debugLabel.text = "e: " + str(mouse_over)
 	
-	if $Area.has_overlapping_areas() and hittable:
+	if Flux.cursor_area_ref in $Area.get_overlapping_areas() and hittable:
 		hittable = false
 		unhittable = true
 		self.visible = false

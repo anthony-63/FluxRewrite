@@ -6,6 +6,7 @@ var current_map = {}
 var transition_time:float = 1
 var fullscreen = false
 var update_selected_map = false
+var cursor_area_ref: Area3D
 
 const version_string = "FluxRewrite v0.3 ALPHA"
 

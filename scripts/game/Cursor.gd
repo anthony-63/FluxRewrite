@@ -1,6 +1,7 @@
 extends Node
 
 func _ready():
+	Flux.cursor_area_ref = $Area
 	self.scale = Vector3.ONE * Flux.get_setting("cursor", "scale")
 
 func _process(_delta):
