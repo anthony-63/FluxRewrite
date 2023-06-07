@@ -1,27 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5vvljnqw6wo6"]
+[gd_scene load_steps=3 format=3 uid="uid://b5vvljnqw6wo6"]
 
 [ext_resource type="Texture2D" uid="uid://c2mix74bxjker" path="res://images/note_placeholder.png" id="1_skqtm"]
 [ext_resource type="Script" path="res://scripts/game/Note.gd" id="2_50cy8"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_he6i4"]
-margin = 0.0
 
 [node name="NoteSprite" type="Sprite3D"]
 transform = Transform3D(0.090039, 0, 0, 0, 0.09, 0, 0, 0, 0.3, -0.00187546, -2.98023e-08, 0.000335693)
 pixel_size = 0.0015
 texture = ExtResource("1_skqtm")
 script = ExtResource("2_50cy8")
-
-[node name="Area" type="Area3D" parent="."]
-transform = Transform3D(114.06, 0, 0, 0, 114.06, 0, 0, 0, 999, 0, 0, 0)
-
-[node name="Collider" type="CollisionShape3D" parent="Area"]
-transform = Transform3D(0.01, 0, 0, 0, 0.01, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_he6i4")
-
-[node name="debugLabel" type="Label3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 0, 8.74228e-08, 1, 8.74228e-08, 7.64274e-15, 8.74228e-08, -1, 0, 0, 0)
-text = "ok"
-
-[connection signal="area_entered" from="Area" to="." method="_mouse_entered"]
-[connection signal="area_exited" from="Area" to="." method="_mouse_exited"]

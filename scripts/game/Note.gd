@@ -11,14 +11,19 @@ var mouse_over = false
 func _ready():
 	self.scale = Vector3.ONE*0.865
 
+func check_hit():
+	var c = Flux.cursor_pos
+	var h = Flux.get_setting("game", "hitbox") / 2.0
+	var ch = Flux.get_setting("game", "cursor_hitbox")
+	var t = self.transform.origin
+	return c.x < t.x + h and c.x + ch > t.x and c.y < t.y + h and c.y + ch > t.y
+
 func update(currtime: float):
 	var current_note = Flux.current_map.diffs["default"][index]
 	var time = (float(current_note.ms) - currtime) / (float(current_note.ms) - spawn_time)
 	self.transform.origin = Vector3(-current_note.x + 1.0, -current_note.y + 1.0, time * Flux.get_setting("note", "sd"))
 	
-	$debugLabel.text = "e: " + str(mouse_over)
-	
-	if Flux.cursor_area_ref in $Area.get_overlapping_areas() and hittable:
+	if check_hit() and hittable:
 		hittable = false
 		unhittable = true
 		self.visible = false
@@ -49,4 +54,4 @@ func update(currtime: float):
 		queue_free()
 
 func _process(delta):
-	$Area.transform.origin.z = 0.0
+	pass

@@ -1,11 +1,11 @@
 extends Node
 
 func _ready():
-	Flux.cursor_area_ref = $Area
 	self.scale = Vector3.ONE * Flux.get_setting("cursor", "scale")
 
 func _process(_delta):
-	$Area.transform.origin.z = 0.0
+
+	pass
 	
 func _input(ev):
 	if ev is InputEventMouseMotion:
@@ -19,7 +19,7 @@ func _input(ev):
 			clamp(self.transform.origin.y, $"../HUD/Border".scale.y * -1.5, $"../HUD/Border".scale.y * 1.5),
 			0
 		)
-		
+		Flux.cursor_pos = Vector2(self.transform.origin.x, self.transform.origin.y)
 #		print("\nclamp coords\nx<{CXA}, {CXB}>\ny<{CYA}, {CYB}>".format({
 #			"CXA": $"../HUD/Border".scale.x * -1.5,
 #			"CXB": $"../HUD/Border".scale.x * 1.5,

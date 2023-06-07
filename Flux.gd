@@ -6,7 +6,8 @@ var current_map = {}
 var transition_time:float = 1
 var fullscreen = false
 var update_selected_map = false
-var cursor_area_ref: Area3D
+var cursor_pos = Vector2(0, 0)
+
 
 const version_string = "FluxRewrite v0.3 ALPHA"
 
@@ -44,6 +45,7 @@ var default_settings = {
 	"game": {
 		"hitwindow": 58, # ms
 		"hitbox": 1.14, # m
+		"cursor_hitbox": 0.2625,
 		"wait_time": 1.5, # s
 		"parallax": 0.25,
 		"spin": false,

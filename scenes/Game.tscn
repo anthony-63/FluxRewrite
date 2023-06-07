@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d1dimg4gwxobu"]
+[gd_scene load_steps=16 format=3 uid="uid://d1dimg4gwxobu"]
 
 [ext_resource type="Script" path="res://scripts/game/Game.gd" id="1_8b1w1"]
 [ext_resource type="Texture2D" uid="uid://rcehjeafqa81" path="res://prefabs/user/border.png" id="2_uviet"]
@@ -21,8 +21,6 @@ viewport_path = NodePath("HUD/HealthBarViewport")
 
 [sub_resource type="Environment" id="Environment_2pdyn"]
 background_mode = 1
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_q8vjj"]
 
 [sub_resource type="Shader" id="Shader_0h38x"]
 code = "shader_type canvas_item;
@@ -196,13 +194,6 @@ script = ExtResource("4_567p8")
 pixel_size = 0.0001
 texture = ExtResource("5_s5dj5")
 script = ExtResource("5_he3ju")
-
-[node name="Area" type="Area3D" parent="Cursor"]
-transform = Transform3D(0.256, 0, 0, 0, 0.256, 0, 0, 0, 999, 0, 0, 0)
-
-[node name="Collider" type="CollisionShape3D" parent="Cursor/Area"]
-transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 1, 0, 0, 0)
-shape = SubResource("BoxShape3D_q8vjj")
 
 [node name="Transition" parent="." instance=ExtResource("7_tq6j5")]
 z_index = 4096
