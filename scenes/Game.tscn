@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://d1dimg4gwxobu"]
+[gd_scene load_steps=17 format=3 uid="uid://d1dimg4gwxobu"]
 
 [ext_resource type="Script" path="res://scripts/game/Game.gd" id="1_8b1w1"]
+[ext_resource type="Script" path="res://scripts/game/Camera.gd" id="2_8iia7"]
 [ext_resource type="Texture2D" uid="uid://rcehjeafqa81" path="res://prefabs/user/border.png" id="2_uviet"]
 [ext_resource type="FontFile" uid="uid://b5o12budjhyv7" path="res://fonts/font.ttf" id="3_f6rql"]
 [ext_resource type="Script" path="res://scripts/game/managers/NoteManager.gd" id="4_567p8"]
@@ -48,6 +49,7 @@ script = ExtResource("1_8b1w1")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-1, 8.74228e-08, 0, 8.74228e-08, 1, -8.74228e-08, -7.64274e-15, -8.74228e-08, -1, 0, 0, -3.5)
 current = true
+script = ExtResource("2_8iia7")
 
 [node name="HUD" type="Node3D" parent="."]
 
