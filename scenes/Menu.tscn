@@ -246,6 +246,7 @@ grow_vertical = 0
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_ukrn5")
 
 [node name="Mods" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -608,7 +609,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
 text = "Import from sspmv2"
 
 [node name="Credits" type="TabBar" parent="Changeables"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Credits"]
@@ -669,6 +669,17 @@ theme_override_styles/separator = SubResource("StyleBoxFlat_kttam")
 layout_mode = 2
 text = "cat person - Being one of the first to test and provide feedback on the
 origional flux. Also motivating me to continue writing flux."
+label_settings = SubResource("LabelSettings_ltw7d")
+
+[node name="HSeparator4" type="HSeparator" parent="Changeables/Credits/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_5d22k")
+theme_override_styles/separator = SubResource("StyleBoxFlat_kttam")
+
+[node name="Label6" type="Label" parent="Changeables/Credits/VBoxContainer"]
+layout_mode = 2
+text = "kermeet - Allowing me to borrow ssp code to be able to get this game 
+running"
 label_settings = SubResource("LabelSettings_ltw7d")
 
 [node name="MapInfoPanel" type="Panel" parent="."]
