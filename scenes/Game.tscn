@@ -16,7 +16,7 @@ bg_color = Color(0.92549, 0.423529, 0.352941, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4kgtn"]
 bg_color = Color(0.392157, 0.690196, 0.196078, 1)
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_lsoql"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_hcogi"]
 viewport_path = NodePath("HUD/HealthBarViewport")
 
 [sub_resource type="Environment" id="Environment_2pdyn"]
@@ -142,7 +142,7 @@ show_percentage = false
 [node name="HealthBarSprite" type="Sprite3D" parent="HUD"]
 transform = Transform3D(-0.406559, 0, -5.17463e-07, 0, 0.0355695, 0, 6.13888e-08, 0, -3.427, 0, -1.59695, 0)
 pixel_size = 0.005
-texture = SubResource("ViewportTexture_lsoql")
+texture = SubResource("ViewportTexture_hcogi")
 
 [node name="Combo" type="Label3D" parent="HUD"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.42671, -1.33952, 0)

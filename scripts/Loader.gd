@@ -19,25 +19,23 @@ func _ready():
 func load_maps():
 	# Clear maps so they dont duplicate when reloading
 	Flux.maps = []
-	load_sspms()
+	if not load_sspms():
+		var user_dir = DirAccess.open("user://")
+		user_dir.make_dir("maps")
+		return
 	for i in to_convert:
 		FluxMap.sspm_to_flux(i.path, i.data)
 	to_convert = []
 	
 	var map_dir = DirAccess.open("user://maps")
-	if map_dir:
-		var files = map_dir.get_files()
-		for map_path in files:
-			if not map_path.ends_with(".flux"):
-				map_dir.get_next()
-				continue
-				
-			$FluxImage/CurrentMap.text = map_path
+	var files = map_dir.get_files()
+	for map_path in files:
+		if not map_path.ends_with(".flux"):
+			continue
 			
-			await FluxMap.load_from_path(map_path)
-	else:
-		var user_dir = DirAccess.open("user://")
-		user_dir.make_dir("maps")
+		$FluxImage/CurrentMap.text = map_path
+		
+		await FluxMap.load_from_path(map_path)
 	
 	finished_loading_maps.emit()
 	
@@ -59,17 +57,18 @@ func load_notesets():
 
 func load_sspms():
 	var map_dir = DirAccess.open("user://maps")
-	
+	if not map_dir:
+		return false
 	var files = map_dir.get_files()
 	for map_path in files:
 		if not map_path.ends_with(".sspm"):
-			map_dir.get_next()
 			continue
 			
 		$FluxImage/CurrentMap.text = map_path
 		
 		Sspm2Flux.flux_from_sspm(to_convert, map_path)
-
+	return true
+	
 func validate_settings(settings_dict: Dictionary):
 	for cat in Flux.default_settings.keys():
 		if not cat in settings_dict.keys():

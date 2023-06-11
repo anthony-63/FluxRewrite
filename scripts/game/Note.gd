@@ -48,7 +48,7 @@ func update(currtime: float):
 		mod_color = Color(1.0, 1.0, 1.0)
 	self.modulate = mod_color
 	
-	if self.transform.origin.z < -3.0:
+	if self.transform.origin.z < -2.0:
 		self.visible = false
 	
 	if self.transform.origin.z < -15.0:
