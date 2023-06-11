@@ -108,7 +108,6 @@ func get_map_len_str(map):
 		map_len = Flux.ms_to_min_sec_str(map.diffs.default[-1].ms)
 	return map_len
 	
-	
 enum AudioFormat {
 	OGG,
 	WAV,

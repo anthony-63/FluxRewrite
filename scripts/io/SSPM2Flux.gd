@@ -58,7 +58,7 @@ class Mapset:
 
 const SIGNATURE:PackedByteArray = [0x53,0x53,0x2b,0x6d]
 
-func flux_from_sspm(to_conv: Array, path: String):
+func flux_from_sspm(path: String):
 	var mapset = read_from_file(path)
 	var maps = []
 	
@@ -81,7 +81,7 @@ func flux_from_sspm(to_conv: Array, path: String):
 	if mapset.broken: return
 	for note in mapset.maps[0].notes:
 		combined_map_data.diffs.default.append({"ms": note.time * 1000.0, "x": note.x, "y": note.y})
-	to_conv.append({"path": path, "data": combined_map_data})
+	FluxMap.sspm_to_flux(path, combined_map_data)
 
 static func read_from_file(path:String,full:bool=false,index:int=0) -> Mapset:
 	var file = FileAccess.open("user://maps/%s" % path,FileAccess.READ)

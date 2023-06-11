@@ -11,8 +11,6 @@ signal load_single_setting
 signal finished_loading_notesets
 signal load_single_noteset
 
-var to_convert = []
-
 func _ready():
 	pass
 
@@ -23,9 +21,6 @@ func load_maps():
 		var user_dir = DirAccess.open("user://")
 		user_dir.make_dir("maps")
 		return
-	for i in to_convert:
-		FluxMap.sspm_to_flux(i.path, i.data)
-	to_convert = []
 	
 	var map_dir = DirAccess.open("user://maps")
 	var files = map_dir.get_files()
@@ -66,7 +61,7 @@ func load_sspms():
 			
 		$FluxImage/CurrentMap.text = map_path
 		
-		Sspm2Flux.flux_from_sspm(to_convert, map_path)
+		Sspm2Flux.flux_from_sspm(map_path)
 	return true
 	
 func validate_settings(settings_dict: Dictionary):
