@@ -13,7 +13,7 @@ func _ready():
 
 func check_hit():
 	var c = Flux.cursor_pos
-	var h = Flux.get_setting("game", "hitbox") / 1.14
+	var h = Flux.get_setting("game", "hitbox")
 	var ch = Flux.get_setting("game", "cursor_hitbox")
 	var t = Vector2(self.transform.origin.x + self.scale.x / 2.0, self.transform.origin.y + self.scale.y / 2.0)
 	return c.x < t.x + h and c.x + ch > t.x and c.y < t.y + h and c.y + ch > t.y
@@ -41,6 +41,7 @@ func update(currtime: float):
 		Flux.game_stats.hp = clamp(Flux.game_stats.hp - Flux.game_stats.hp_per_miss, 0.0, Flux.game_stats.max_hp)
 		Flux.game_stats.combo = 0
 		Flux.game_stats.misses += 1
+	
 	if Flux.settings.note.fade:
 		mod_color = Color(1.0, 1.0, 1.0, 1.0 - time)
 	else:
