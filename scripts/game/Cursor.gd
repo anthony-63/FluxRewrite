@@ -19,7 +19,7 @@ func _input(ev):
 			clamp(self.transform.origin.y, $"../HUD/Border".scale.y * -1.5, $"../HUD/Border".scale.y * 1.5),
 			0
 		)
-		Flux.cursor_pos = Vector2(self.transform.origin.x, self.transform.origin.y)
+		Flux.cursor_pos = Vector2(self.transform.origin.x + self.scale.x / 2.0, self.transform.origin.y + self.scale.y / 2.0)
 #		print("\nclamp coords\nx<{CXA}, {CXB}>\ny<{CYA}, {CYB}>".format({
 #			"CXA": $"../HUD/Border".scale.x * -1.5,
 #			"CXB": $"../HUD/Border".scale.x * 1.5,

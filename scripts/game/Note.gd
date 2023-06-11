@@ -13,9 +13,9 @@ func _ready():
 
 func check_hit():
 	var c = Flux.cursor_pos
-	var h = Flux.get_setting("game", "hitbox") / 2.0
+	var h = Flux.get_setting("game", "hitbox") / 1.14
 	var ch = Flux.get_setting("game", "cursor_hitbox")
-	var t = self.transform.origin
+	var t = Vector2(self.transform.origin.x + self.scale.x / 2.0, self.transform.origin.y + self.scale.y / 2.0)
 	return c.x < t.x + h and c.x + ch > t.x and c.y < t.y + h and c.y + ch > t.y
 
 func update(currtime: float):
@@ -47,7 +47,7 @@ func update(currtime: float):
 		mod_color = Color(1.0, 1.0, 1.0)
 	self.modulate = mod_color
 	
-	if self.transform.origin.z < -1.5:
+	if self.transform.origin.z < -3.0:
 		self.visible = false
 	
 	if self.transform.origin.z < -15.0:
