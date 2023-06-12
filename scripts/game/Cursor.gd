@@ -4,7 +4,8 @@ func _ready():
 	self.scale = Vector3.ONE * Flux.get_setting("cursor", "scale")
 
 func _process(_delta):
-
+	if Flux.replaying:
+		Flux.cursor_pos = Vector2(self.transform.origin.x + self.scale.x / 2.0, self.transform.origin.y + self.scale.y / 2.0)		
 	pass
 	
 func _input(ev):

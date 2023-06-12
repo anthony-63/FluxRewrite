@@ -20,12 +20,16 @@ func _ready():
 	
 	update_mods()
 	
+	$HUD/ReplayLabel.visible = Flux.replaying
+	
 	if not Flux.current_map.meta.artist == "":
 		$HUD/MapName.text = Flux.current_map.meta.artist + " - " + Flux.current_map.meta.title
 	else:
 		$HUD/MapName.text = Flux.current_map.meta.title
 	
+	if not Flux.replaying: ReplayManager.start_replay_save()
 	await get_tree().create_timer(Flux.get_setting("game", "wait_time")).timeout
+	
 	$AudioManager.length = Flux.current_map.diffs.default[-1].ms
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(Flux.get_setting("audio", "music_volume")))
 
@@ -35,7 +39,6 @@ func _ready():
 #	Flux.audio_manager.seek(Flux.mods.seek)
 	AudioServer.playback_speed_scale = Flux.mods.speed
 	
-	if not Flux.replaying: ReplayManager.start_replay_save()
 
 func reset_game():
 		Flux.game_stats.misses = 0
@@ -68,6 +71,7 @@ func _process(delta):
 		var cy = Flux.replay_file.get_float()
 		$Cursor.transform.origin.x = cx
 		$Cursor.transform.origin.y = cy
+		record_timer = 0.0
 	
 	$HUD/TimeIntoMap.text = Flux.ms_to_min_sec_str($AudioManager.current_time) + "/" + Flux.ms_to_min_sec_str(Flux.current_map.diffs["default"][-1]["ms"])
 	$HUD/Misses/MissAmount.text = str(Flux.game_stats.misses)
