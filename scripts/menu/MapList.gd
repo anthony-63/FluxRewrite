@@ -18,6 +18,7 @@ func _process(_d):
 				child.visible = true
 			else:
 				child.visible = false
+
 func update_maps():
 	print("Updating maps...")
 	for child in $MapScrollVbox.get_children():

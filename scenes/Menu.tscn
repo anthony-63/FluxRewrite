@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://1uoi6aia1qhh"]
+[gd_scene load_steps=32 format=3 uid="uid://1uoi6aia1qhh"]
 
 [ext_resource type="Script" path="res://scripts/menu/UpdateVars.gd" id="1_7p613"]
 [ext_resource type="Texture2D" uid="uid://5u7n2u4erb06" path="res://images/ruwo.png" id="3_il0bq"]
@@ -6,8 +6,10 @@
 [ext_resource type="Script" path="res://scripts/buttons/MapButton.gd" id="5_6w867"]
 [ext_resource type="Script" path="res://scripts/menu/Import.gd" id="6_4dtfb"]
 [ext_resource type="Texture2D" uid="uid://dim6m2c6rupcg" path="res://images/flux.png" id="6_mw0vg"]
+[ext_resource type="Script" path="res://scripts/menu/ReplayList.gd" id="7_a0kwa"]
 [ext_resource type="Script" path="res://scripts/menu/MapInfo.gd" id="7_yyn24"]
 [ext_resource type="FontFile" uid="uid://b5o12budjhyv7" path="res://fonts/font.ttf" id="8_58afk"]
+[ext_resource type="Script" path="res://scripts/buttons/ReplayButton.gd" id="8_ijjny"]
 [ext_resource type="PackedScene" uid="uid://dxmi7p40ic26a" path="res://prefabs/transition.tscn" id="9_4cwsh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pdf3y"]
@@ -608,7 +610,77 @@ theme = SubResource("Theme_25olc")
 theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
 text = "Import from sspmv2"
 
+[node name="Replays" type="TabBar" parent="Changeables"]
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Changeables/Replays"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.141176, 0.141176, 0.141176, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="ReplayScrollContainer" type="ScrollContainer" parent="Changeables/Replays"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("7_a0kwa")
+
+[node name="ReplayScrollVbox" type="VBoxContainer" parent="Changeables/Replays/ReplayScrollContainer"]
+layout_mode = 2
+
+[node name="HSeparator" type="HSeparator" parent="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_pdf3y")
+
+[node name="ReplayButton" type="Button" parent="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox"]
+layout_mode = 2
+text = "                                                                                                                   "
+script = ExtResource("8_ijjny")
+
+[node name="SongName" type="Label" parent="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox/ReplayButton"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 2.0
+offset_top = -11.5
+offset_right = 297.0
+offset_bottom = 11.5
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_58afk")
+theme_override_font_sizes/font_size = 14
+text = "Billy Sick - Balls In Your Jaws"
+label_settings = SubResource("LabelSettings_r2ubh")
+clip_text = true
+
+[node name="DateTime" type="Label" parent="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox/ReplayButton"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -177.0
+offset_top = -11.5
+offset_right = -11.0
+offset_bottom = 11.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("8_58afk")
+theme_override_font_sizes/font_size = 14
+text = "03-13-2023 / 17:23"
+label_settings = SubResource("LabelSettings_r2ubh")
+
 [node name="Credits" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Credits"]
@@ -863,6 +935,8 @@ layout_mode = 1
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/SpinHbox/EnableSpin" to="." method="_on_enable_spin_toggled"]
 [connection signal="pressed" from="Changeables/Settings/SaveSettings" to="." method="_on_save_settings_pressed"]
 [connection signal="pressed" from="Changeables/Import/VBoxContainer/ImportFromTxtData" to="Changeables/Import" method="_on_import_from_txt_data_pressed"]
+[connection signal="pressed" from="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox/ReplayButton" to="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox/ReplayButton" method="_on_pressed"]
+[connection signal="selected" from="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox/ReplayButton" to="Changeables/Replays/ReplayScrollContainer" method="_on_replay_button_selected"]
 [connection signal="pressed" from="MapInfoPanel/PlayButton" to="MapInfoPanel" method="_on_play_button_pressed"]
 
 [editable path="Transition"]

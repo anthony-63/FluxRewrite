@@ -4,6 +4,7 @@ func _ready():
 	self.scale = Vector3.ONE * Flux.get_setting("cursor", "scale")
 
 func _process(d):
+	if Flux.replaying: return
 	self.transform.origin.x = tan($"../Camera3D".pitch) * $"../Camera3D".transform.origin.z
 	self.transform.origin.y = tan($"../Camera3D".yaw) * $"../Camera3D".transform.origin.z
 

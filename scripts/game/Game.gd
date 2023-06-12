@@ -1,5 +1,8 @@
 extends Node3D
 
+const record_fps = 60
+const ms_per_frame = 1000/record_fps
+var record_timer = 0.0
 
 func update_mods():
 	if Flux.mods.speed != 1.0:
@@ -8,13 +11,11 @@ func update_mods():
 	
 func _ready():
 	Flux.game_stats.hp = Flux.game_stats.max_hp
-	var draw = Draw3D.new()
-	draw.name = "Draw3D"
-	add_child(draw)
 	
 	reset_game()
 	$AudioManager.connect("finished", game_finished)
 	$Transition.show()
+	
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	update_mods()
@@ -23,17 +24,19 @@ func _ready():
 		$HUD/MapName.text = Flux.current_map.meta.artist + " - " + Flux.current_map.meta.title
 	else:
 		$HUD/MapName.text = Flux.current_map.meta.title
-		
+	
+	await get_tree().create_timer(Flux.get_setting("game", "wait_time")).timeout
 	$AudioManager.length = Flux.current_map.diffs.default[-1].ms
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(Flux.get_setting("audio", "music_volume")))
-	await get_tree().create_timer(Flux.get_setting("game", "wait_time")).timeout
-	
+
 #	Flux.audio_manager.seek(-Flux.default_settings.game.wait_time)
 	$AudioManager.play($MusicStream)
 	$AudioManager.playback_speed = Flux.mods.speed
 #	Flux.audio_manager.seek(Flux.mods.seek)
 	AudioServer.playback_speed_scale = Flux.mods.speed
 	
+	if not Flux.replaying: ReplayManager.start_replay_save()
+
 func reset_game():
 		Flux.game_stats.misses = 0
 		Flux.game_stats.hits = 0
@@ -57,7 +60,15 @@ func game_finished():
 	set_all_finished_info()
 	get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 
-func _process(_delta):
+func _process(delta):
+	record_timer += delta
+	
+	if Flux.replaying and (record_timer * 1000.0) >= ms_per_frame:
+		var cx = Flux.replay_file.get_float()
+		var cy = Flux.replay_file.get_float()
+		$Cursor.transform.origin.x = cx
+		$Cursor.transform.origin.y = cy
+	
 	$HUD/TimeIntoMap.text = Flux.ms_to_min_sec_str($AudioManager.current_time) + "/" + Flux.ms_to_min_sec_str(Flux.current_map.diffs["default"][-1]["ms"])
 	$HUD/Misses/MissAmount.text = str(Flux.game_stats.misses)
 	$HUD/Hits/HitAmount.text = str(Flux.game_stats.hits)
@@ -66,27 +77,30 @@ func _process(_delta):
 	
 	$HUD/HealthBarViewport/HealthBarProgress.max_value = Flux.game_stats.max_hp
 	$HUD/HealthBarViewport/HealthBarProgress.value = Flux.game_stats.hp
+	
 	if Flux.get_setting("game", "spin"):
-		$Camera3D.look_at($InvisCursor.transform.origin, Vector3.UP)
+		pass
 	else:
 		$Camera3D.global_transform.origin.x = $Cursor.global_transform.origin.x * Flux.get_setting("game", "parallax")
 		$Camera3D.global_transform.origin.y = $Cursor.global_transform.origin.y * Flux.get_setting("game", "parallax")
 	
-	$Draw3D.clear()
-	
 	if Flux.game_stats.hp == 0.0:
 		set_all_finished_info()
+		if not Flux.replaying: ReplayManager.end_replay()
 		$HUD/FailedText.show()
 		await get_tree().create_timer(0.5).timeout
 		$Transition.transition_out()
 		await get_tree().create_timer(Flux.transition_time).timeout
 		$HUD/FailedText.hide()
-
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 	
 	if Input.is_action_just_pressed("leave_map"):
 		set_all_finished_info()
+		if not Flux.replaying: ReplayManager.end_replay()
 		$Transition.transition_out()
-		await get_tree().create_timer(Flux.transition_time).timeout		
+		await get_tree().create_timer(Flux.transition_time).timeout
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
-		
+
+	if Flux.get_setting("game", "replay") and not Flux.replaying and $AudioManager.current_time != null and (record_timer * 1000.0) >= ms_per_frame:
+		ReplayManager.save_stamp(Vector2($Cursor.transform.origin.x, $Cursor.transform.origin.y))
+		record_timer = 0.0

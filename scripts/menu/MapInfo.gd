@@ -41,6 +41,7 @@ func _process(_delta):
 		$PassedOrFailed.text = "Not played yet."
 	
 func _on_play_button_pressed():
+	Flux.replaying = false
 	$"../Transition".transition_out()
 	await get_tree().create_timer(Flux.transition_time).timeout
 	Flux.current_map = selected_map

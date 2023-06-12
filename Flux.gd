@@ -7,7 +7,9 @@ var transition_time:float = 1
 var fullscreen = false
 var update_selected_map = false
 var cursor_pos = Vector2(0, 0)
-
+var replay_poss = []
+var replaying = false
+var replay_file = null
 
 const version_string = "FluxRewrite v0.3 ALPHA"
 
@@ -49,6 +51,7 @@ var default_settings = {
 		"wait_time": 1.5, # s
 		"parallax": 0.25,
 		"spin": false,
+		"replay": true,
 	},
 	"cursor": {
 		"sensitivity": 1.0, # m/s
@@ -101,6 +104,33 @@ func ms_to_min_sec_str(ms):
 	var mins = int(float(ms) * 0.001) / 60
 	var secs = int(float(ms) * 0.001) % 60
 	return str(mins) + ":" + ("%02d" % secs)
+
+func play_replay(replay_data):
+	
+	var file_text = FileAccess.get_file_as_string("user://replays/" + replay_data.file)
+	var a = file_text.find("Ξζξ")
+	var b = file_text.find("Ξζξ", a + 1)
+	replay_file = FileAccess.open("user://replays/" + replay_data.file, FileAccess.READ)
+	replay_file.seek(b + 9)
+	
+	replaying = true
+	
+	if replay_file.get_8() == 1: # spin
+		Flux.settings.game.spin = true
+	else:
+		Flux.settings.game.spin = false
+	
+	Flux.mods.speed = replay_file.get_float() # get speed of the map
+	Flux.settings.note.ar = replay_file.get_float()
+	Flux.settings.note.sd = replay_file.get_float()
+	
+	print("speed: " + str(Flux.mods.speed) + "\nar: " + str(Flux.settings.note.ar) + "\nsd: " + str(Flux.settings.note.sd))
+	var m = null
+	for map in Flux.maps:
+		if map.meta.id == replay_data.meta.id: m = map
+	Flux.current_map = m
+	
+	get_tree().change_scene_to_file("res://scenes/Game.tscn")
 
 func get_map_len_str(map):
 	var map_len = "err:err"

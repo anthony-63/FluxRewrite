@@ -8,6 +8,7 @@ func _process(_delta):
 	pass
 	
 func _input(ev):
+	if Flux.replaying: return
 	if ev is InputEventMouseMotion:
 		if Flux.get_setting("game", "spin"):
 			self.transform.origin = $"../InvisCursor".transform.origin

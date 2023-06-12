@@ -27,6 +27,7 @@ TimeManager="*res://scripts/game/managers/TimeManager.gd"
 FluxNoteset="*res://scripts/io/FluxNoteset.gd"
 Sspm2Flux="*res://scripts/io/SSPM2Flux.gd"
 DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
+ReplayManager="*res://scripts/game/managers/ReplayManager.gd"
 
 [display]
 

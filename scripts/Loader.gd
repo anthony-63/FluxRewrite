@@ -98,8 +98,12 @@ func _process(_delta):
 	load_settings()
 	load_maps()
 	load_notesets()
-
 	FluxNoteset.load_default_noteset()
+	
+	var replay_dir = DirAccess.open("user://replays")
+	if not replay_dir:
+		var user_dir = DirAccess.open("user://")
+		user_dir.make_dir("replays")
 	
 	# This is also probably a bad way to do this. 
 	await finished_loading_maps
