@@ -3,11 +3,20 @@ extends Node3D
 const record_fps = 60
 const ms_per_frame = 1000/record_fps
 var record_timer = 0.0
+var sync = 0.0
 
 func update_mods():
 	if Flux.mods.speed != 1.0:
 		$HUD/Mods.show()
 		$HUD/Mods/ModsString.text += "S" + str(round(Flux.mods.speed * 100.0)) + "\n"
+	
+func update_debug_info():
+	$DbgInfoParent/DbgInfo.text = ""
+	$DbgInfoParent/DbgInfo.text += "CameraRotation x y z" + str($Camera3D.rotation_degrees.x) + ", " + str($Camera3D.rotation_degrees.y) + ", " + str($Camera3D.rotation_degrees.z) + "\n"
+	$DbgInfoParent/DbgInfo.text += "Cursor x y: " + str($Cursor.transform.origin.x) + ", " + str($Cursor.transform.origin.y) + "\n"
+	$DbgInfoParent/DbgInfo.text += "InvisCursor x y: " + str($InvisCursor.transform.origin.x) + "," + str($InvisCursor.transform.origin.y) + "\n"
+	$DbgInfoParent/DbgInfo.text += "Replay Timer: " + str(record_timer) + "\n"
+	$DbgInfoParent/DbgInfo.text += "Replay Sync Interval: " + str(sync) + "\n"
 	
 func _ready():
 	Flux.game_stats.hp = Flux.game_stats.max_hp
@@ -72,7 +81,7 @@ func _process(delta):
 		var cy = Flux.replay_file.get_float()
 		$Cursor.transform.origin.x = cx
 		$Cursor.transform.origin.y = cy
-		var sync = (t - $AudioManager.current_time) / 1000.0
+		sync = (t - $AudioManager.current_time) / 1000.0
 		record_timer = -sync
 		
 	if Flux.get_setting("game", "replay") and not Flux.replaying and $AudioManager.current_time != null and (record_timer * 1000.0) >= ms_per_frame:
@@ -96,9 +105,9 @@ func _process(delta):
 	
 	if Flux.game_stats.hp == 0.0:
 		set_all_finished_info()
-		if not Flux.replaying: ReplayManager.end_replay()
 		$HUD/FailedText.show()
 		await get_tree().create_timer(0.5).timeout
+		if not Flux.replaying: ReplayManager.end_replay()
 		$Transition.transition_out()
 		await get_tree().create_timer(Flux.transition_time).timeout
 		$HUD/FailedText.hide()
@@ -110,3 +119,5 @@ func _process(delta):
 		$Transition.transition_out()
 		await get_tree().create_timer(Flux.transition_time).timeout
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
+		
+	update_debug_info()

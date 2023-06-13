@@ -248,7 +248,6 @@ grow_vertical = 0
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_ukrn5")
 
 [node name="Mods" type="TabBar" parent="Changeables"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -611,6 +610,7 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
 text = "Import from sspmv2"
 
 [node name="Replays" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Replays"]

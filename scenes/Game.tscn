@@ -169,6 +169,7 @@ font_size = 85
 
 [node name="Mods" type="Label3D" parent="HUD"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1.83249, -0.348976, 0.00155461)
+visible = false
 pixel_size = 0.003
 double_sided = false
 text = "Mods"
@@ -215,5 +216,16 @@ script = ExtResource("8_bg3u7")
 [node name="InvisCursor" type="Sprite3D" parent="."]
 visible = false
 script = ExtResource("9_gku1u")
+
+[node name="DbgInfoParent" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Debug Info:"
+
+[node name="DbgInfo" type="Label" parent="DbgInfoParent"]
+layout_mode = 0
+offset_top = 24.0
+offset_right = 40.0
+offset_bottom = 47.0
 
 [editable path="Transition"]

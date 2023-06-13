@@ -109,5 +109,8 @@ func _process(_delta):
 	await finished_loading_maps
 	await finished_loading_notesets
 	await finished_loading_settings
+	
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	
 	get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 
