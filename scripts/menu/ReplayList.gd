@@ -7,26 +7,27 @@ func _ready():
 	update_replays()
 	
 func _process(_d):
-#	for child in $MapScrollVbox.get_children():
-#		if child.name.begins_with("MapButton_"):
-#			if $MapScrollVbox/Search.text == "":
-#				child.visible = true
-#			elif child.map_data.meta.title.findn($MapScrollVbox/Search.text) != -1:
-#				child.visible = true
-#			elif child.map_data.meta.mapper.findn($MapScrollVbox/Search.text) != -1:
-#				child.visible = true
-#			elif child.map_data.meta.artist.findn($MapScrollVbox/Search.text) != -1:
-#				child.visible = true
-#			else:
-#				child.visible = false
-	pass
+	for child in $ReplayScrollVbox.get_children():
+		if child.name.begins_with("ReplayButton_"):
+			if $ReplayScrollVbox/Search.text == "":
+				child.visible = true
+			elif child.replay_data.meta.title.findn($ReplayScrollVbox/Search.text) != -1:
+				child.visible = true
+			elif child.replay_data.meta.mapper.findn($ReplayScrollVbox/Search.text) != -1:
+				child.visible = true
+			elif child.replay_data.meta.artist.findn($ReplayScrollVbox/Search.text) != -1:
+				child.visible = true
+			elif child.replay_data.datetime.findn($ReplayScrollVbox/Search.text) != -1:
+				child.visible = true
+			else:
+				child.visible = false
 
 func update_replays():
 	print("Updating replays...")
 	for child in $ReplayScrollVbox.get_children():
 		if child.name.begins_with("ReplayButton_"):
 			child.queue_free()
-			if child in $MapScrollVbox.get_children():
+			if child in $ReplayScrollVbox.get_children():
 				child.queue_free()
 	replay_button_data = []
 	
@@ -61,7 +62,7 @@ func update_replays():
 	for data in replays_info:
 		var button = $ReplayScrollVbox/ReplayButton.duplicate()
 		button.name = "ReplayButton_%d" % i
-		button.visible = true
+		button.visible = false
 		button.update(data)
 		i += 1
 		$ReplayScrollVbox.add_child(button)

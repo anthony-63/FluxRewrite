@@ -23,26 +23,6 @@ func update(currtime: float):
 	var time = (float(current_note.ms) - currtime) / (float(current_note.ms) - spawn_time)
 	self.transform.origin = Vector3(-current_note.x + 1.0, -current_note.y + 1.0, time * Flux.get_setting("note", "sd"))
 	
-	if check_hit() and hittable:
-		hittable = false
-		unhittable = true
-		self.visible = false
-		Flux.game_stats.hp = clamp(Flux.game_stats.hp + Flux.game_stats.hp_per_hit, 0.0, Flux.game_stats.max_hp)
-		Flux.game_stats.combo += 1
-		
-		if Flux.game_stats.combo > Flux.game_stats.max_combo:
-			Flux.game_stats.max_combo = Flux.game_stats.combo
-		
-		Flux.game_stats.hits += 1
-	if currtime >= ms and not unhittable: hittable = true
-	
-	if currtime >= ms + Flux.get_setting("game", "hitwindow") and hittable:
-		hittable = false
-		unhittable = true
-		Flux.game_stats.hp = clamp(Flux.game_stats.hp - Flux.game_stats.hp_per_miss, 0.0, Flux.game_stats.max_hp)
-		Flux.game_stats.combo = 0
-		Flux.game_stats.misses += 1
-	
 	if Flux.settings.note.fade:
 		mod_color = Color(1.0, 1.0, 1.0, 1.0 - time)
 	else:
@@ -54,6 +34,27 @@ func update(currtime: float):
 	
 	if self.transform.origin.z < -15.0:
 		queue_free()
+	
+	if currtime >= ms and not unhittable: hittable = true
+		
+	if currtime >= ms + Flux.get_setting("game", "hitwindow") and hittable:
+		hittable = false
+		unhittable = true
+		Flux.game_stats.hp = clamp(Flux.game_stats.hp - Flux.game_stats.hp_per_miss, 0.0, Flux.game_stats.max_hp)
+		Flux.game_stats.combo = 0
+		Flux.game_stats.misses += 1
+	
+	if check_hit() and hittable:
+		hittable = false
+		unhittable = true
+		self.visible = false
+		Flux.game_stats.hp = clamp(Flux.game_stats.hp + Flux.game_stats.hp_per_hit, 0.0, Flux.game_stats.max_hp)
+		Flux.game_stats.combo += 1
+		
+		if Flux.game_stats.combo > Flux.game_stats.max_combo:
+			Flux.game_stats.max_combo = Flux.game_stats.combo
+		
+		Flux.game_stats.hits += 1
 
 func _process(delta):
 	pass

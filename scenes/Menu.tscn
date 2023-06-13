@@ -165,8 +165,8 @@ theme_override_fonts/font = ExtResource("8_58afk")
 theme_override_font_sizes/font_size = 20
 text = "Reload"
 
-[node name="Search" type="TextEdit" parent="MapList/MapListScrollContainer/MapScrollVbox"]
-custom_minimum_size = Vector2(0, 33)
+[node name="Search" type="LineEdit" parent="MapList/MapListScrollContainer/MapScrollVbox"]
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 placeholder_text = "Search..."
 
@@ -248,6 +248,7 @@ grow_vertical = 0
 theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_ukrn5")
 
 [node name="Mods" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -610,7 +611,6 @@ theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
 text = "Import from sspmv2"
 
 [node name="Replays" type="TabBar" parent="Changeables"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Replays"]
@@ -635,9 +635,14 @@ script = ExtResource("7_a0kwa")
 [node name="ReplayScrollVbox" type="VBoxContainer" parent="Changeables/Replays/ReplayScrollContainer"]
 layout_mode = 2
 
-[node name="HSeparator" type="HSeparator" parent="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox"]
+[node name="HSeparator2" type="HSeparator" parent="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox"]
 layout_mode = 2
 theme_override_styles/separator = SubResource("StyleBoxEmpty_pdf3y")
+
+[node name="Search" type="LineEdit" parent="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox"]
+custom_minimum_size = Vector2(485, 30)
+layout_mode = 2
+placeholder_text = "Search..."
 
 [node name="ReplayButton" type="Button" parent="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox"]
 layout_mode = 2
