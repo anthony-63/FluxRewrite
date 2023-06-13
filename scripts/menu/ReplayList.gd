@@ -55,6 +55,8 @@ func update_replays():
 		
 		replays_info.append({"meta": ReplayManager.get_metadata(file).meta, "datetime":  ReplayManager.get_metadata(file).datetime, "file": file})
 	
+	replays_info.reverse()
+	
 	var i = 0
 	for data in replays_info:
 		var button = $ReplayScrollVbox/ReplayButton.duplicate()
