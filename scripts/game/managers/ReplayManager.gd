@@ -4,8 +4,9 @@ var curr_file: FileAccess
 
 const very_cool_seperator = "Ξζξ"
 
-func save_stamp(cursor_loc):
+func save_stamp(t, cursor_loc):
 	if not curr_file: return
+	curr_file.store_float(t)
 	curr_file.store_float(cursor_loc.x)
 	curr_file.store_float(cursor_loc.y)
 

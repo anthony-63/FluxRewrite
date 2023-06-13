@@ -67,10 +67,16 @@ func _process(delta):
 	record_timer += delta
 	
 	if Flux.replaying and (record_timer * 1000.0) >= ms_per_frame:
+		var t = Flux.replay_file.get_float()
 		var cx = Flux.replay_file.get_float()
 		var cy = Flux.replay_file.get_float()
 		$Cursor.transform.origin.x = cx
 		$Cursor.transform.origin.y = cy
+		var sync = (t - $AudioManager.current_time) / 1000.0
+		record_timer = -sync
+		
+	if Flux.get_setting("game", "replay") and not Flux.replaying and $AudioManager.current_time != null and (record_timer * 1000.0) >= ms_per_frame:
+		ReplayManager.save_stamp($AudioManager.current_time, Vector2($Cursor.transform.origin.x, $Cursor.transform.origin.y))
 		record_timer = 0.0
 	
 	$HUD/TimeIntoMap.text = Flux.ms_to_min_sec_str($AudioManager.current_time) + "/" + Flux.ms_to_min_sec_str(Flux.current_map.diffs["default"][-1]["ms"])
@@ -104,7 +110,3 @@ func _process(delta):
 		$Transition.transition_out()
 		await get_tree().create_timer(Flux.transition_time).timeout
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
-
-	if Flux.get_setting("game", "replay") and not Flux.replaying and $AudioManager.current_time != null and (record_timer * 1000.0) >= ms_per_frame:
-		ReplayManager.save_stamp(Vector2($Cursor.transform.origin.x, $Cursor.transform.origin.y))
-		record_timer = 0.0
