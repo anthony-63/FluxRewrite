@@ -12,11 +12,12 @@ func _ready():
 	self.scale = Vector3.ONE*0.865
 
 func check_hit():
-	var c = Flux.cursor_pos
-	var h = Flux.get_setting("game", "hitbox")
-	var ch = Flux.get_setting("game", "cursor_hitbox")
-	var t = Vector2(self.transform.origin.x + self.scale.x / 2.0, self.transform.origin.y + self.scale.y / 2.0)
-	return c.x < t.x + h and c.x + ch > t.x and c.y < t.y + h and c.y + ch > t.y
+	var curs = Flux.cursor_pos
+	var note = self.transform.origin
+	var curshb = Flux.get_setting("game", "cursor_hitbox")
+	var notehb = Flux.get_setting("game", "hitbox")
+	var sc = self.global_transform.basis.get_scale()
+	return abs(note.x - curs.x) <= (sc.x + curshb) / 2.0 and abs(note.y - curs.y) <= (sc.y + curshb) / 2.0
 
 func update(currtime: float):
 	var current_note = Flux.current_map.diffs["default"][index]
@@ -44,7 +45,7 @@ func update(currtime: float):
 		Flux.game_stats.combo = 0
 		Flux.game_stats.misses += 1
 		self.queue_free()
-	
+
 	if check_hit() and hittable:
 		hittable = false
 		unhittable = true

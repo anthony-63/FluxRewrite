@@ -4,7 +4,7 @@ func _ready():
 	self.scale = Vector3.ONE * Flux.get_setting("cursor", "scale")
 
 func update_cursor_hitboxes():
-	Flux.cursor_pos = Vector2(self.transform.origin.x + self.scale.x / 2.0, self.transform.origin.y + self.scale.y / 2.0)
+	Flux.cursor_pos = self.transform.origin
 
 func _process(_delta):
 	if Flux.replaying:
@@ -14,8 +14,9 @@ func _process(_delta):
 func _input(ev):
 	if Flux.replaying: return
 	if ev is InputEventMouseMotion:
+		self.transform.origin = $"../InvisCursor".transform.origin
 		if Flux.spinning:
-			self.transform.origin = $"../InvisCursor".transform.origin
+			pass
 		else:
 			self.transform.origin.x -= (ev.relative.x * (Flux.get_setting("cursor", "sensitivity") / 100))
 			self.transform.origin.y -= (ev.relative.y * (Flux.get_setting("cursor", "sensitivity") / 100))

@@ -5,5 +5,6 @@ extends Camera3D
 
 func _input(event):
 	if event is InputEventMouseMotion and Flux.spinning and not Flux.replaying:
-		self.look_at($"../InvisCursor".transform.origin, Vector3.UP)
+#		self.look_at($"../InvisCursor".transform.origin, Vector3.UP)
+		pass
 #		$"../Camera3D".rotate_y(deg_to_rad(yaw))

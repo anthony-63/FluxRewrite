@@ -100,7 +100,7 @@ func _process(delta):
 	$HUD/HealthBarViewport/HealthBarProgress.value = Flux.game_stats.hp
 	
 	if Flux.spinning:
-		$Camera3D.look_at($InvisCursor.transform.origin)
+		pass
 	else:
 		$Camera3D.global_transform.origin.x = $Cursor.global_transform.origin.x * Flux.get_setting("game", "parallax")
 		$Camera3D.global_transform.origin.y = $Cursor.global_transform.origin.y * Flux.get_setting("game", "parallax")
@@ -122,4 +122,4 @@ func _process(delta):
 		await get_tree().create_timer(Flux.transition_time).timeout
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 		
-#	update_debug_info()
+	update_debug_info()

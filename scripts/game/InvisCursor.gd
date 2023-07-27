@@ -8,11 +8,15 @@ func _process(d):
 	
 func _input(ev):
 	if ev is InputEventMouseMotion and not Flux.replaying:
-		self.transform.origin.x -= (ev.relative.x * (Flux.get_setting("cursor", "sensitivity") / 100))
-		self.transform.origin.y -= (ev.relative.y * (Flux.get_setting("cursor", "sensitivity") / 100))
-#		print("\nclamp coords\nx<{CXA}, {CXB}>\ny<{CYA}, {CYB}>".format({
-#			"CXA": $"../HUD/Border".scale.x * -1.5,
-#			"CXB": $"../HUD/Border".scale.x * 1.5,
-#			"CYA": $"../HUD/Border".scale.y * -1.5,
-#			"CYB": $"../HUD/Border".scale.y * 1.5
-#		}))
+		var mouse_sens = ev.relative * (Flux.get_setting("cursor", "sensitivity") / 100.0)
+		if Flux.spinning:
+			$"../Camera3D".rotation_degrees -= Vector3(mouse_sens.y, mouse_sens.x, 0) * 10
+			
+			var cam_rot = Vector2(tan($"../Camera3D".rotation.y), tan($"../Camera3D".rotation.x))
+			var cam_vec = Vector2($"../Camera3D".position.x, $"../Camera3D".position.y)
+			var cursor_pos = cam_vec + cam_rot * -$"../Camera3D".position.z
+			self.transform.origin.x = cursor_pos.x
+			self.transform.origin.y = cursor_pos.y
+		else:
+			self.transform.origin.x -= mouse_sens.x
+			self.transform.origin.y -= mouse_sens.y
