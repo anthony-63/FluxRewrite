@@ -28,44 +28,60 @@ func _process(_delta):
 	else:
 		$MapList/Ruwo.hide()
 
-func update_at():
-	Flux.settings.note.approach_time = Flux.get_setting("note", "sd") / Flux.get_setting("note", "ar")
-
-func _on_save_settings_pressed():
+func save_settings():
 	var f = FileAccess.open("user://settings.json", FileAccess.WRITE)
 	f.store_string(JSON.stringify(Flux.settings))
 
+func update_at():
+	Flux.settings.note.approach_time = Flux.get_setting("note", "sd") / Flux.get_setting("note", "ar")
+	save_settings()
+
 func _on_enable_ruwo_checkbox_toggled(button_pressed):
 	Flux.settings.ui.enable_ruwo = button_pressed
+	save_settings()
 
 func _on_ar_value_changed(value):
 	Flux.settings.note.ar = value
 	update_at()
+	save_settings()
 
 func _on_sd_value_changed(value):
 	Flux.settings.note.sd = value
 	update_at()
+	save_settings()
 
 func _on_music_volume_value_changed(value):
 	Flux.settings.audio.music_volume = value / 100.0
+	save_settings()
 
 func _on_speed_value_changed(value):
 	Flux.mods.speed = value
+	save_settings()
 	
 func _on_cursor_sensitivity_value_changed(value):
 	Flux.settings.cursor.sensitivity = value
+	save_settings()
 
 func _on_cursor_scale_value_changed(value):
 	Flux.settings.cursor.scale = value
+	save_settings()
 
 func _on_enable_fade_toggled(button_pressed):
 	Flux.settings.note.fade = button_pressed
+	save_settings()
 
 func _on_enable_spin_toggled(button_pressed):
 	Flux.settings.game.spin = button_pressed
+	save_settings()
 
 func _on_parallax_value_changed(value):
 	Flux.settings.game.parallax = value
+	save_settings()
 
 func _on_noteset_item_selected(index):
 	Flux.settings.sets.noteset = $Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.get_item_text(index)
+	save_settings()
+
+func _on_enable_drift_toggled(button_pressed):
+	Flux.settings.cursor.drift = button_pressed
+	save_settings()

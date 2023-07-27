@@ -9,7 +9,7 @@ func update_mods():
 	if Flux.mods.speed != 1.0:
 		$HUD/Mods.show()
 		$HUD/Mods/ModsString.text += "S" + str(round(Flux.mods.speed * 100.0)) + "\n"
-	
+
 func update_debug_info():
 	$DbgInfoParent/DbgInfo.text = ""
 	$DbgInfoParent/DbgInfo.text += "CameraRotation x y z: " + str($Camera3D.rotation_degrees.x) + ", " + str($Camera3D.rotation_degrees.y) + ", " + str($Camera3D.rotation_degrees.z) + "\n"

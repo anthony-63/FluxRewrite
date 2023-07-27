@@ -57,6 +57,7 @@ var default_settings = {
 	"cursor": {
 		"sensitivity": 1.0, # m/s
 		"scale": 1.9, # m
+		"drift": false,
 	},
 	"ui": {
 		"enable_ruwo": true,

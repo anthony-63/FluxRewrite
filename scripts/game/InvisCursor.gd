@@ -18,3 +18,9 @@ func _input(ev):
 		else:
 			self.transform.origin.x -= mouse_sens.x
 			self.transform.origin.y -= mouse_sens.y
+			if Flux.get_setting("cursor", "drift"):
+				self.transform.origin = Vector3(
+					clamp(self.transform.origin.x, $"../HUD/Border".scale.x * -1.5, $"../HUD/Border".scale.x * 1.5),
+					clamp(self.transform.origin.y, $"../HUD/Border".scale.y * -1.5, $"../HUD/Border".scale.y * 1.5),
+					0
+				)
