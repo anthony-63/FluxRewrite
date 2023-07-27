@@ -12,14 +12,16 @@ func update_mods():
 	
 func update_debug_info():
 	$DbgInfoParent/DbgInfo.text = ""
-	$DbgInfoParent/DbgInfo.text += "CameraRotation x y z" + str($Camera3D.rotation_degrees.x) + ", " + str($Camera3D.rotation_degrees.y) + ", " + str($Camera3D.rotation_degrees.z) + "\n"
+	$DbgInfoParent/DbgInfo.text += "CameraRotation x y z: " + str($Camera3D.rotation_degrees.x) + ", " + str($Camera3D.rotation_degrees.y) + ", " + str($Camera3D.rotation_degrees.z) + "\n"
 	$DbgInfoParent/DbgInfo.text += "Cursor x y: " + str($Cursor.transform.origin.x) + ", " + str($Cursor.transform.origin.y) + "\n"
 	$DbgInfoParent/DbgInfo.text += "InvisCursor x y: " + str($InvisCursor.transform.origin.x) + "," + str($InvisCursor.transform.origin.y) + "\n"
 	$DbgInfoParent/DbgInfo.text += "Replay Timer: " + str(record_timer) + "\n"
 	$DbgInfoParent/DbgInfo.text += "Replay Sync Interval: " + str(sync) + "\n"
-	
+	$DbgInfoParent/DbgInfo.text += "Current time: " + str($AudioManager.current_time) + "\n"
+
 func _ready():
 	Flux.game_stats.hp = Flux.game_stats.max_hp
+	if not Flux.replaying: Flux.spinning = Flux.get_setting("game", "spin")
 	
 	reset_game()
 	$AudioManager.connect("finished", game_finished)
@@ -79,8 +81,8 @@ func _process(delta):
 		var t = Flux.replay_file.get_float()
 		var cx = Flux.replay_file.get_float()
 		var cy = Flux.replay_file.get_float()
-		$Cursor.transform.origin.x = cx
-		$Cursor.transform.origin.y = cy
+		$InvisCursor.transform.origin.x = cx
+		$InvisCursor.transform.origin.y = cy
 		sync = (t - $AudioManager.current_time) / 1000.0
 		record_timer = -sync
 		
@@ -97,8 +99,8 @@ func _process(delta):
 	$HUD/HealthBarViewport/HealthBarProgress.max_value = Flux.game_stats.max_hp
 	$HUD/HealthBarViewport/HealthBarProgress.value = Flux.game_stats.hp
 	
-	if Flux.get_setting("game", "spin"):
-		pass
+	if Flux.spinning:
+		$Camera3D.look_at($InvisCursor.transform.origin)
 	else:
 		$Camera3D.global_transform.origin.x = $Cursor.global_transform.origin.x * Flux.get_setting("game", "parallax")
 		$Camera3D.global_transform.origin.y = $Cursor.global_transform.origin.y * Flux.get_setting("game", "parallax")
@@ -120,4 +122,4 @@ func _process(delta):
 		await get_tree().create_timer(Flux.transition_time).timeout
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 		
-	update_debug_info()
+#	update_debug_info()

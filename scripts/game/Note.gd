@@ -36,13 +36,14 @@ func update(currtime: float):
 		queue_free()
 	
 	if currtime >= ms and not unhittable: hittable = true
-		
+	
 	if currtime >= ms + Flux.get_setting("game", "hitwindow") and hittable:
 		hittable = false
 		unhittable = true
 		Flux.game_stats.hp = clamp(Flux.game_stats.hp - Flux.game_stats.hp_per_miss, 0.0, Flux.game_stats.max_hp)
 		Flux.game_stats.combo = 0
 		Flux.game_stats.misses += 1
+		self.queue_free()
 	
 	if check_hit() and hittable:
 		hittable = false

@@ -10,6 +10,7 @@ var cursor_pos = Vector2(0, 0)
 var replay_poss = []
 var replaying = false
 var replay_file = null
+var spinning = false
 
 const version_string = "FluxRewrite v0.3 ALPHA"
 
@@ -47,7 +48,7 @@ var default_settings = {
 	"game": {
 		"hitwindow": 58, # ms
 		"hitbox": 1.14, # m
-		"cursor_hitbox": 0.2625,
+		"cursor_hitbox": 0.2526,
 		"wait_time": 1.5, # s
 		"parallax": 0.25,
 		"spin": false,
@@ -107,7 +108,6 @@ func ms_to_min_sec_str(ms):
 	return str(mins) + ":" + ("%02d" % secs)
 
 func play_replay(replay_data):
-	
 	var file_text = FileAccess.get_file_as_string("user://replays/" + replay_data.file)
 	var a = file_text.find("Ξζξ")
 	var b = file_text.find("Ξζξ", a + 1)
@@ -117,9 +117,9 @@ func play_replay(replay_data):
 	replaying = true
 	
 	if replay_file.get_8() == 1: # spin
-		Flux.settings.game.spin = true
+		Flux.spinning = true
 	else:
-		Flux.settings.game.spin = false
+		Flux.spinning = false
 	
 	Flux.mods.speed = replay_file.get_float() # get speed of the map
 	Flux.settings.note.ar = replay_file.get_float()

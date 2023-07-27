@@ -214,10 +214,11 @@ material = SubResource("ShaderMaterial_6fa0p")
 script = ExtResource("8_bg3u7")
 
 [node name="InvisCursor" type="Sprite3D" parent="."]
-visible = false
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0114087)
 script = ExtResource("9_gku1u")
 
 [node name="DbgInfoParent" type="Label" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Debug Info:"
