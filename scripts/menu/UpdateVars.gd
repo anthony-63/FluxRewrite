@@ -14,7 +14,7 @@ func _ready():
 	$Changeables/Mods/ModsVbox/SpeedHbox/Speed.value = Flux.mods.speed
 	$MapInfoPanel/Version.text = Flux.version_string
 	
-	var current_id = 0
+	var current_id: int = 0
 	for noteset in Flux.notesets.keys():
 		$Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.add_item(noteset)
 		if Flux.get_setting("sets", "noteset") == noteset:
@@ -29,7 +29,7 @@ func _process(_delta):
 		$MapList/Ruwo.hide()
 
 func save_settings():
-	var f = FileAccess.open("user://settings.json", FileAccess.WRITE)
+	var f: FileAccess = FileAccess.open("user://settings.json", FileAccess.WRITE)
 	f.store_string(JSON.stringify(Flux.settings))
 
 func update_at():

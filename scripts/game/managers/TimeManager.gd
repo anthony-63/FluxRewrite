@@ -35,8 +35,8 @@ func just_unpaused():
 
 func _process(_delta):
 	if !playing: return
-	var now = Time.get_ticks_msec()
-	var time = playback_speed * (now - last_time)
+	var now: float = Time.get_ticks_msec()
+	var time: float = playback_speed * (now - last_time)
 	last_time = now
 	real_time += time
 	current_time = real_time

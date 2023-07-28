@@ -1,6 +1,6 @@
 extends Node
 
-var map_button_data = []
+var map_button_data: Array = []
 
 func _ready():
 	$MapScrollVbox/MapButton.visible = false
@@ -30,9 +30,9 @@ func update_maps():
 	
 	for map in Flux.maps:
 		map_button_data.append(map)
-	var i = 0
+	var i: int = 0
 	for data in map_button_data:
-		var button = $MapScrollVbox/MapButton.duplicate()
+		var button: Button = $MapScrollVbox/MapButton.duplicate()
 		button.name = "MapButton_%d" % i
 		button.visible = false
 		button.update(data)

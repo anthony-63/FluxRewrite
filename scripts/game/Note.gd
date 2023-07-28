@@ -1,27 +1,27 @@
 extends Node
 
-var spawn_time
-var ms
-var index
-var hittable: bool
-var unhittable: bool
-var mod_color: Color
+var spawn_time: float = 0.0
+var ms: int = 0
+var index: int = 0
+var hittable: bool = false
+var unhittable: bool = false
+var mod_color: Color = Color(1.0, 1.0, 1.0)
 var mouse_over = false
 
 func _ready():
 	self.scale = Vector3.ONE*0.865
 
 func check_hit():
-	var curs = Flux.cursor_pos
-	var note = self.transform.origin
-	var curshb = Flux.get_setting("game", "cursor_hitbox")
-	var notehb = Flux.get_setting("game", "hitbox")
-	var sc = self.global_transform.basis.get_scale()
+	var curs: Vector3 = Flux.cursor_pos
+	var note: Vector3 = self.transform.origin
+	var curshb: float = Flux.get_setting("game", "cursor_hitbox")
+	var notehb: float = Flux.get_setting("game", "hitbox")
+	var sc: Vector3 = self.global_transform.basis.get_scale()
 	return abs(note.x - curs.x) <= (sc.x + curshb) / 2.0 and abs(note.y - curs.y) <= (sc.y + curshb) / 2.0
 
 func update(currtime: float):
-	var current_note = Flux.current_map.diffs["default"][index]
-	var time = (float(current_note.ms) - currtime) / (float(current_note.ms) - spawn_time)
+	var current_note: Dictionary = Flux.current_map.diffs["default"][index]
+	var time: float = (float(current_note.ms) - currtime) / (float(current_note.ms) - spawn_time)
 	self.transform.origin = Vector3(-current_note.x + 1.0, -current_note.y + 1.0, time * Flux.get_setting("note", "sd"))
 	
 	if Flux.settings.note.fade:

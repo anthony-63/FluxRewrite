@@ -1,6 +1,6 @@
 extends Node
 
-var selected_map = {}
+var selected_map: Dictionary = {}
 
 func update_map_info():
 	if not selected_map.meta.artist == "":

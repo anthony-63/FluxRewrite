@@ -1,8 +1,8 @@
 extends Node
 
-signal selected(map_data)
+signal selected(map_data: Dictionary)
 
-var map_data = {}
+var map_data: Dictionary = {}
 
 func update(data):
 	map_data = data

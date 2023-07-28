@@ -8,11 +8,11 @@ func _process(d):
 	
 func _input(ev):
 	if ev is InputEventMouseMotion and not Flux.replaying:
-		var mouse_sens = ev.relative * (Flux.get_setting("cursor", "sensitivity") / 100.0)
+		var mouse_sens: Vector2 = ev.relative * (Flux.get_setting("cursor", "sensitivity") / 100.0)
 		if Flux.spinning:
-			var cam_rot = Vector2(tan($"../Camera3D".rotation.y), tan($"../Camera3D".rotation.x))
-			var cam_vec = Vector2($"../Camera3D".position.x, $"../Camera3D".position.y)
-			var cursor_pos = cam_vec + cam_rot * -$"../Camera3D".position.z
+			var cam_rot: Vector2 = Vector2(tan($"../Camera3D".rotation.y), tan($"../Camera3D".rotation.x))
+			var cam_vec: Vector2 = Vector2($"../Camera3D".position.x, $"../Camera3D".position.y)
+			var cursor_pos: Vector2 = cam_vec + cam_rot * -$"../Camera3D".position.z
 			self.transform.origin.x = cursor_pos.x
 			self.transform.origin.y = cursor_pos.y
 		else:

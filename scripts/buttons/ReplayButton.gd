@@ -2,7 +2,7 @@ extends Node
 
 signal selected(replay_data)
 
-var replay_data = {}
+var replay_data: Dictionary = {}
 
 func update(data):
 	replay_data = data

@@ -1,32 +1,32 @@
 extends Node
 
-var meta = {}
-var jackets = {}
+var meta: Dictionary = {}
+var jackets: Dictionary = {}
 var audio_stream: AudioStream
-var diffs = {}
-const very_cool_seperator = "Ξζξ"
+var diffs: Dictionary = {}
+const very_cool_seperator: String = "Ξζξ"
 
-var combined_map_data = {}
+var combined_map_data: Dictionary = {}
 
 func get_start_of_audio_buffer(f_txt: String):
-	var a = f_txt.find(very_cool_seperator)
-	var b = f_txt.find(very_cool_seperator, a + 1)
-	var c = f_txt.find(very_cool_seperator, b + 1)
+	var a: int = f_txt.find(very_cool_seperator)
+	var b: int = f_txt.find(very_cool_seperator, a + 1)
+	var c: int = f_txt.find(very_cool_seperator, b + 1)
 	return c + 12
 
 func load_from_path(path):
-	var file_txt_a = FileAccess.get_file_as_string("user://maps/%s" % path)
-	var file_txt = file_txt_a.substr(1).split(very_cool_seperator)
+	var file_txt_a: String = FileAccess.get_file_as_string("user://maps/%s" % path)
+	var file_txt: PackedStringArray = file_txt_a.substr(1).split(very_cool_seperator)
 	
-	var file = FileAccess.open("user://maps/%s" % path, FileAccess.READ)
+	var file: FileAccess = FileAccess.open("user://maps/%s" % path, FileAccess.READ)
 	
-	var version = file.get_8()
+	var version: int = file.get_8()
 	if version != 2:
 		push_error("Invalid map version... skipping")
 		return
 	file.close()
 	
-	var file_bytes = FileAccess.get_file_as_bytes("user://maps/%s" % path)
+	var file_bytes: PackedByteArray = FileAccess.get_file_as_bytes("user://maps/%s" % path)
 	
 	meta = JSON.parse_string(file_txt[0])
 	
@@ -34,9 +34,9 @@ func load_from_path(path):
 	if meta["has_jacket"]:
 		jackets = JSON.parse_string(file_txt[2])
 		
-	var audio_bytes = file_bytes.slice(get_start_of_audio_buffer(file_txt_a))
+	var audio_bytes: PackedByteArray = file_bytes.slice(get_start_of_audio_buffer(file_txt_a))
 	
-	var format = Flux.get_audio_format(audio_bytes)
+	var format: Flux.AudioFormat = Flux.get_audio_format(audio_bytes)
 	match format:
 		Flux.AudioFormat.WAV:
 			audio_stream = AudioStreamWAV.new()
@@ -61,25 +61,25 @@ func load_from_path(path):
 	Flux.maps.append(combined_map_data)
 
 func sspm_to_flux(sspm_path, combined_map_data):
-	var file = FileAccess.open("user://maps/%s.flux" % combined_map_data.meta.id, FileAccess.WRITE)
+	var file: FileAccess = FileAccess.open("user://maps/%s.flux" % combined_map_data.meta.id, FileAccess.WRITE)
 	print("converting: %s" % sspm_path)
 	file.store_8(2) # version
 	file.store_string(JSON.stringify(combined_map_data.meta))
 	file.store_string(very_cool_seperator)
 	file.store_string(JSON.stringify(combined_map_data.diffs))
 	file.store_string(very_cool_seperator)
-	var _jackets = {}
+	var _jackets: Dictionary = {}
 	file.store_string(" " + very_cool_seperator)
 	file.store_buffer(combined_map_data.audio_buffer)
 	DirAccess.remove_absolute("user://maps/%s" % sspm_path)
 	
 func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, _jacket_path = ""):
 #	var audio_data = FileAccess.get_file_as_bytes(audio_path)
-	var output = FileAccess.open("user://maps/%s.flux" % id, FileAccess.WRITE)
+	var output: FileAccess = FileAccess.open("user://maps/%s.flux" % id, FileAccess.WRITE)
 	
 	output.store_8(2) # version
 	
-	var meta_ = {}
+	var meta_: Dictionary = {}
 	meta_["title"] = title
 	meta_["artist"] = artist
 	meta_["mapper"] = mapper
@@ -89,11 +89,11 @@ func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, _jacke
 	
 	output.store_string(very_cool_seperator)
 	
-	var diffs_ = {}
+	var diffs_: Dictionary = {}
 	diffs_["default"] = []
 	
 	for i in txt_data.split(",").slice(1):
-		var note_data = i.replace("\r", "").replace("\n", "").split("|")
+		var note_data: String = i.replace("\r", "").replace("\n", "").split("|")
 		diffs_["default"].append({
 			"x": float(note_data[0]),
 			"y": float(note_data[1]),
@@ -102,7 +102,7 @@ func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, _jacke
 	output.store_string(JSON.stringify(diffs_))
 	output.store_string(very_cool_seperator)
 	
-	var _jackets = {}
+	var _jackets: Dictionary = {}
 	output.store_string(" " + very_cool_seperator)
 	
 	var audio_bytes = FileAccess.get_file_as_bytes(audio_path)

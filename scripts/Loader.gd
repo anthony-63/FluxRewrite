@@ -18,12 +18,12 @@ func load_maps():
 	# Clear maps so they dont duplicate when reloading
 	Flux.maps = []
 	if not load_sspms():
-		var user_dir = DirAccess.open("user://")
+		var user_dir: DirAccess = DirAccess.open("user://")
 		user_dir.make_dir("maps")
 		return
 	
-	var map_dir = DirAccess.open("user://maps")
-	var files = map_dir.get_files()
+	var map_dir: DirAccess = DirAccess.open("user://maps")
+	var files: PackedStringArray = map_dir.get_files()
 	for map_path in files:
 		if not map_path.ends_with(".flux"):
 			continue
@@ -37,7 +37,7 @@ func load_maps():
 func load_notesets():
 	Flux.notesets = {}
 	FluxNoteset.load_default_noteset()
-	var noteset_dir = DirAccess.open("user://notesets")
+	var noteset_dir: DirAccess = DirAccess.open("user://notesets")
 	if noteset_dir:
 		for dir in noteset_dir.get_directories():
 			if not dir.is_empty():
@@ -45,16 +45,16 @@ func load_notesets():
 			else:
 				print("Noteset dir '%s' is empty, Skipping..." % dir)
 	else:
-		var user_dir = DirAccess.open("user://")
+		var user_dir: DirAccess = DirAccess.open("user://")
 		user_dir.make_dir("notesets")
 		load_notesets()
 	finished_loading_notesets.emit()
 
 func load_sspms():
-	var map_dir = DirAccess.open("user://maps")
+	var map_dir: DirAccess = DirAccess.open("user://maps")
 	if not map_dir:
 		return false
-	var files = map_dir.get_files()
+	var files: PackedStringArray = map_dir.get_files()
 	for map_path in files:
 		if not map_path.ends_with(".sspm"):
 			continue
@@ -79,8 +79,8 @@ func validate_settings(settings_dict: Dictionary):
 
 func load_settings():
 	if FileAccess.file_exists("user://settings.json"):
-		var f = FileAccess.get_file_as_string("user://settings.json")
-		var settings_dict = JSON.parse_string(f)
+		var f: String = FileAccess.get_file_as_string("user://settings.json")
+		var settings_dict: Dictionary = JSON.parse_string(f)
 		if validate_settings(settings_dict):
 			Flux.settings = settings_dict
 			Flux.settings.debug.show_note_hitbox = Flux.default_settings.debug.show_note_hitbox
@@ -100,9 +100,9 @@ func _process(_delta):
 	load_notesets()
 	FluxNoteset.load_default_noteset()
 	
-	var replay_dir = DirAccess.open("user://replays")
+	var replay_dir: DirAccess = DirAccess.open("user://replays")
 	if not replay_dir:
-		var user_dir = DirAccess.open("user://")
+		var user_dir: DirAccess = DirAccess.open("user://")
 		user_dir.make_dir("replays")
 	
 	# This is also probably a bad way to do this. 

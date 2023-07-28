@@ -1,20 +1,20 @@
 extends Node
 
-var maps = []
-var notesets = {}
-var current_map = {}
-var transition_time:float = 1
-var fullscreen = false
-var update_selected_map = false
-var cursor_pos = Vector2(0, 0)
-var replay_poss = []
-var replaying = false
-var replay_file = null
-var spinning = false
+var maps: Array = []
+var notesets: Dictionary = {}
+var current_map: Dictionary = {}
+var transition_time: float = 1
+var fullscreen: bool = false
+var update_selected_map: bool = false
+var cursor_pos: Vector3 = Vector3(0, 0, 0)
+var replay_poss: Array = []
+var replaying: bool = false
+var replay_file: FileAccess = null
+var spinning: bool = false
 
-const version_string = "FluxRewrite v0.4 ALPHA"
+const version_string: String = "FluxRewrite v0.4 ALPHA"
 
-var map_finished_info = {
+var map_finished_info: Dictionary = {
 	"max_combo": 0,
 	"misses": 0,
 	"accuracy": 0,
@@ -22,7 +22,7 @@ var map_finished_info = {
 	"played": false,
 }
 
-var game_stats = {
+var game_stats: Dictionary = {
 	"misses": 0,
 	"hits": 0,
 	"combo": 0,
@@ -34,7 +34,7 @@ var game_stats = {
 	"hp_per_miss": 1.0,
 }
 
-var default_settings = {
+var default_settings: Dictionary = {
 	"note": {
 		"ar": 10.0, # m/s
 		"sd": 4.0, # m
@@ -70,9 +70,9 @@ var default_settings = {
 	}
 }
 
-var settings = default_settings
+var settings: Dictionary = default_settings
 
-var mods = {
+var mods: Dictionary = {
 	"speed": 1.0, # %
 	"seek": 0, # s
 	"endseek": -1, # s
@@ -104,14 +104,14 @@ func reload_game_stylish():
 		get_tree().change_scene_to_file("res://scenes/Loading.tscn")
 
 func ms_to_min_sec_str(ms):
-	var mins = int(float(ms) * 0.001) / 60
-	var secs = int(float(ms) * 0.001) % 60
+	var mins: int = int(float(ms) * 0.001) / 60
+	var secs: int = int(float(ms) * 0.001) % 60
 	return str(mins) + ":" + ("%02d" % secs)
 
 func play_replay(replay_data):
-	var file_text = FileAccess.get_file_as_string("user://replays/" + replay_data.file)
-	var a = file_text.find("Ξζξ")
-	var b = file_text.find("Ξζξ", a + 1)
+	var file_text: String = FileAccess.get_file_as_string("user://replays/" + replay_data.file)
+	var a: int = file_text.find("Ξζξ")
+	var b: int = file_text.find("Ξζξ", a + 1)
 	replay_file = FileAccess.open("user://replays/" + replay_data.file, FileAccess.READ)
 	replay_file.seek(b + 9)
 	
@@ -127,7 +127,7 @@ func play_replay(replay_data):
 	Flux.settings.note.sd = replay_file.get_float()
 	
 	print("speed: " + str(Flux.mods.speed) + "\nar: " + str(Flux.settings.note.ar) + "\nsd: " + str(Flux.settings.note.sd))
-	var m = null
+	var m: Dictionary = {}
 	for map in Flux.maps:
 		if map.meta.id == replay_data.meta.id: m = map
 	Flux.current_map = m
@@ -135,7 +135,7 @@ func play_replay(replay_data):
 	get_tree().change_scene_to_file("res://scenes/Game.tscn")
 
 func get_map_len_str(map):
-	var map_len = "err:err"
+	var map_len: String = "err:err"
 	if len(map.diffs.default) > 0:
 		map_len = Flux.ms_to_min_sec_str(map.diffs.default[-1].ms)
 	return map_len
@@ -149,10 +149,10 @@ enum AudioFormat {
 
 # got this from kermeet. Thanks :3
 func get_ogg_packet_sequence(data:PackedByteArray):
-	var packets = []
-	var granule_positions = []
-	var sampling_rate = 0
-	var pos = 0
+	var packets: Array = []
+	var granule_positions: Array = []
+	var sampling_rate: int = 0
+	var pos: int  = 0
 	while pos < data.size():
 		var header = data.slice(pos, pos + 27)
 		pos += 27

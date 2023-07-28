@@ -2,7 +2,7 @@ extends Node3D
 
 var curr_file: FileAccess
 
-const very_cool_seperator = "Ξζξ"
+const very_cool_seperator: String = "Ξζξ"
 
 func save_stamp(t, cursor_loc):
 	if curr_file == null: return
@@ -14,13 +14,13 @@ func save_stamp(t, cursor_loc):
 	curr_file.store_float(cursor_loc.y)
 
 func get_metadata(filename):
-	var f = FileAccess.get_file_as_string("user://replays/" + filename)
-	var ff = JSON.parse_string(f.split(very_cool_seperator)[1])
+	var f: String = FileAccess.get_file_as_string("user://replays/" + filename)
+	var ff: Dictionary = JSON.parse_string(f.split(very_cool_seperator)[1])
 	return ff
 
 func start_replay_save():
-	var time = Time.get_datetime_dict_from_system()
-	var curr_fname = str(time.day) + "-" + str(time.month) + "-" + str(time.year) + "_" + str(time.hour) + "-" + str(time.minute) + "-" + str(time.second) + "_" + Flux.current_map.meta.id + "_.rflux"
+	var time: Dictionary = Time.get_datetime_dict_from_system()
+	var curr_fname: String = str(time.day) + "-" + str(time.month) + "-" + str(time.year) + "_" + str(time.hour) + "-" + str(time.minute) + "-" + str(time.second) + "_" + Flux.current_map.meta.id + "_.rflux"
 	curr_file = FileAccess.open("user://replays/" + curr_fname, FileAccess.WRITE)
 	if curr_file == null:
 		print("failed to open replay file: " + curr_fname)

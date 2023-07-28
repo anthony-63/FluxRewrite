@@ -2,8 +2,8 @@ extends Node
 
 @onready var note_scene = preload("res://scenes/NoteSprite.tscn")
 
-var note_index = 0
-var spawn_new_notes = true
+var note_index: int = 0
+var spawn_new_notes: bool = true
 
 func _ready():
 	for note in Flux.current_map.diffs["default"]:
@@ -15,11 +15,11 @@ func _process(_delta):
 	if note_index + 1 >= len(Flux.current_map.diffs.default):
 		spawn_new_notes = false
 	
-	var noteset = Flux.notesets[Flux.get_setting("sets", "noteset")]
+	var noteset: Array = Flux.notesets[Flux.get_setting("sets", "noteset")]
 	
 	if spawn_new_notes:
 		if $"../AudioManager".current_time > Flux.current_map.diffs["default"][note_index].st:
-			var ndata = Flux.current_map.diffs["default"][note_index]
+			var ndata: Dictionary = Flux.current_map.diffs["default"][note_index]
 			var note = note_scene.instantiate()
 			note.spawn_time = Flux.current_map.diffs["default"][note_index].st
 			note.index = note_index

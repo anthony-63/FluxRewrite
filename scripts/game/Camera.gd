@@ -1,8 +1,5 @@
 extends Camera3D
 
-@export var yaw = 0
-@export var pitch = 0
-
 func _input(ev):
 	if ev is InputEventMouseMotion and Flux.spinning and not Flux.replaying:
 		var mouse_sens = ev.relative * (Flux.get_setting("cursor", "sensitivity") / 100.0)

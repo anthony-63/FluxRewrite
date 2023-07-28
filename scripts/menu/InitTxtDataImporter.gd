@@ -17,12 +17,12 @@ func _on_text_file_dialog_file_selected(path):
 	$MapTxtData.text = f
 
 func check_map_data(map_data: String):
-	var splitted = map_data.split(",")
+	var splitted: PackedStringArray = map_data.split(",")
 	if len(splitted) < 2:
 		return false
-	var splitted_noid = splitted.slice(1)
+	var splitted_noid: PackedStringArray = splitted.slice(1)
 	for note in splitted_noid:
-		var note_data = note.split("|")
+		var note_data: PackedStringArray = note.split("|")
 		for nl in note_data:
 			if not nl.is_valid_float() || not nl.is_valid_int():
 				return false

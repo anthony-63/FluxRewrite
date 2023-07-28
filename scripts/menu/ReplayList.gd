@@ -1,6 +1,6 @@
 extends Node
 
-var replay_button_data = []
+var replay_button_data: Array = []
 
 func _ready():
 	$ReplayScrollVbox/ReplayButton.visible = false
@@ -31,19 +31,19 @@ func update_replays():
 				child.queue_free()
 	replay_button_data = []
 	
-	var replay_dir = DirAccess.open("user://replays")
-	var replay_files = replay_dir.get_files()
+	var replay_dir: DirAccess = DirAccess.open("user://replays")
+	var replay_files: PackedStringArray = replay_dir.get_files()
 	
-	var replays_info = []
+	var replays_info: Array = []
 	
 	for file in replay_files:
 		if not file.ends_with(".rflux"):
 			continue
 		print(file)
 		
-		var f = FileAccess.open("user://replays/" + file, FileAccess.READ)
+		var f: FileAccess = FileAccess.open("user://replays/" + file, FileAccess.READ)
 		
-		var MAGIC = [] 
+		var MAGIC: Array = [] 
 		MAGIC.append(f.get_8())
 		MAGIC.append(f.get_8())
 		MAGIC.append(f.get_8())
@@ -60,7 +60,7 @@ func update_replays():
 	
 	var i = 0
 	for data in replays_info:
-		var button = $ReplayScrollVbox/ReplayButton.duplicate()
+		var button: Button = $ReplayScrollVbox/ReplayButton.duplicate()
 		button.name = "ReplayButton_%d" % i
 		button.visible = false
 		button.update(data)

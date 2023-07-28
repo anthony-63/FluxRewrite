@@ -1,9 +1,10 @@
 extends Node3D
 
-const record_fps = 60
-const ms_per_frame = 1000/record_fps
-var record_timer = 0.0
-var sync = 0.0
+const record_fps: float = 60
+const ms_per_frame: float = 1000/record_fps
+var record_timer: float = 0.0
+var sync: float = 0.0
+var replay_dict: Dictionary = {}
 
 func update_mods():
 	if Flux.mods.speed != 1.0:
@@ -43,7 +44,9 @@ func _ready():
 	
 	$AudioManager.length = Flux.current_map.diffs.default[-1].ms
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(Flux.get_setting("audio", "music_volume")))
-
+	
+	
+	
 #	Flux.audio_manager.seek(-Flux.default_settings.game.wait_time)
 	$AudioManager.play($MusicStream)
 	$AudioManager.playback_speed = Flux.mods.speed
@@ -78,9 +81,9 @@ func _process(delta):
 	record_timer += delta
 	
 	if Flux.replaying and (record_timer * 1000.0) >= ms_per_frame:
-		var t = Flux.replay_file.get_float()
-		var cx = Flux.replay_file.get_float()
-		var cy = Flux.replay_file.get_float()
+		var t: float = Flux.replay_file.get_float()
+		var cx: float = Flux.replay_file.get_float()
+		var cy: float = Flux.replay_file.get_float()
 		$InvisCursor.transform.origin.x = cx
 		$InvisCursor.transform.origin.y = cy
 		sync = (t - $AudioManager.current_time) / 1000.0
