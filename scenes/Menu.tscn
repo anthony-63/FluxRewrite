@@ -286,6 +286,22 @@ value = 1.0
 suffix = "x"
 custom_arrow_step = 0.1
 
+[node name="Seek" type="HBoxContainer" parent="Changeables/Mods/ModsVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Mods/ModsVbox/Seek"]
+layout_mode = 2
+text = "Seek"
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Speed" type="SpinBox" parent="Changeables/Mods/ModsVbox/Seek"]
+layout_mode = 2
+step = 0.01
+suffix = "s"
+custom_arrow_step = 0.1
+
 [node name="Settings" type="TabBar" parent="Changeables"]
 visible = false
 layout_mode = 2
@@ -928,6 +944,7 @@ layout_mode = 1
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapList/MapListScrollContainer/MapScrollVbox/MapButton" method="_on_pressed"]
 [connection signal="selected" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapInfoPanel" method="_on_map_button_selected"]
 [connection signal="value_changed" from="Changeables/Mods/ModsVbox/SpeedHbox/Speed" to="." method="_on_speed_value_changed"]
+[connection signal="value_changed" from="Changeables/Mods/ModsVbox/Seek/Speed" to="." method="_on_speed_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/NoteVbox/ARHbox/AR" to="." method="_on_ar_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/NoteVbox/SDHbox/SD" to="." method="_on_sd_value_changed"]
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/Note/NoteVbox/FadeHbox/EnableFade" to="." method="_on_enable_fade_toggled"]

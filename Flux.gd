@@ -71,6 +71,7 @@ var default_settings: Dictionary = {
 }
 
 var settings: Dictionary = default_settings
+var tmp_settings: Dictionary = settings
 
 var mods: Dictionary = {
 	"speed": 1.0, # %
@@ -109,6 +110,7 @@ func ms_to_min_sec_str(ms):
 	return str(mins) + ":" + ("%02d" % secs)
 
 func play_replay(replay_data):
+	tmp_settings = settings
 	var file_text: String = FileAccess.get_file_as_string("user://replays/" + replay_data.file)
 	var a: int = file_text.find("Ξζξ")
 	var b: int = file_text.find("Ξζξ", a + 1)
@@ -131,7 +133,7 @@ func play_replay(replay_data):
 	for map in Flux.maps:
 		if map.meta.id == replay_data.meta.id: m = map
 	Flux.current_map = m
-	
+	FluxMap.load_data(Flux.current_map)
 	get_tree().change_scene_to_file("res://scenes/Game.tscn")
 
 func get_map_len_str(map):

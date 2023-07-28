@@ -87,6 +87,7 @@ static func read_from_file(path:String,full:bool=false,index:int=0) -> Mapset:
 	var file: FileAccess = FileAccess.open("user://maps/%s" % path,FileAccess.READ)
 	assert(file != null)
 	assert(file.get_buffer(4) == SIGNATURE)
+	file.seek(4)
 	var set: Mapset = Mapset.new()
 	var file_version: int = file.get_16()
 	set.path = path
@@ -95,6 +96,7 @@ static func read_from_file(path:String,full:bool=false,index:int=0) -> Mapset:
 		1: _sspmv1(file,set,full)
 		2: _sspmv2(file,set,full)
 		3: _sspmv3(file,set,full,index)
+		_: return null
 	return set
 
 static func _sspmv3(file:FileAccess,set:Mapset,full:bool,index:int=-1):

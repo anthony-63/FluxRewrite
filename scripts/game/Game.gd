@@ -47,7 +47,7 @@ func _ready():
 	
 	
 	
-#	Flux.audio_manager.seek(-Flux.default_settings.game.wait_time)
+	$AudioManager.seek(-Flux.default_settings.game.wait_time)
 	$AudioManager.play($MusicStream)
 	$AudioManager.playback_speed = Flux.mods.speed
 #	Flux.audio_manager.seek(Flux.mods.seek)
@@ -71,6 +71,7 @@ func set_all_finished_info():
 	Flux.map_finished_info.accuracy = (float(Flux.game_stats.hits) / float(Flux.game_stats.hits + Flux.game_stats.misses)) * 100.0
 	Flux.map_finished_info.played = true
 	Flux.update_selected_map = true
+	if Flux.replaying: Flux.settings = Flux.tmp_settings
 	
 func game_finished():
 	Flux.map_finished_info.passed = true
