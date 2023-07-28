@@ -136,8 +136,8 @@ func play_replay(replay_data):
 
 func get_map_len_str(map):
 	var map_len: String = "err:err"
-	if len(map.diffs.default) > 0:
-		map_len = Flux.ms_to_min_sec_str(map.diffs.default[-1].ms)
+	if map.end_time != 0:
+		map_len = Flux.ms_to_min_sec_str(map.end_time)
 	return map_len
 	
 enum AudioFormat {

@@ -1,6 +1,7 @@
 extends Node
 
 var thread: Thread = Thread.new()
+var cache_file: String = "user://maps".path_join(".cache")
 
 signal finished_loading_maps
 signal load_single_map
@@ -14,13 +15,30 @@ signal load_single_noteset
 func _ready():
 	pass
 
+func save_new_map_cache():
+	var nc = {}
+	for map in Flux.maps:
+		var f = map.path.get_file()
+		nc[f] = {
+			"meta": map.meta,
+			"end_time": map.end_time,
+		}
+	var cf = FileAccess.open(cache_file,FileAccess.WRITE)
+	cf.store_string(JSON.stringify(nc, "", false))
+	cf.close()
+
 func load_maps():
 	# Clear maps so they dont duplicate when reloading
 	Flux.maps = []
+
 	if not load_sspms():
 		var user_dir: DirAccess = DirAccess.open("user://")
 		user_dir.make_dir("maps")
 		return
+
+	var map_cache: Dictionary = {}
+	if FileAccess.file_exists(cache_file):
+		map_cache = JSON.parse_string(FileAccess.get_file_as_string(cache_file))
 	
 	var map_dir: DirAccess = DirAccess.open("user://maps")
 	var files: PackedStringArray = map_dir.get_files()
@@ -30,7 +48,8 @@ func load_maps():
 			
 		$FluxImage/CurrentMap.text = map_path
 		
-		await FluxMap.load_from_path(map_path)
+		await FluxMap.load_from_path(map_path, map_cache)
+	save_new_map_cache()
 	
 	finished_loading_maps.emit()
 	

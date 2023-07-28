@@ -1,9 +1,11 @@
 extends Node
 
-var meta: Dictionary = {}
-var jackets: Dictionary = {}
+var meta: Dictionary
+var jackets: Dictionary
 var audio_stream: AudioStream
-var diffs: Dictionary = {}
+var diffs: Dictionary
+var path: String
+var end_time: int
 const very_cool_seperator: String = "Ξζξ"
 
 var combined_map_data: Dictionary = {}
@@ -14,48 +16,60 @@ func get_start_of_audio_buffer(f_txt: String):
 	var c: int = f_txt.find(very_cool_seperator, b + 1)
 	return c + 12
 
-func load_from_path(path):
-	var file_txt_a: String = FileAccess.get_file_as_string("user://maps/%s" % path)
+func load_data(dict: Dictionary):
+	var file_txt_a: String = FileAccess.get_file_as_string("user://maps/%s" % dict.path)
 	var file_txt: PackedStringArray = file_txt_a.substr(1).split(very_cool_seperator)
-	
-	var file: FileAccess = FileAccess.open("user://maps/%s" % path, FileAccess.READ)
-	
-	var version: int = file.get_8()
-	if version != 2:
-		push_error("Invalid map version... skipping")
-		return
-	file.close()
-	
-	var file_bytes: PackedByteArray = FileAccess.get_file_as_bytes("user://maps/%s" % path)
-	
-	meta = JSON.parse_string(file_txt[0])
-	
-	diffs = JSON.parse_string(file_txt[1])
+	var file_bytes: PackedByteArray = FileAccess.get_file_as_bytes("user://maps/%s" % dict.path)
+	dict.diffs = JSON.parse_string(file_txt[1])
 	if meta["has_jacket"]:
-		jackets = JSON.parse_string(file_txt[2])
+		dict.jackets = JSON.parse_string(file_txt[2])
 		
 	var audio_bytes: PackedByteArray = file_bytes.slice(get_start_of_audio_buffer(file_txt_a))
 	
 	var format: Flux.AudioFormat = Flux.get_audio_format(audio_bytes)
 	match format:
 		Flux.AudioFormat.WAV:
-			audio_stream = AudioStreamWAV.new()
-			audio_stream.data = audio_bytes
+			dict.audio_stream = AudioStreamWAV.new()
+			dict.audio_stream.data = audio_bytes
 		Flux.AudioFormat.OGG:
-			audio_stream = AudioStreamOggVorbis.new()
-			audio_stream.packet_sequence = Flux.get_ogg_packet_sequence(audio_bytes)
+			dict.audio_stream = AudioStreamOggVorbis.new()
+			dict.audio_stream.packet_sequence = Flux.get_ogg_packet_sequence(audio_bytes)
 		Flux.AudioFormat.MP3:
-			audio_stream = AudioStreamMP3.new()
-			audio_stream.data = audio_bytes
+			dict.audio_stream = AudioStreamMP3.new()
+			dict.audio_stream.data = audio_bytes
 		_:
 			print("File: %s, Invalid format. Magic: %s" % [path, audio_bytes.slice(0,3)])
 			return
-	
+
+func load_from_path(path: String, map_cache: Dictionary):
+	self.path = path
+	if path in map_cache.keys():
+		meta = map_cache[path].meta
+		end_time = map_cache[path].end_time
+	else:
+		var file_txt_a: String = FileAccess.get_file_as_string("user://maps/%s" % path)
+		var file_txt: PackedStringArray = file_txt_a.substr(1).split(very_cool_seperator)
+		
+		var file: FileAccess = FileAccess.open("user://maps/%s" % path, FileAccess.READ)
+		
+		var version: int = file.get_8()
+		if version != 2:
+			push_error("Invalid map version... skipping")
+			return
+		file.close()
+		meta = JSON.parse_string(file_txt[0])
+		diffs = JSON.parse_string(file_txt[1])
+		if len(diffs.default) < 1:
+			end_time = 0
+		else: end_time = diffs.default[-1].ms
+
 	combined_map_data = {
 		"meta": meta,
-		"diffs": diffs,
-		"jackets": jackets,
-		"audio_stream": audio_stream,
+		"diffs": {},
+		"path": path,
+		"end_time": end_time,
+		"jackets": {},
+		"audio_stream": null,
 	}
 
 	Flux.maps.append(combined_map_data)
@@ -105,5 +119,5 @@ func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, _jacke
 	var _jackets: Dictionary = {}
 	output.store_string(" " + very_cool_seperator)
 	
-	var audio_bytes = FileAccess.get_file_as_bytes(audio_path)
+	var audio_bytes: PackedByteArray = FileAccess.get_file_as_bytes(audio_path)
 	output.store_buffer(audio_bytes)

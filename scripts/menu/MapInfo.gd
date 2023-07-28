@@ -14,6 +14,7 @@ func update_map_info():
 
 func _on_map_button_selected(map):
 	selected_map = map
+	FluxMap.load_data(map)
 	update_map_info()
 	$PlayButton.visible = true
 	Flux.map_finished_info.max_combo = 0
