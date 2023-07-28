@@ -12,7 +12,7 @@ var replaying = false
 var replay_file = null
 var spinning = false
 
-const version_string = "FluxRewrite v0.3 ALPHA"
+const version_string = "FluxRewrite v0.4 ALPHA"
 
 var map_finished_info = {
 	"max_combo": 0,

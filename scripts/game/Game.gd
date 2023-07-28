@@ -122,4 +122,4 @@ func _process(delta):
 		await get_tree().create_timer(Flux.transition_time).timeout
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 		
-	update_debug_info()
+#	update_debug_info()
