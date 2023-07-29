@@ -9,11 +9,11 @@ func _ready():
 	$Changeables/Settings/SettingTypes/Note/NoteVbox/ARHbox/AR.value = Flux.get_setting("note", "ar")
 	$Changeables/Settings/SettingTypes/Note/NoteVbox/SDHbox/SD.value = Flux.get_setting("note", "sd")
 	$Changeables/Settings/SettingTypes/Note/NoteVbox/FadeHbox/EnableFade.button_pressed = Flux.get_setting("note", "fade")
-	$Changeables/Settings/SettingTypes/UI/UIVbox/EnableRuwoCheckbox.button_pressed = Flux.get_setting("ui", "enable_ruwo")
+	$Changeables/Settings/SettingTypes/UI/UIVbox/RuwoHbox/EnableRuwoCheckbox.button_pressed = Flux.get_setting("ui", "enable_ruwo")
 	$Changeables/Settings/SettingTypes/Sound/SoundVbox/MusicVolHbox/MusicVolume.value = Flux.get_setting("audio", "music_volume") * 100.0
 	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorScaleHbox/CursorScale.value = Flux.get_setting("cursor", "scale")
 	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorSensHbox/CursorSensitivity.value = Flux.get_setting("cursor", "sensitivity")
-	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/ParallaxHbox/Parallax.value = Flux.get_setting("game", "parallax")
+	$Changeables/Settings/SettingTypes/UI/UIVbox/ParallaxHbox/Parallax.value = Flux.get_setting("game", "parallax")
 	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/SpinHbox/EnableSpin.button_pressed = Flux.get_setting("game", "spin")
 	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/DriftHbox/EnableDrift.button_pressed = Flux.get_setting("cursor", "drift")
 	$Changeables/Mods/ModsVbox/SpeedHbox/Speed.value = Flux.mods.speed
