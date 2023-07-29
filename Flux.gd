@@ -81,6 +81,8 @@ var mods: Dictionary = {
 	"visual_map": false
 }
 
+var tmp_mods: Dictionary = mods
+
 func _ready():
 #	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	pass
@@ -112,7 +114,6 @@ func ms_to_min_sec_str(ms):
 	return str(mins) + ":" + ("%02d" % secs)
 
 func play_replay(replay_data):
-	tmp_settings = settings
 	var file_text: String = FileAccess.get_file_as_string("user://replays/" + replay_data.file)
 	var a: int = file_text.find("Ξζξ")
 	var b: int = file_text.find("Ξζξ", a + 1)
@@ -121,10 +122,8 @@ func play_replay(replay_data):
 	
 	replaying = true
 	
-	if replay_file.get_8() == 1: # spin
-		Flux.spinning = true
-	else:
-		Flux.spinning = false
+	Flux.spinning = bool(replay_file.get_8()) # spin
+	Flux.mods.no_fail = bool(replay_file.get_8()) # no fail
 	
 	Flux.mods.speed = replay_file.get_float() # get speed of the map
 	Flux.settings.note.ar = replay_file.get_float()

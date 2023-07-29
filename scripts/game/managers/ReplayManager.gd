@@ -33,11 +33,8 @@ func start_replay_save():
 	curr_file.store_string(JSON.stringify({"meta": Flux.current_map.meta, "datetime": str(time.month) + "-" + str(time.day) + "-" + str(time.year) + " / " + str(time.hour) + ":" + str(time.minute) }))
 	curr_file.store_string(very_cool_seperator)
 
-	if Flux.get_setting("game", "spin"):
-		curr_file.store_8(1)
-	else:
-		curr_file.store_8(0)
-	
+	curr_file.store_8(int(Flux.get_setting("game", "spin")))
+	curr_file.store_8(int(Flux.mods.no_fail))
 	curr_file.store_float(Flux.mods.speed)
 	curr_file.store_float(Flux.get_setting("note", "ar"))
 	curr_file.store_float(Flux.get_setting("note", "sd"))

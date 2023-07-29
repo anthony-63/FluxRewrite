@@ -72,4 +72,6 @@ func update_replays():
 
 
 func _on_replay_button_selected(replay_data):
+	Flux.tmp_settings = Flux.settings.duplicate(true)
+	Flux.tmp_mods = Flux.mods.duplicate(true)
 	Flux.play_replay(replay_data)

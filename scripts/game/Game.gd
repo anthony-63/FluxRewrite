@@ -47,7 +47,7 @@ func _ready():
 	$Cursor.visible = not Flux.mods.visual_map
 	$HUD/HealthBarSprite.visible = not Flux.mods.visual_map
 	
-	if not Flux.replaying: ReplayManager.start_replay_save()
+	if not Flux.replaying and not Flux.mods.visual_map: ReplayManager.start_replay_save()
 	await get_tree().create_timer(Flux.get_setting("game", "wait_time")).timeout
 	
 	$AudioManager.length = Flux.current_map.diffs.default[-1].ms
@@ -63,15 +63,15 @@ func _ready():
 	
 
 func reset_game():
-		Flux.game_stats.misses = 0
-		Flux.game_stats.hits = 0
-		Flux.game_stats.max_combo = 0
-		Flux.game_stats.combo = 0
-		Flux.game_stats.hp = Flux.game_stats.max_hp
-		
-		$NoteSpawner.note_index = 0
-		for child in $NoteSpawner.get_children():
-			child.queue_free()
+	Flux.game_stats.misses = 0
+	Flux.game_stats.hits = 0
+	Flux.game_stats.max_combo = 0
+	Flux.game_stats.combo = 0
+	Flux.game_stats.hp = Flux.game_stats.max_hp
+	
+	$NoteSpawner.note_index = 0
+	for child in $NoteSpawner.get_children():
+		child.queue_free()
 
 func set_all_finished_info():
 	Flux.map_finished_info.misses = Flux.game_stats.misses
@@ -79,7 +79,6 @@ func set_all_finished_info():
 	Flux.map_finished_info.accuracy = (float(Flux.game_stats.hits) / float(Flux.game_stats.hits + Flux.game_stats.misses)) * 100.0
 	Flux.map_finished_info.played = true
 	Flux.update_selected_map = true
-	if Flux.replaying: Flux.settings = Flux.tmp_settings
 	
 func game_finished():
 	Flux.map_finished_info.passed = true
@@ -118,18 +117,18 @@ func _process(delta):
 		$Camera3D.global_transform.origin.y = $Cursor.global_transform.origin.y * Flux.get_setting("game", "parallax")
 	
 	if Flux.game_stats.hp == 0.0 and not Flux.mods.no_fail and not Flux.mods.visual_map:
+		if not Flux.replaying and not Flux.mods.visual_map: ReplayManager.end_replay()
 		set_all_finished_info()
 		$HUD/FailedText.show()
 		await get_tree().create_timer(0.5).timeout
-		if not Flux.replaying: ReplayManager.end_replay()
 		$Transition.transition_out()
 		await get_tree().create_timer(Flux.transition_time).timeout
 		$HUD/FailedText.hide()
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 	
 	if Input.is_action_just_pressed("leave_map"):
+		if not Flux.replaying and not Flux.mods.visual_map: ReplayManager.end_replay()
 		set_all_finished_info()
-		if not Flux.replaying: ReplayManager.end_replay()
 		$Transition.transition_out()
 		await get_tree().create_timer(Flux.transition_time).timeout
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")

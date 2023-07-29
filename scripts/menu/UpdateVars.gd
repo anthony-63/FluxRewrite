@@ -2,6 +2,10 @@ extends Node
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	if Flux.replaying:
+		Flux.settings = Flux.tmp_settings.duplicate(true)
+		Flux.mods = Flux.tmp_mods.duplicate(true)
+		Flux.replaying = false
 	$Changeables/Settings/SettingTypes/Note/NoteVbox/ARHbox/AR.value = Flux.get_setting("note", "ar")
 	$Changeables/Settings/SettingTypes/Note/NoteVbox/SDHbox/SD.value = Flux.get_setting("note", "sd")
 	$Changeables/Settings/SettingTypes/Note/NoteVbox/FadeHbox/EnableFade.button_pressed = Flux.get_setting("note", "fade")
