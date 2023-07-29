@@ -4,13 +4,9 @@ var thread: Thread = Thread.new()
 var cache_file: String = "user://maps".path_join(".cache")
 
 signal finished_loading_maps
-signal load_single_map
-
 signal finished_loading_settings
-signal load_single_setting
-
 signal finished_loading_notesets
-signal load_single_noteset
+signal finished_loading_cursorsets
 
 func _ready():
 	pass
@@ -69,6 +65,23 @@ func load_notesets():
 		load_notesets()
 	finished_loading_notesets.emit()
 
+func load_cursorsets():
+	Flux.cursorsets = {}
+	FluxCursorset.load_default_cursorset()
+	var cursorset_dir: DirAccess = DirAccess.open("user://cursorsets")
+	if cursorset_dir:
+		for dir in cursorset_dir.get_directories():
+			if not dir.is_empty():
+				FluxCursorset.load_cursorset(dir)
+			else:
+				print("Noteset dir '%s' is empty, Skipping..." % dir)
+	else:
+		var user_dir: DirAccess = DirAccess.open("user://")
+		user_dir.make_dir("cursorsets")
+		load_cursorsets()
+	finished_loading_cursorsets.emit()
+
+
 func load_sspms():
 	var map_dir: DirAccess = DirAccess.open("user://maps")
 	if not map_dir:
@@ -117,6 +130,7 @@ func _process(_delta):
 	load_settings()
 	load_maps()
 	load_notesets()
+	load_cursorsets()
 	FluxNoteset.load_default_noteset()
 	
 	var replay_dir: DirAccess = DirAccess.open("user://replays")

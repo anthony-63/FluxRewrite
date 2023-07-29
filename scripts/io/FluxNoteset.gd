@@ -5,9 +5,9 @@ func load_noteset(dir: String):
 	print("Loading noteset: %s" % dir)
 	Flux.notesets[dir] = []
 	var files: PackedStringArray = d.get_files()
-	print("erm: ", files)
+	print("Noteset Files: ", files)
 	for file in files:
-		print("%s: " % dir, file)
+		print("File loading from noteset %s: " % dir, file)
 		var i: Image = Image.new()
 		var err = i.load("user://notesets/%s/%s" % [dir, file])
 		if err != 0:

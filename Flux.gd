@@ -2,6 +2,7 @@ extends Node
 
 var maps: Array = []
 var notesets: Dictionary = {}
+var cursorsets: Dictionary = {}
 var current_map: Dictionary = {}
 var transition_time: float = 1
 var fullscreen: bool = false
@@ -61,9 +62,11 @@ var default_settings: Dictionary = {
 	},
 	"ui": {
 		"enable_ruwo": true,
+		"debug": false,
 	},
 	"sets": {
-		"noteset": "default"
+		"noteset": "default",
+		"cursorset": "default",
 	},
 	"audio": {
 		"music_volume": 0.5, # %

@@ -7,9 +7,11 @@ var hittable: bool = false
 var unhittable: bool = false
 var mod_color: Color = Color(1.0, 1.0, 1.0)
 var mouse_over = false
+var cursor: Sprite3D
 
 func _ready():
 	self.scale = Vector3.ONE*0.865
+	cursor = $"../../Cursor"
 
 func check_hit():
 	var curs: Vector3 = Flux.cursor_pos
@@ -44,6 +46,11 @@ func update(currtime: float):
 	if currtime >= ms + Flux.get_setting("game", "hitwindow") and hittable:
 		hittable = false
 		unhittable = true
+		
+		cursor.texture = cursor.cursorset[cursor.cursor_index % len(cursor.cursorset)]
+		cursor.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
+		cursor.cursor_index += 1
+		
 		Flux.game_stats.hp = clamp(Flux.game_stats.hp - Flux.game_stats.hp_per_miss, 0.0, Flux.game_stats.max_hp)
 		Flux.game_stats.combo = 0
 		Flux.game_stats.misses += 1
@@ -53,6 +60,11 @@ func update(currtime: float):
 		hittable = false
 		unhittable = true
 		self.visible = false
+		
+		cursor.texture = cursor.cursorset[cursor.cursor_index % len(cursor.cursorset)]
+		cursor.alpha_cut = SpriteBase3D.ALPHA_CUT_DISABLED
+		cursor.cursor_index += 1
+		
 		Flux.game_stats.hp = clamp(Flux.game_stats.hp + Flux.game_stats.hp_per_hit, 0.0, Flux.game_stats.max_hp)
 		Flux.game_stats.combo += 1
 		

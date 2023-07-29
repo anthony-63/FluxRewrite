@@ -1,7 +1,14 @@
 extends Node
 
+@export var cursorset: Array
+@export var cursor_index: int = 0
+
 func _ready():
 	self.scale = Vector3.ONE * Flux.get_setting("cursor", "scale")
+	cursorset = Flux.cursorsets[Flux.get_setting("sets", "cursorset")]
+	self.texture = cursorset[cursor_index % len(cursorset)]
+	self.alpha_cut = SpriteBase3D.ALPHA_CUT_OPAQUE_PREPASS
+	cursor_index += 1
 
 func update_cursor_hitboxes():
 	Flux.cursor_pos = self.transform.origin

@@ -2,7 +2,7 @@ extends Node
 
 @onready var note_scene = preload("res://scenes/NoteSprite.tscn")
 
-var note_index: int = 0
+@export var note_index: int = 0
 var spawn_new_notes: bool = true
 
 func _ready():

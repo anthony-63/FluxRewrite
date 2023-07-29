@@ -16,6 +16,7 @@ func _ready():
 	$Changeables/Settings/SettingTypes/UI/UIVbox/ParallaxHbox/Parallax.value = Flux.get_setting("game", "parallax")
 	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/SpinHbox/EnableSpin.button_pressed = Flux.get_setting("game", "spin")
 	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/DriftHbox/EnableDrift.button_pressed = Flux.get_setting("cursor", "drift")
+	$Changeables/Settings/SettingTypes/UI/UIVbox/DebugHbox/EnableDebug.button_pressed = Flux.get_setting("ui", "debug")
 	$Changeables/Mods/ModsVbox/SpeedHbox/Speed.value = Flux.mods.speed
 	$Changeables/Mods/ModsVbox/NoFailHbox/NoFail.button_pressed = Flux.mods.no_fail
 	$Changeables/Mods/ModsVbox/VisualMapHbox/VisualMap.button_pressed = Flux.mods.visual_map
@@ -26,7 +27,13 @@ func _ready():
 		$Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.add_item(noteset)
 		if Flux.get_setting("sets", "noteset") == noteset:
 			$Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.selected = current_id
-		current_id = current_id + 1
+		current_id += 1
+	current_id = 0
+	for cursorset in Flux.cursorsets.keys():
+		$Changeables/Settings/SettingTypes/Sets/SetsVbox/CursorsetHbox/Cursorset.add_item(cursorset)
+		if Flux.get_setting("sets", "cursorset") == cursorset:
+			$Changeables/Settings/SettingTypes/Sets/SetsVbox/CursorsetHbox/Cursorset.selected = current_id
+		current_id +=  1
 
 func _process(_delta):
 	Flux.settings.sets.noteset = $Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.get_item_text($Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.selected)
@@ -100,3 +107,13 @@ func _on_no_fail_checkbox_toggled(button_pressed):
 
 func _on_visual_map_toggled(button_pressed):
 	Flux.mods.visual_map = button_pressed
+
+
+func _on_cursorset_item_selected(index):
+	Flux.settings.sets.cursorset = $Changeables/Settings/SettingTypes/Sets/SetsVbox/CursorsetHbox/Cursorset.get_item_text(index)
+	save_settings()
+
+
+func _on_enable_debug_toggled(button_pressed):
+	Flux.settings.ui.debug = button_pressed
+	save_settings()

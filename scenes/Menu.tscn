@@ -88,6 +88,7 @@ shader_parameter/screen_width = 1920.0
 shader_parameter/screen_height = 1080.0
 
 [node name="Control" type="Control"]
+process_mode = 3
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -348,7 +349,6 @@ offset_bottom = 270.0
 theme = SubResource("Theme_2pltl")
 
 [node name="Note" type="TabBar" parent="Changeables/Settings/SettingTypes"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Note"]
@@ -467,6 +467,20 @@ vertical_alignment = 1
 layout_mode = 2
 button_pressed = true
 
+[node name="DebugHbox" type="HBoxContainer" parent="Changeables/Settings/SettingTypes/UI/UIVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/UI/UIVbox/DebugHbox"]
+layout_mode = 2
+text = "Enable Debug Text:"
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnableDebug" type="CheckBox" parent="Changeables/Settings/SettingTypes/UI/UIVbox/DebugHbox"]
+layout_mode = 2
+button_pressed = true
+
 [node name="Sound" type="TabBar" parent="Changeables/Settings/SettingTypes"]
 visible = false
 layout_mode = 2
@@ -537,7 +551,19 @@ text = "Noteset:"
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
+[node name="CursorsetHbox" type="HBoxContainer" parent="Changeables/Settings/SettingTypes/Sets/SetsVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Sets/SetsVbox/CursorsetHbox"]
+layout_mode = 2
+text = "Noteset:"
+
+[node name="Cursorset" type="OptionButton" parent="Changeables/Settings/SettingTypes/Sets/SetsVbox/CursorsetHbox"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
 [node name="Cursor" type="TabBar" parent="Changeables/Settings/SettingTypes"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings/SettingTypes/Cursor"]
@@ -990,8 +1016,10 @@ layout_mode = 1
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/Note/NoteVbox/FadeHbox/EnableFade" to="." method="_on_enable_fade_toggled"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/UI/UIVbox/ParallaxHbox/Parallax" to="." method="_on_parallax_value_changed"]
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/UI/UIVbox/RuwoHbox/EnableRuwoCheckbox" to="." method="_on_enable_ruwo_checkbox_toggled"]
+[connection signal="toggled" from="Changeables/Settings/SettingTypes/UI/UIVbox/DebugHbox/EnableDebug" to="." method="_on_enable_debug_toggled"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Sound/SoundVbox/MusicVolHbox/MusicVolume" to="." method="_on_music_volume_value_changed"]
 [connection signal="item_selected" from="Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset" to="." method="_on_noteset_item_selected"]
+[connection signal="item_selected" from="Changeables/Settings/SettingTypes/Sets/SetsVbox/CursorsetHbox/Cursorset" to="." method="_on_cursorset_item_selected"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorScaleHbox/CursorScale" to="." method="_on_cursor_scale_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorSensHbox/CursorSensitivity" to="." method="_on_cursor_sensitivity_value_changed"]
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/SpinHbox/EnableSpin" to="." method="_on_enable_spin_toggled"]

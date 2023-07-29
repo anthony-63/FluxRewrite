@@ -5,6 +5,8 @@ const ms_per_frame: float = 1000/record_fps
 var record_timer: float = 0.0
 var sync: float = 0.0
 var replay_dict: Dictionary = {}
+var failed: bool = false
+var pause_timer: float = 0
 
 func update_mods():
 	if Flux.mods.speed != 1.0:
@@ -19,8 +21,12 @@ func update_debug_info():
 	$DbgInfoParent/DbgInfo.text += "Replay Timer: " + str(record_timer) + "\n"
 	$DbgInfoParent/DbgInfo.text += "Replay Sync Interval: " + str(sync) + "\n"
 	$DbgInfoParent/DbgInfo.text += "Current time: " + str($AudioManager.current_time) + "\n"
+	$DbgInfoParent/DbgInfo.text += "Note Index: " + str($NoteSpawner.note_index) + "\n"
+	$DbgInfoParent/DbgInfo.text += "Pause Timer: " + str(pause_timer) + "\n"
+	
 
 func _ready():
+	$DbgInfoParent.visible = Flux.get_setting("ui", "debug")
 	Flux.game_stats.hp = Flux.game_stats.max_hp
 	if not Flux.replaying: Flux.spinning = Flux.get_setting("game", "spin")
 	
@@ -52,9 +58,7 @@ func _ready():
 	
 	$AudioManager.length = Flux.current_map.diffs.default[-1].ms
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(Flux.get_setting("audio", "music_volume")))
-	
-	
-	
+
 	$AudioManager.seek(-Flux.default_settings.game.wait_time)
 	$AudioManager.play($MusicStream)
 	$AudioManager.playback_speed = Flux.mods.speed
@@ -73,6 +77,13 @@ func reset_game():
 	for child in $NoteSpawner.get_children():
 		child.queue_free()
 
+func pause_game():
+	if get_tree().paused:
+		pause_timer = 0.0
+		$AudioManager.just_unpaused()
+	$AudioManager.paused = !get_tree().paused and pause_timer > 1.0
+	get_tree().paused = !get_tree().paused
+
 func set_all_finished_info():
 	Flux.map_finished_info.misses = Flux.game_stats.misses
 	Flux.map_finished_info.max_combo = Flux.game_stats.max_combo
@@ -87,6 +98,7 @@ func game_finished():
 
 func _process(delta):
 	record_timer += delta
+	if !get_tree().paused: pause_timer += delta
 	
 	if Flux.replaying and (record_timer * 1000.0) >= ms_per_frame:
 		var t: float = Flux.replay_file.get_float()
@@ -106,31 +118,50 @@ func _process(delta):
 	$HUD/Hits/HitAmount.text = str(Flux.game_stats.hits)
 	$HUD/Combo.text = str(Flux.game_stats.combo) + "x"
 	$HUD/Total/TotalAmount.text = str(Flux.game_stats.hits + Flux.game_stats.misses)
-	
+
 	$HUD/HealthBarViewport/HealthBarProgress.max_value = Flux.game_stats.max_hp
 	$HUD/HealthBarViewport/HealthBarProgress.value = Flux.game_stats.hp
 	
 	if Flux.spinning:
 		pass
 	elif not Flux.mods.visual_map:
-		$Camera3D.global_transform.origin.x = $Cursor.global_transform.origin.x * Flux.get_setting("game", "parallax")
-		$Camera3D.global_transform.origin.y = $Cursor.global_transform.origin.y * Flux.get_setting("game", "parallax")
+		$Camera3D.global_transform.origin.x = $Cursor.global_transform.origin.x * 0.25 * Flux.get_setting("game", "parallax") / 10.0
+		$Camera3D.global_transform.origin.y = $Cursor.global_transform.origin.y * 0.25 * Flux.get_setting("game", "parallax") / 10.0
 	
 	if Flux.game_stats.hp == 0.0 and not Flux.mods.no_fail and not Flux.mods.visual_map:
 		if not Flux.replaying and not Flux.mods.visual_map: ReplayManager.end_replay()
+		if not failed:
+			pause_game()
+			failed = true
+		
 		set_all_finished_info()
-		$HUD/FailedText.show()
+		
+		$Failed.visible = true
 		await get_tree().create_timer(0.5).timeout
 		$Transition.transition_out()
 		await get_tree().create_timer(Flux.transition_time).timeout
-		$HUD/FailedText.hide()
+		$Failed.visible = false
+		
+		pause_game()
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 	
+	if Input.is_action_just_pressed("pause"):
+		$Paused.visible = !get_tree().paused
+		pause_game()
+		
 	if Input.is_action_just_pressed("leave_map"):
 		if not Flux.replaying and not Flux.mods.visual_map: ReplayManager.end_replay()
 		set_all_finished_info()
+		
+		$AudioManager.paused = true
+		get_tree().paused = true
+		$Paused.visible = false
+		
 		$Transition.transition_out()
 		await get_tree().create_timer(Flux.transition_time).timeout
+
+		$AudioManager.paused = false
+		get_tree().paused = false
 		get_tree().change_scene_to_file("res://scenes/Menu.tscn")
 		
-#	update_debug_info()
+	if Flux.get_setting("ui", "debug"): update_debug_info()

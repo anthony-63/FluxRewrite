@@ -47,5 +47,10 @@ func seek(from:float=0):
 	super.seek(from)
 	_set_offset()
 
+func just_unpaused():
+	super.just_unpaused()
+	print("hi")
+	var pbp = audio_player.get_playback_position()
+
 func just_paused():
 	audio_player.stop()
