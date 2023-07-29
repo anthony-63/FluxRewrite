@@ -36,7 +36,10 @@ func update(currtime: float):
 	if self.transform.origin.z < -15.0:
 		queue_free()
 	
-	if currtime >= ms and not unhittable: hittable = true
+	if currtime >= ms and not unhittable: 
+		if Flux.mods.visual_map:
+			self.queue_free()
+		else: hittable = true
 	
 	if currtime >= ms + Flux.get_setting("game", "hitwindow") and hittable:
 		hittable = false

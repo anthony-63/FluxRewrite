@@ -11,7 +11,10 @@ func _ready():
 	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorSensHbox/CursorSensitivity.value = Flux.get_setting("cursor", "sensitivity")
 	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/ParallaxHbox/Parallax.value = Flux.get_setting("game", "parallax")
 	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/SpinHbox/EnableSpin.button_pressed = Flux.get_setting("game", "spin")
+	$Changeables/Settings/SettingTypes/Cursor/CursorVbox/DriftHbox/EnableDrift.button_pressed = Flux.get_setting("cursor", "drift")
 	$Changeables/Mods/ModsVbox/SpeedHbox/Speed.value = Flux.mods.speed
+	$Changeables/Mods/ModsVbox/NoFailHbox/NoFail.button_pressed = Flux.mods.no_fail
+	$Changeables/Mods/ModsVbox/VisualMapHbox/VisualMap.button_pressed = Flux.mods.visual_map
 	$MapInfoPanel/Version.text = Flux.version_string
 	
 	var current_id: int = 0
@@ -85,3 +88,11 @@ func _on_noteset_item_selected(index):
 func _on_enable_drift_toggled(button_pressed):
 	Flux.settings.cursor.drift = button_pressed
 	save_settings()
+
+
+func _on_no_fail_checkbox_toggled(button_pressed):
+	Flux.mods.no_fail = button_pressed
+
+
+func _on_visual_map_toggled(button_pressed):
+	Flux.mods.visual_map = button_pressed

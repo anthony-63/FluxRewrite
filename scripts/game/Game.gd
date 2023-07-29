@@ -39,6 +39,14 @@ func _ready():
 	else:
 		$HUD/MapName.text = Flux.current_map.meta.title
 	
+	
+	$HUD/Misses.visible = not Flux.mods.visual_map
+	$HUD/Hits.visible = not Flux.mods.visual_map
+	$HUD/Total.visible = not Flux.mods.visual_map
+	$HUD/Combo.visible = not Flux.mods.visual_map
+	$Cursor.visible = not Flux.mods.visual_map
+	$HUD/HealthBarSprite.visible = not Flux.mods.visual_map
+	
 	if not Flux.replaying: ReplayManager.start_replay_save()
 	await get_tree().create_timer(Flux.get_setting("game", "wait_time")).timeout
 	
@@ -105,11 +113,11 @@ func _process(delta):
 	
 	if Flux.spinning:
 		pass
-	else:
+	elif not Flux.mods.visual_map:
 		$Camera3D.global_transform.origin.x = $Cursor.global_transform.origin.x * Flux.get_setting("game", "parallax")
 		$Camera3D.global_transform.origin.y = $Cursor.global_transform.origin.y * Flux.get_setting("game", "parallax")
 	
-	if Flux.game_stats.hp == 0.0:
+	if Flux.game_stats.hp == 0.0 and not Flux.mods.no_fail and not Flux.mods.visual_map:
 		set_all_finished_info()
 		$HUD/FailedText.show()
 		await get_tree().create_timer(0.5).timeout

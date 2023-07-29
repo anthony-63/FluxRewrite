@@ -77,6 +77,8 @@ var mods: Dictionary = {
 	"speed": 1.0, # %
 	"seek": 0, # s
 	"endseek": -1, # s
+	"no_fail": false,
+	"visual_map": false
 }
 
 func _ready():

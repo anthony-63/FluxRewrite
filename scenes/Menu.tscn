@@ -286,7 +286,34 @@ value = 1.0
 suffix = "x"
 custom_arrow_step = 0.1
 
+[node name="NoFailHbox" type="HBoxContainer" parent="Changeables/Mods/ModsVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Mods/ModsVbox/NoFailHbox"]
+layout_mode = 2
+text = "No Fail:"
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NoFail" type="CheckBox" parent="Changeables/Mods/ModsVbox/NoFailHbox"]
+layout_mode = 2
+
+[node name="VisualMapHbox" type="HBoxContainer" parent="Changeables/Mods/ModsVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Mods/ModsVbox/VisualMapHbox"]
+layout_mode = 2
+text = "Visualize Map"
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VisualMap" type="CheckBox" parent="Changeables/Mods/ModsVbox/VisualMapHbox"]
+layout_mode = 2
+
 [node name="Seek" type="HBoxContainer" parent="Changeables/Mods/ModsVbox"]
+visible = false
 layout_mode = 2
 
 [node name="Label" type="Label" parent="Changeables/Mods/ModsVbox/Seek"]
@@ -944,6 +971,8 @@ layout_mode = 1
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapList/MapListScrollContainer/MapScrollVbox/MapButton" method="_on_pressed"]
 [connection signal="selected" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapInfoPanel" method="_on_map_button_selected"]
 [connection signal="value_changed" from="Changeables/Mods/ModsVbox/SpeedHbox/Speed" to="." method="_on_speed_value_changed"]
+[connection signal="toggled" from="Changeables/Mods/ModsVbox/NoFailHbox/NoFail" to="." method="_on_no_fail_checkbox_toggled"]
+[connection signal="toggled" from="Changeables/Mods/ModsVbox/VisualMapHbox/VisualMap" to="." method="_on_visual_map_toggled"]
 [connection signal="value_changed" from="Changeables/Mods/ModsVbox/Seek/Speed" to="." method="_on_speed_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/NoteVbox/ARHbox/AR" to="." method="_on_ar_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/NoteVbox/SDHbox/SD" to="." method="_on_sd_value_changed"]
