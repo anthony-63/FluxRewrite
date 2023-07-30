@@ -3,7 +3,7 @@ extends Node
 func _ready():
 	self.scale = Vector3.ONE * Flux.get_setting("cursor", "scale")
 
-func _process(d):
+func _process(_d):
 	if Flux.replaying: return
 	
 func _input(ev):

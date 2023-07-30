@@ -12,6 +12,13 @@
 [ext_resource type="Script" path="res://scripts/buttons/ReplayButton.gd" id="8_ijjny"]
 [ext_resource type="PackedScene" uid="uid://dxmi7p40ic26a" path="res://prefabs/transition.tscn" id="9_4cwsh"]
 
+[sub_resource type="Gradient" id="Gradient_p7gi6"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.47849, 0.553376, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6xg67"]
+gradient = SubResource("Gradient_p7gi6")
+fill_to = Vector2(1, 1)
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pdf3y"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_keemo"]
@@ -84,13 +91,6 @@ shader_parameter/circle_size = 1.05
 shader_parameter/screen_width = 1920.0
 shader_parameter/screen_height = 1080.0
 
-[sub_resource type="Gradient" id="Gradient_p7gi6"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 0.47849, 0.553376, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_6xg67"]
-gradient = SubResource("Gradient_p7gi6")
-fill_to = Vector2(1, 1)
-
 [node name="Control" type="Control"]
 process_mode = 3
 clip_contents = true
@@ -110,6 +110,16 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.0941176, 0.0901961, 0.0901961, 1)
+
+[node name="Background2" type="TextureRect" parent="."]
+z_index = -2048
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_6xg67")
 
 [node name="MapList" type="Panel" parent="."]
 layout_mode = 1
@@ -252,6 +262,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Mods" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -642,12 +653,11 @@ vertical_alignment = 1
 [node name="EnableDrift" type="CheckBox" parent="Changeables/Settings/SettingTypes/Cursor/CursorVbox/DriftHbox"]
 layout_mode = 2
 
-[node name="Import" type="TabBar" parent="Changeables"]
-visible = false
+[node name="Manage" type="TabBar" parent="Changeables"]
 layout_mode = 2
 script = ExtResource("6_4dtfb")
 
-[node name="ColorRect" type="ColorRect" parent="Changeables/Import"]
+[node name="ColorRect" type="ColorRect" parent="Changeables/Manage"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -656,7 +666,7 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.141176, 0.141176, 0.141176, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Changeables/Import"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Changeables/Manage"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -667,30 +677,37 @@ offset_right = -31.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HSeparator2" type="HSeparator" parent="Changeables/Import/VBoxContainer"]
+[node name="HSeparator2" type="HSeparator" parent="Changeables/Manage/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_5d22k")
 theme_override_styles/separator = SubResource("StyleBoxFlat_kttam")
 
-[node name="ImportFromTxtData" type="Button" parent="Changeables/Import/VBoxContainer"]
+[node name="ImportFromTxtData" type="Button" parent="Changeables/Manage/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme = SubResource("Theme_25olc")
 theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
 text = "Import from .txt data"
 
-[node name="HSeparator" type="HSeparator" parent="Changeables/Import/VBoxContainer"]
+[node name="HSeparator" type="HSeparator" parent="Changeables/Manage/VBoxContainer"]
 layout_mode = 2
 theme = SubResource("Theme_5d22k")
 theme_override_styles/separator = SubResource("StyleBoxFlat_kttam")
 
-[node name="ImportFromSSPMV2" type="Button" parent="Changeables/Import/VBoxContainer"]
+[node name="ImportFromSSPMV2" type="Button" parent="Changeables/Manage/VBoxContainer"]
 visible = false
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 theme = SubResource("Theme_25olc")
 theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
 text = "Import from sspmv2"
+
+[node name="MergeEFlux" type="Button" parent="Changeables/Manage/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme = SubResource("Theme_25olc")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mald1")
+text = "Merge .eflux with .flux map"
 
 [node name="Replays" type="TabBar" parent="Changeables"]
 visible = false
@@ -1007,16 +1024,6 @@ z_index = 4096
 material = SubResource("ShaderMaterial_q58ik")
 layout_mode = 1
 
-[node name="Background2" type="TextureRect" parent="."]
-z_index = -2048
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_6xg67")
-
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/ReloadMapList" to="MapList/MapListScrollContainer" method="_on_reload_map_list_pressed"]
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapList/MapListScrollContainer/MapScrollVbox/MapButton" method="_on_pressed"]
 [connection signal="selected" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapInfoPanel" method="_on_map_button_selected"]
@@ -1037,7 +1044,7 @@ texture = SubResource("GradientTexture2D_6xg67")
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/CursorSensHbox/CursorSensitivity" to="." method="_on_cursor_sensitivity_value_changed"]
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/SpinHbox/EnableSpin" to="." method="_on_enable_spin_toggled"]
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/Cursor/CursorVbox/DriftHbox/EnableDrift" to="." method="_on_enable_drift_toggled"]
-[connection signal="pressed" from="Changeables/Import/VBoxContainer/ImportFromTxtData" to="Changeables/Import" method="_on_import_from_txt_data_pressed"]
+[connection signal="pressed" from="Changeables/Manage/VBoxContainer/ImportFromTxtData" to="Changeables/Manage" method="_on_import_from_txt_data_pressed"]
 [connection signal="pressed" from="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox/ReplayButton" to="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox/ReplayButton" method="_on_pressed"]
 [connection signal="selected" from="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox/ReplayButton" to="Changeables/Replays/ReplayScrollContainer" method="_on_replay_button_selected"]
 [connection signal="pressed" from="MapInfoPanel/PlayButton" to="MapInfoPanel" method="_on_play_button_pressed"]

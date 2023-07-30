@@ -29,6 +29,7 @@ Sspm2Flux="*res://scripts/io/SSPM2Flux.gd"
 DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
 ReplayManager="*res://scripts/game/managers/ReplayManager.gd"
 FluxCursorset="*res://scripts/io/FluxCursorset.gd"
+FluxEvents="*res://scripts/io/FluxEvents.gd"
 
 [display]
 

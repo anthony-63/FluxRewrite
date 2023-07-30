@@ -7,6 +7,9 @@ var diffs: Dictionary
 var path: String
 var end_time: int
 const very_cool_seperator: String = "Ξζξ"
+var version: int
+var events: Dictionary
+var has_events: bool
 
 var combined_map_data: Dictionary = {}
 
@@ -20,7 +23,11 @@ func load_data(dict: Dictionary):
 	var file_txt_a: String = FileAccess.get_file_as_string("user://maps/%s" % dict.path)
 	var file_txt: PackedStringArray = file_txt_a.substr(1).split(very_cool_seperator)
 	var file_bytes: PackedByteArray = FileAccess.get_file_as_bytes("user://maps/%s" % dict.path)
+
 	dict.diffs = JSON.parse_string(file_txt[1])
+
+	if dict.has_events: dict.events = JSON.parse_string(file_txt[4])
+
 	if meta["has_jacket"]:
 		dict.jackets = JSON.parse_string(file_txt[2])
 		
@@ -41,19 +48,23 @@ func load_data(dict: Dictionary):
 			print("File: %s, Invalid format. Magic: %s" % [path, audio_bytes.slice(0,3)])
 			return
 
-func load_from_path(path: String, map_cache: Dictionary):
-	self.path = path
+func load_from_path(path_: String, map_cache: Dictionary):
+	path = path_
 	if path in map_cache.keys():
 		meta = map_cache[path].meta
 		end_time = map_cache[path].end_time
+		version = map_cache[path].version
 	else:
 		var file_txt_a: String = FileAccess.get_file_as_string("user://maps/%s" % path)
 		var file_txt: PackedStringArray = file_txt_a.substr(1).split(very_cool_seperator)
 		
 		var file: FileAccess = FileAccess.open("user://maps/%s" % path, FileAccess.READ)
 		
-		var version: int = file.get_8()
-		if version != 2:
+		var version_ev = file.get_8()
+		version = (version_ev >> 4) & 0xf
+		has_events = bool(version_ev & 0xf)
+
+		if version < 2 and version > 3:
 			push_error("Invalid map version... skipping")
 			return
 		file.close()
@@ -70,17 +81,19 @@ func load_from_path(path: String, map_cache: Dictionary):
 		"end_time": end_time,
 		"jackets": {},
 		"audio_stream": null,
+		"version": version,
+		"has_events": has_events,
 	}
 
 	Flux.maps.append(combined_map_data)
 
-func sspm_to_flux(sspm_path, combined_map_data):
-	var file: FileAccess = FileAccess.open("user://maps/%s.flux" % combined_map_data.meta.id, FileAccess.WRITE)
+func sspm_to_flux(sspm_path, cmd):
+	var file: FileAccess = FileAccess.open("user://maps/%s.flux" % cmd.meta.id, FileAccess.WRITE)
 	print("converting: %s" % sspm_path)
 	file.store_8(2) # version
-	file.store_string(JSON.stringify(combined_map_data.meta))
+	file.store_string(JSON.stringify(cmd.meta))
 	file.store_string(very_cool_seperator)
-	file.store_string(JSON.stringify(combined_map_data.diffs))
+	file.store_string(JSON.stringify(cmd.diffs))
 	file.store_string(very_cool_seperator)
 	var _jackets: Dictionary = {}
 	file.store_string(" " + very_cool_seperator)

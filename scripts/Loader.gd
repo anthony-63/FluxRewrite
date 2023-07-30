@@ -18,6 +18,7 @@ func save_new_map_cache():
 		nc[f] = {
 			"meta": map.meta,
 			"end_time": map.end_time,
+			"version": map.version,
 		}
 	var cf = FileAccess.open(cache_file,FileAccess.WRITE)
 	cf.store_string(JSON.stringify(nc, "", false))
@@ -126,7 +127,6 @@ func load_settings():
 func _process(_delta):
 	# the whole point of this was to render the loading screen at the same time
 	# it doesnt.
-	
 	load_settings()
 	load_maps()
 	load_notesets()

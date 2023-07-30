@@ -17,7 +17,6 @@ func check_hit():
 	var curs: Vector3 = Flux.cursor_pos
 	var note: Vector3 = self.transform.origin
 	var curshb: float = Flux.get_setting("game", "cursor_hitbox")
-	var notehb: float = Flux.get_setting("game", "hitbox")
 	var sc: Vector3 = self.global_transform.basis.get_scale()
 	return abs(note.x - curs.x) <= (sc.x + curshb) * 0.5 and abs(note.y - curs.y) <= (sc.y + curshb) * 0.5
 
@@ -73,5 +72,5 @@ func update(currtime: float):
 		
 		Flux.game_stats.hits += 1
 
-func _process(delta):
+func _process(_delta):
 	pass

@@ -37,7 +37,7 @@ func _process(_delta):
 	if !playing: return
 	var now: float = Time.get_ticks_msec()
 	var time: float = playback_speed * (now - last_time)
-	last_time = now
+	last_time = int(now)
 	real_time += time
 	current_time = real_time
 	try_finish()
