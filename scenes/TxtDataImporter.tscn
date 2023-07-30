@@ -56,8 +56,8 @@ placeholder_text = "Or enter the map data"
 scroll_smooth = true
 
 [node name="TextFileDialog" type="FileDialog" parent="."]
-initial_position = 1
 title = "Open a File"
+initial_position = 1
 size = Vector2i(392, 162)
 ok_button_text = "Open"
 file_mode = 0
@@ -66,8 +66,8 @@ filters = PackedStringArray("*.txt")
 show_hidden_files = true
 
 [node name="AudioFileDialog" type="FileDialog" parent="."]
-initial_position = 1
 title = "Open a File"
+initial_position = 1
 size = Vector2i(392, 162)
 popup_window = true
 ok_button_text = "Open"
@@ -248,6 +248,6 @@ vertical_alignment = 1
 [connection signal="file_selected" from="TextFileDialog" to="." method="_on_text_file_dialog_file_selected"]
 [connection signal="file_selected" from="AudioFileDialog" to="." method="_on_file_dialog_file_selected"]
 [connection signal="pressed" from="ConvertButton" to="." method="_on_convert_button_pressed"]
-[connection signal="pressed" from="OpenTextFile" to="." method="_on_open_text_file_pressed_bruh"]
 [connection signal="pressed" from="OpenTextFile" to="." method="_on_open_text_file_pressed"]
+[connection signal="pressed" from="OpenTextFile" to="." method="_on_open_text_file_pressed_bruh"]
 [connection signal="pressed" from="OpenMp3File" to="." method="_on_open_mp_3_file_pressed"]

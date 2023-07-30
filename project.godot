@@ -38,6 +38,10 @@ window/vsync/vsync_mode=0
 
 enabled=PackedStringArray("res://addons/draw3d/plugin.cfg")
 
+[gui]
+
+theme/custom="res://prefabs/theme.tres"
+
 [input]
 
 toggle_fullscreen={

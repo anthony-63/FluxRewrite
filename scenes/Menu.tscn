@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://1uoi6aia1qhh"]
+[gd_scene load_steps=33 format=3 uid="uid://1uoi6aia1qhh"]
 
 [ext_resource type="Script" path="res://scripts/menu/UpdateVars.gd" id="1_7p613"]
 [ext_resource type="Texture2D" uid="uid://5u7n2u4erb06" path="res://images/ruwo.png" id="3_il0bq"]
@@ -24,9 +24,6 @@ font_size = 23
 [sub_resource type="LabelSettings" id="LabelSettings_r2ubh"]
 font = ExtResource("8_58afk")
 font_size = 17
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ukrn5"]
-bg_color = Color(0.0941176, 0.0784314, 0.0627451, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_hucv2"]
 
@@ -86,6 +83,13 @@ shader = SubResource("Shader_81pu1")
 shader_parameter/circle_size = 1.05
 shader_parameter/screen_width = 1920.0
 shader_parameter/screen_height = 1080.0
+
+[sub_resource type="Gradient" id="Gradient_p7gi6"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.47849, 0.553376, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6xg67"]
+gradient = SubResource("Gradient_p7gi6")
+fill_to = Vector2(1, 1)
 
 [node name="Control" type="Control"]
 process_mode = 3
@@ -246,10 +250,8 @@ offset_top = -301.0
 offset_right = -666.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_styles/tabbar_background = SubResource("StyleBoxFlat_ukrn5")
 
 [node name="Mods" type="TabBar" parent="Changeables"]
-visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Mods"]
@@ -332,6 +334,7 @@ suffix = "s"
 custom_arrow_step = 0.1
 
 [node name="Settings" type="TabBar" parent="Changeables"]
+visible = false
 layout_mode = 2
 
 [node name="ColorRect" type="ColorRect" parent="Changeables/Settings"]
@@ -867,9 +870,9 @@ anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -305.0
-offset_top = 5.0
+offset_top = 6.0
 offset_right = -5.0
-offset_bottom = 305.0
+offset_bottom = 306.0
 grow_horizontal = 0
 texture = ExtResource("6_mw0vg")
 expand_mode = 1
@@ -1003,6 +1006,16 @@ vertical_alignment = 2
 z_index = 4096
 material = SubResource("ShaderMaterial_q58ik")
 layout_mode = 1
+
+[node name="Background2" type="TextureRect" parent="."]
+z_index = -2048
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_6xg67")
 
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/ReloadMapList" to="MapList/MapListScrollContainer" method="_on_reload_map_list_pressed"]
 [connection signal="pressed" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapList/MapListScrollContainer/MapScrollVbox/MapButton" method="_on_pressed"]

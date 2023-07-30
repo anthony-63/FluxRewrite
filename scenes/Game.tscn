@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://d1dimg4gwxobu"]
+[gd_scene load_steps=28 format=3 uid="uid://d1dimg4gwxobu"]
 
 [ext_resource type="Script" path="res://scripts/game/Game.gd" id="1_8b1w1"]
 [ext_resource type="Script" path="res://scripts/game/Camera.gd" id="2_8iia7"]
@@ -10,6 +10,92 @@
 [ext_resource type="PackedScene" uid="uid://dxmi7p40ic26a" path="res://prefabs/transition.tscn" id="7_tq6j5"]
 [ext_resource type="Script" path="res://scripts/game/managers/AudioManager.gd" id="8_bg3u7"]
 [ext_resource type="Script" path="res://scripts/game/InvisCursor.gd" id="9_gku1u"]
+
+[sub_resource type="Animation" id="Animation_nhxev"]
+resource_name = "fail"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 1.5),
+"transitions": PackedFloat32Array(0.5, -2, 1),
+"update": 0,
+"values": [Vector3(0, 0, -3), Vector3(0, 0, -7), Vector3(0, 0, -6.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.5),
+"transitions": PackedFloat32Array(0.5, -2, 1),
+"update": 0,
+"values": [Vector3(8.74228e-08, -3.14159, 8.74228e-08), Vector3(0, -3.14159, 0.261799), Vector3(0, -3.14159, 0.218166)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Fog:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0.498039)]
+}
+
+[sub_resource type="Animation" id="Animation_thjjl"]
+resource_name = "fail2"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector3(0, 0, -3.5), Vector3(0, 0, -7)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(0.25, 1),
+"update": 0,
+"values": [Vector3(8.74228e-08, -3.14159, 8.74228e-08), Vector3(0, -3.14159, 0.261799)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Fog:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6hilu"]
+_data = {
+"fail": SubResource("Animation_nhxev"),
+"fail2": SubResource("Animation_thjjl")
+}
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ewf8k"]
 bg_color = Color(0.92549, 0.423529, 0.352941, 1)
@@ -1333,9 +1419,15 @@ process_mode = 3
 script = ExtResource("1_8b1w1")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-1, 8.74228e-08, 0, 8.74228e-08, 1, -8.74228e-08, -7.64274e-15, -8.74228e-08, -1, 0, 0, -3.5)
+process_mode = 3
+transform = Transform3D(-1, 8.74226e-08, -2.53518e-06, 8.74228e-08, 1, -8.74228e-08, 2.53518e-06, -8.7423e-08, -1, 0, 0, -3)
 current = true
 script = ExtResource("2_8iia7")
+
+[node name="Failed" type="AnimationPlayer" parent="Camera3D"]
+libraries = {
+"": SubResource("AnimationLibrary_6hilu")
+}
 
 [node name="HUD" type="Node3D" parent="."]
 
@@ -1532,5 +1624,15 @@ text = "PAUSED"
 label_settings = SubResource("LabelSettings_ll5vl")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Fog" type="ColorRect" parent="."]
+modulate = Color(1, 1, 1, 0)
+z_index = 2048
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [editable path="Transition"]

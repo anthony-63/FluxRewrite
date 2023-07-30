@@ -137,6 +137,7 @@ func _process(delta):
 		set_all_finished_info()
 		
 		$Failed.visible = true
+		$Camera3D/Failed.play("fail2")
 		await get_tree().create_timer(0.5).timeout
 		$Transition.transition_out()
 		await get_tree().create_timer(Flux.transition_time).timeout
