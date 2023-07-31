@@ -50,7 +50,7 @@ func embed_events(file_path: String, map_path: String):
 	if map_bytes[0] & 0xf > 1:
 		print("Already embedded")
 		return
-	map_bytes[0] = map_bytes[0] | 0x01
+	map_bytes[0] = map_bytes[0] | 0x10
 	FileAccess.open(map_path, FileAccess.WRITE).store_buffer(map_bytes)
 	
 	var map_file = FileAccess.open(map_path, FileAccess.READ_WRITE)

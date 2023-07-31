@@ -1,15 +1,17 @@
-[gd_scene load_steps=28 format=3 uid="uid://d1dimg4gwxobu"]
+[gd_scene load_steps=30 format=3 uid="uid://d1dimg4gwxobu"]
 
 [ext_resource type="Script" path="res://scripts/game/Game.gd" id="1_8b1w1"]
 [ext_resource type="Script" path="res://scripts/game/Camera.gd" id="2_8iia7"]
 [ext_resource type="Texture2D" uid="uid://rcehjeafqa81" path="res://prefabs/user/border.png" id="2_uviet"]
 [ext_resource type="FontFile" uid="uid://b5o12budjhyv7" path="res://fonts/font.ttf" id="3_f6rql"]
 [ext_resource type="Script" path="res://scripts/game/managers/NoteManager.gd" id="4_567p8"]
+[ext_resource type="Script" path="res://scripts/game/Border.gd" id="4_r7ihs"]
 [ext_resource type="Script" path="res://scripts/game/Cursor.gd" id="5_he3ju"]
 [ext_resource type="Texture2D" uid="uid://dk8bu7ktdhcw" path="res://prefabs/user/cursor.png" id="5_s5dj5"]
 [ext_resource type="PackedScene" uid="uid://dxmi7p40ic26a" path="res://prefabs/transition.tscn" id="7_tq6j5"]
 [ext_resource type="Script" path="res://scripts/game/managers/AudioManager.gd" id="8_bg3u7"]
 [ext_resource type="Script" path="res://scripts/game/InvisCursor.gd" id="9_gku1u"]
+[ext_resource type="Script" path="res://scripts/game/managers/EventManager.gd" id="12_clxcq"]
 
 [sub_resource type="Animation" id="Animation_nhxev"]
 resource_name = "fail"
@@ -1434,6 +1436,7 @@ libraries = {
 [node name="Border" type="Sprite3D" parent="HUD"]
 pixel_size = 0.0025
 texture = ExtResource("2_uviet")
+script = ExtResource("4_r7ihs")
 
 [node name="TimeIntoMap" type="Label3D" parent="HUD"]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.00100446, 1.60401, 0.000479102)
@@ -1634,5 +1637,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="EventHandler" type="Node" parent="."]
+script = ExtResource("12_clxcq")
 
 [editable path="Transition"]

@@ -13,6 +13,9 @@ func update_mods():
 		$HUD/Mods.show()
 		$HUD/Mods/ModsString.text += "S" + str(round(Flux.mods.speed * 100.0)) + "\n"
 
+func process_event(event: Dictionary):
+	pass
+
 func update_debug_info():
 	$DbgInfoParent/DbgInfo.text = ""
 	$DbgInfoParent/DbgInfo.text += "CameraRotation x y z: " + str($Camera3D.rotation_degrees.x) + ", " + str($Camera3D.rotation_degrees.y) + ", " + str($Camera3D.rotation_degrees.z) + "\n"
