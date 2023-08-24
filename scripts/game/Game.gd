@@ -59,15 +59,12 @@ func _ready():
 	if not Flux.replaying and not Flux.mods.visual_map: ReplayManager.start_replay_save()
 	await get_tree().create_timer(Flux.get_setting("game", "wait_time")).timeout
 	
-	$AudioManager.length = Flux.current_map.diffs.default[-1].ms
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(Flux.get_setting("audio", "music_volume")))
 
-	$AudioManager.seek(-Flux.default_settings.game.wait_time + Flux.mods.seek)
-	$AudioManager.play($MusicStream)
+	$AudioManager.audio_stream = Flux.current_map.audio_stream
+	$AudioManager.start(-Flux.default_settings.game.wait_time + Flux.mods.seek)
 	$AudioManager.playback_speed = Flux.mods.speed
 #	Flux.audio_manager.seek(Flux.mods.seek)
-	AudioServer.playback_speed_scale = Flux.mods.speed
-	
 
 func reset_game():
 	Flux.game_stats.misses = 0
@@ -116,7 +113,7 @@ func _process(delta):
 		ReplayManager.save_stamp($AudioManager.current_time, Vector2($Cursor.transform.origin.x, $Cursor.transform.origin.y))
 		record_timer = 0.0
 	
-	$HUD/TimeIntoMap.text = Flux.ms_to_min_sec_str($AudioManager.current_time) + "/" + Flux.ms_to_min_sec_str(Flux.current_map.diffs["default"][-1]["ms"])
+	$HUD/TimeIntoMap.text = Flux.ms_to_min_sec_str($AudioManager.current_time * 1000.0) + "/" + Flux.ms_to_min_sec_str($AudioManager.length * 1000)
 	$HUD/Misses/MissAmount.text = str(Flux.game_stats.misses)
 	$HUD/Hits/HitAmount.text = str(Flux.game_stats.hits)
 	$HUD/Combo.text = str(Flux.game_stats.combo) + "x"

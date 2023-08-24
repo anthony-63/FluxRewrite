@@ -23,7 +23,6 @@ config/icon="res://images/flux.png"
 
 Flux="*res://Flux.gd"
 FluxMap="*res://scripts/io/FluxMap.gd"
-TimeManager="*res://scripts/game/managers/TimeManager.gd"
 FluxNoteset="*res://scripts/io/FluxNoteset.gd"
 Sspm2Flux="*res://scripts/io/SSPM2Flux.gd"
 DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"

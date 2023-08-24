@@ -18,7 +18,7 @@ func _process(_delta):
 	var noteset: Array = Flux.notesets[Flux.get_setting("sets", "noteset")]
 	
 	if spawn_new_notes:
-		if $"../AudioManager".current_time > Flux.current_map.diffs["default"][note_index].st:
+		if $"../AudioManager".current_time * 1000.0 > Flux.current_map.diffs["default"][note_index].st:
 			var ndata: Dictionary = Flux.current_map.diffs["default"][note_index]
 			var note = note_scene.instantiate()
 			note.spawn_time = Flux.current_map.diffs["default"][note_index].st
@@ -30,6 +30,6 @@ func _process(_delta):
 			note_index += 1
 		
 	for child in get_children():
-		child.update($"../AudioManager".current_time)
+		child.update($"../AudioManager".current_time * 1000)
 	
 

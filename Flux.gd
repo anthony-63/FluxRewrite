@@ -114,7 +114,7 @@ func reload_game_stylish():
 func ms_to_min_sec_str(ms):
 	var mins: int = int(float(ms) * 0.001) / 60
 	var secs: int = int(float(ms) * 0.001) % 60
-	return str(mins) + ":" + ("%02d" % secs)
+	return str(max(mins, 0.0)) + ":" + ("%02d" % max(secs, 0.0))
 
 func play_replay(replay_data):
 	var file_text: String = FileAccess.get_file_as_string("user://replays/" + replay_data.file)

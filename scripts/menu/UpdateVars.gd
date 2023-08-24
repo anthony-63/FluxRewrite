@@ -20,6 +20,7 @@ func _ready():
 	$Changeables/Mods/ModsVbox/SpeedHbox/Speed.value = Flux.mods.speed
 	$Changeables/Mods/ModsVbox/NoFailHbox/NoFail.button_pressed = Flux.mods.no_fail
 	$Changeables/Mods/ModsVbox/VisualMapHbox/VisualMap.button_pressed = Flux.mods.visual_map
+	$Changeables/Mods/ModsVbox/Seek/Seek.value = Flux.mods.seek
 	$MapInfoPanel/Version.text = Flux.version_string
 	
 	var current_id: int = 0

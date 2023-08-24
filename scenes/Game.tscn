@@ -1583,9 +1583,10 @@ script = ExtResource("5_he3ju")
 z_index = 4096
 material = SubResource("ShaderMaterial_6fa0p")
 
-[node name="AudioManager" type="Node" parent="."]
+[node name="AudioManager" type="Node" parent="." node_paths=PackedStringArray("audio_player")]
 process_mode = 1
 script = ExtResource("8_bg3u7")
+audio_player = NodePath("../MusicStream")
 
 [node name="InvisCursor" type="Sprite3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0114087)
