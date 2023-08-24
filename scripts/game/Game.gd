@@ -62,7 +62,7 @@ func _ready():
 	$AudioManager.length = Flux.current_map.diffs.default[-1].ms
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(Flux.get_setting("audio", "music_volume")))
 
-	$AudioManager.seek(-Flux.default_settings.game.wait_time)
+	$AudioManager.seek(-Flux.default_settings.game.wait_time + Flux.mods.seek)
 	$AudioManager.play($MusicStream)
 	$AudioManager.playback_speed = Flux.mods.speed
 #	Flux.audio_manager.seek(Flux.mods.seek)

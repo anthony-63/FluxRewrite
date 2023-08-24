@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://1uoi6aia1qhh"]
+[gd_scene load_steps=34 format=3 uid="uid://1uoi6aia1qhh"]
 
 [ext_resource type="Script" path="res://scripts/menu/UpdateVars.gd" id="1_7p613"]
 [ext_resource type="Texture2D" uid="uid://5u7n2u4erb06" path="res://images/ruwo.png" id="3_il0bq"]
@@ -60,6 +60,11 @@ font_size = 20
 [sub_resource type="LabelSettings" id="LabelSettings_8jruu"]
 font = ExtResource("8_58afk")
 font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_efifq"]
+font = ExtResource("8_58afk")
+font_size = 18
+font_color = Color(0.945098, 0, 0.105882, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_jh32p"]
 font = ExtResource("8_58afk")
@@ -300,6 +305,22 @@ value = 1.0
 suffix = "x"
 custom_arrow_step = 0.1
 
+[node name="Seek" type="HBoxContainer" parent="Changeables/Mods/ModsVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Mods/ModsVbox/Seek"]
+layout_mode = 2
+text = "Seek"
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Seek" type="SpinBox" parent="Changeables/Mods/ModsVbox/Seek"]
+layout_mode = 2
+step = 0.01
+suffix = "s"
+custom_arrow_step = 0.1
+
 [node name="NoFailHbox" type="HBoxContainer" parent="Changeables/Mods/ModsVbox"]
 layout_mode = 2
 
@@ -325,23 +346,6 @@ vertical_alignment = 1
 
 [node name="VisualMap" type="CheckBox" parent="Changeables/Mods/ModsVbox/VisualMapHbox"]
 layout_mode = 2
-
-[node name="Seek" type="HBoxContainer" parent="Changeables/Mods/ModsVbox"]
-visible = false
-layout_mode = 2
-
-[node name="Label" type="Label" parent="Changeables/Mods/ModsVbox/Seek"]
-layout_mode = 2
-text = "Seek"
-label_settings = SubResource("LabelSettings_hucv2")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Speed" type="SpinBox" parent="Changeables/Mods/ModsVbox/Seek"]
-layout_mode = 2
-step = 0.01
-suffix = "s"
-custom_arrow_step = 0.1
 
 [node name="Settings" type="TabBar" parent="Changeables"]
 visible = false
@@ -920,6 +924,20 @@ theme_override_fonts/font = ExtResource("8_58afk")
 text = "0:00"
 label_settings = SubResource("LabelSettings_8jruu")
 
+[node name="NoAudioStream" type="Label" parent="MapInfoPanel"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 67.0
+offset_right = 8.0
+offset_bottom = 94.0
+grow_horizontal = 2
+theme_override_fonts/font = ExtResource("8_58afk")
+text = "NO AUDIO STREAM"
+label_settings = SubResource("LabelSettings_efifq")
+
 [node name="SongName" type="Label" parent="MapInfoPanel"]
 layout_mode = 1
 anchors_preset = 10
@@ -1031,9 +1049,9 @@ layout_mode = 1
 [connection signal="selected" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapInfoPanel" method="_on_map_button_selected"]
 [connection signal="selected" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MusicPreview" method="_on_map_button_selected"]
 [connection signal="value_changed" from="Changeables/Mods/ModsVbox/SpeedHbox/Speed" to="." method="_on_speed_value_changed"]
+[connection signal="value_changed" from="Changeables/Mods/ModsVbox/Seek/Seek" to="." method="_on_seek_value_changed"]
 [connection signal="toggled" from="Changeables/Mods/ModsVbox/NoFailHbox/NoFail" to="." method="_on_no_fail_checkbox_toggled"]
 [connection signal="toggled" from="Changeables/Mods/ModsVbox/VisualMapHbox/VisualMap" to="." method="_on_visual_map_toggled"]
-[connection signal="value_changed" from="Changeables/Mods/ModsVbox/Seek/Speed" to="." method="_on_speed_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/NoteVbox/ARHbox/AR" to="." method="_on_ar_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/NoteVbox/SDHbox/SD" to="." method="_on_sd_value_changed"]
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/Note/NoteVbox/FadeHbox/EnableFade" to="." method="_on_enable_fade_toggled"]

@@ -18,9 +18,15 @@ func _on_map_button_selected(map):
 	
 	update_map_info()
 	
-	$"../MusicPreview".stream = map.audio_stream
-	$"../MusicPreview".stream.loop = true
-	$"../MusicPreview".play((map.end_time / 1000.0) / 3.0)
+	if map.audio_stream == null:
+		$NoAudioStream.visible = true
+		$"../MusicPreview".stop()
+		
+	else:
+		$NoAudioStream.visible = false
+		$"../MusicPreview".stream = map.audio_stream
+		$"../MusicPreview".stream.loop = true
+		$"../MusicPreview".play((map.end_time / 1000.0) / 3.0)
 	
 	$PlayButton.visible = true
 	Flux.map_finished_info.max_combo = 0

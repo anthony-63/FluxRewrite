@@ -70,7 +70,6 @@ func _on_music_volume_value_changed(value):
 
 func _on_speed_value_changed(value):
 	Flux.mods.speed = value
-	save_settings()
 	
 func _on_cursor_sensitivity_value_changed(value):
 	Flux.settings.cursor.sensitivity = value
@@ -117,3 +116,6 @@ func _on_cursorset_item_selected(index):
 func _on_enable_debug_toggled(button_pressed):
 	Flux.settings.ui.debug = button_pressed
 	save_settings()
+
+func _on_seek_value_changed(value):
+	Flux.mods.seek = value
