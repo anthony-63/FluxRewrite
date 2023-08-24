@@ -15,7 +15,13 @@ func update_map_info():
 func _on_map_button_selected(map):
 	selected_map = map
 	FluxMap.load_data(map)
+	
 	update_map_info()
+	
+	$"../MusicPreview".stream = map.audio_stream
+	$"../MusicPreview".stream.loop = true
+	$"../MusicPreview".play((map.end_time / 1000.0) / 3.0)
+	
 	$PlayButton.visible = true
 	Flux.map_finished_info.max_combo = 0
 	Flux.map_finished_info.accuracy = 0

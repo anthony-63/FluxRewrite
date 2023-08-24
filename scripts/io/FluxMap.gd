@@ -25,7 +25,7 @@ func load_data(dict: Dictionary):
 	var file_bytes: PackedByteArray = FileAccess.get_file_as_bytes("user://maps/%s" % dict.path)
 
 	dict.diffs = JSON.parse_string(file_txt[1])
-
+	print(dict.has_events)
 	if dict.has_events: dict.events = JSON.parse_string(file_txt[4])
 
 	if meta["has_jacket"]:
@@ -90,6 +90,7 @@ func load_from_path(path_: String, map_cache: Dictionary):
 func sspm_to_flux(sspm_path, cmd):
 	var file: FileAccess = FileAccess.open("user://maps/%s.flux" % cmd.meta.id, FileAccess.WRITE)
 	print("converting: %s" % sspm_path)
+	
 	file.store_8(2) # version
 	file.store_string(JSON.stringify(cmd.meta))
 	file.store_string(very_cool_seperator)
@@ -97,7 +98,7 @@ func sspm_to_flux(sspm_path, cmd):
 	file.store_string(very_cool_seperator)
 	var _jackets: Dictionary = {}
 	file.store_string(" " + very_cool_seperator)
-	file.store_buffer(combined_map_data.audio_buffer)
+	file.store_buffer(cmd.audio_buffer)
 	DirAccess.remove_absolute("user://maps/%s" % sspm_path)
 	
 func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, _jacket_path = ""):

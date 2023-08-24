@@ -13,7 +13,7 @@ var replaying: bool = false
 var replay_file: FileAccess = null
 var spinning: bool = false
 
-const version_string: String = "FluxRewrite v0.4 ALPHA"
+const version_string: String = "FluxRewrite v0.5 ALPHA"
 
 var map_finished_info: Dictionary = {
 	"max_combo": 0,

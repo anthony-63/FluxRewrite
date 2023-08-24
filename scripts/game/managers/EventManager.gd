@@ -39,18 +39,18 @@ func _process(_delta):
 var process_next_events: bool = true
 
 func process_event(event_data: Dictionary):
-    if event_data.type == FluxEvents.EventTypes.GridSize:
-        print("change grid size")
+	if event_data.type == FluxEvents.EventTypes.GridSize:
+		print("change grid size")
 
 func _process(_delta):
-    if Flux.current_map == {}: return
-    if not Flux.current_map.has_events: return
+	if Flux.current_map == {}: return
+	if not Flux.current_map.has_events: return
 
-    if event_index + 1 >= len(Flux.current_map.events):
-        process_next_events = false
-    
-    if process_next_events:
-        if $"../AudioManager".current_time > Flux.current_map.events[event_index].ms:
-            var edata: Dictionary = Flux.current_map.events[event_index]
-            process_event(edata)
-            event_index += 1
+	if event_index + 1 >= len(Flux.current_map.events):
+		process_next_events = false
+	
+	if process_next_events:
+		if $"../AudioManager".current_time > Flux.current_map.events[event_index].ms:
+			var edata: Dictionary = Flux.current_map.events[event_index]
+			process_event(edata)
+			event_index += 1
