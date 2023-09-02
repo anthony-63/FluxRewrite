@@ -25,6 +25,7 @@ func update_debug_info():
 	$DbgInfoParent/DbgInfo.text += "Replay Sync Interval: " + str(sync) + "\n"
 	$DbgInfoParent/DbgInfo.text += "Current time: " + str($AudioManager.current_time) + "\n"
 	$DbgInfoParent/DbgInfo.text += "Note Index: " + str($NoteSpawner.note_index) + "\n"
+	$DbgInfoParent/DbgInfo.text += "Note Index Skip: " + str($NoteSpawner.note_index_skip) + "\n"
 	$DbgInfoParent/DbgInfo.text += "Pause Timer: " + str(pause_timer) + "\n"
 	
 
