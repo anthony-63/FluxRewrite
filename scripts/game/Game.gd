@@ -8,11 +8,12 @@ var replay_dict: Dictionary = {}
 var failed: bool = false
 var pause_timer: float = 0
 
+func append_mod(mod_str: String):
+	$HUD/Mods.show()
+	$HUD/Mods/ModsString.text += mod_str + "\n"
 func update_mods():
-	if Flux.mods.speed != 1.0:
-		$HUD/Mods.show()
-		$HUD/Mods/ModsString.text += "S" + str(round(Flux.mods.speed * 100.0)) + "\n"
-
+	if Flux.mods.speed != 1.0: append_mod("S" + str(round(Flux.mods.speed * 100.0)))
+	if Flux.mods.no_fail: append_mod("NO FAIL")
 func process_event(event: Dictionary):
 	pass
 

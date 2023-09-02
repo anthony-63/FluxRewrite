@@ -26,7 +26,7 @@ func update(currtime: float):
 	self.transform.origin = Vector3(-current_note.x + 1.0, -current_note.y + 1.0, time * Flux.get_setting("note", "sd"))
 	
 	if Flux.get_setting("note", "fade"):
-		mod_color.a = 1.0 - time
+		mod_color.a = min((1.0 - time) / Flux.get_setting("note", "fd"), 1.0)
 	else:
 		mod_color = Color(1.0, 1.0, 1.0)
 	self.modulate = mod_color

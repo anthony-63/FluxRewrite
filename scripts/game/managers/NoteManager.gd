@@ -35,5 +35,3 @@ func _process(_delta):
 		
 	for child in get_children():
 		child.update($"../AudioManager".current_time * 1000)
-	
-

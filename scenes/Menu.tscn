@@ -317,9 +317,9 @@ vertical_alignment = 1
 
 [node name="Seek" type="SpinBox" parent="Changeables/Mods/ModsVbox/Seek"]
 layout_mode = 2
-step = 0.01
+max_value = 999999.0
 suffix = "s"
-custom_arrow_step = 0.1
+custom_arrow_step = 1.0
 
 [node name="NoFailHbox" type="HBoxContainer" parent="Changeables/Mods/ModsVbox"]
 layout_mode = 2
@@ -416,6 +416,21 @@ vertical_alignment = 1
 layout_mode = 2
 max_value = 200.0
 step = 0.01
+custom_arrow_step = 0.1
+
+[node name="FDHbox" type="HBoxContainer" parent="Changeables/Settings/SettingTypes/Note/NoteVbox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Changeables/Settings/SettingTypes/Note/NoteVbox/FDHbox"]
+layout_mode = 2
+text = "FD: "
+label_settings = SubResource("LabelSettings_hucv2")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FD" type="SpinBox" parent="Changeables/Settings/SettingTypes/Note/NoteVbox/FDHbox"]
+layout_mode = 2
+suffix = "%"
 custom_arrow_step = 0.1
 
 [node name="FadeHbox" type="HBoxContainer" parent="Changeables/Settings/SettingTypes/Note/NoteVbox"]
@@ -1037,6 +1052,23 @@ label_settings = SubResource("LabelSettings_nsaei")
 horizontal_alignment = 2
 vertical_alignment = 2
 
+[node name="StopMusic" type="Button" parent="MapInfoPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -185.0
+offset_top = -38.0
+offset_right = -6.0
+offset_bottom = -5.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("8_58afk")
+theme_override_font_sizes/font_size = 21
+text = "Stop Music"
+
 [node name="Transition" parent="." instance=ExtResource("9_4cwsh")]
 z_index = 4096
 material = SubResource("ShaderMaterial_q58ik")
@@ -1049,11 +1081,14 @@ layout_mode = 1
 [connection signal="selected" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MapInfoPanel" method="_on_map_button_selected"]
 [connection signal="selected" from="MapList/MapListScrollContainer/MapScrollVbox/MapButton" to="MusicPreview" method="_on_map_button_selected"]
 [connection signal="value_changed" from="Changeables/Mods/ModsVbox/SpeedHbox/Speed" to="." method="_on_speed_value_changed"]
+[connection signal="value_changed" from="Changeables/Mods/ModsVbox/SpeedHbox/Speed" to="MapInfoPanel" method="_on_speed_value_changed"]
 [connection signal="value_changed" from="Changeables/Mods/ModsVbox/Seek/Seek" to="." method="_on_seek_value_changed"]
+[connection signal="value_changed" from="Changeables/Mods/ModsVbox/Seek/Seek" to="MapInfoPanel" method="_on_seek_value_changed"]
 [connection signal="toggled" from="Changeables/Mods/ModsVbox/NoFailHbox/NoFail" to="." method="_on_no_fail_checkbox_toggled"]
 [connection signal="toggled" from="Changeables/Mods/ModsVbox/VisualMapHbox/VisualMap" to="." method="_on_visual_map_toggled"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/NoteVbox/ARHbox/AR" to="." method="_on_ar_value_changed"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/NoteVbox/SDHbox/SD" to="." method="_on_sd_value_changed"]
+[connection signal="value_changed" from="Changeables/Settings/SettingTypes/Note/NoteVbox/FDHbox/FD" to="." method="_on_fd_value_changed"]
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/Note/NoteVbox/FadeHbox/EnableFade" to="." method="_on_enable_fade_toggled"]
 [connection signal="value_changed" from="Changeables/Settings/SettingTypes/UI/UIVbox/ParallaxHbox/Parallax" to="." method="_on_parallax_value_changed"]
 [connection signal="toggled" from="Changeables/Settings/SettingTypes/UI/UIVbox/RuwoHbox/EnableRuwoCheckbox" to="." method="_on_enable_ruwo_checkbox_toggled"]
@@ -1069,5 +1104,6 @@ layout_mode = 1
 [connection signal="pressed" from="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox/ReplayButton" to="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox/ReplayButton" method="_on_pressed"]
 [connection signal="selected" from="Changeables/Replays/ReplayScrollContainer/ReplayScrollVbox/ReplayButton" to="Changeables/Replays/ReplayScrollContainer" method="_on_replay_button_selected"]
 [connection signal="pressed" from="MapInfoPanel/PlayButton" to="MapInfoPanel" method="_on_play_button_pressed"]
+[connection signal="pressed" from="MapInfoPanel/StopMusic" to="MapInfoPanel" method="_on_stop_music_pressed"]
 
 [editable path="Transition"]

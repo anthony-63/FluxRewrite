@@ -8,6 +8,7 @@ func _ready():
 		Flux.replaying = false
 	$Changeables/Settings/SettingTypes/Note/NoteVbox/ARHbox/AR.value = Flux.get_setting("note", "ar")
 	$Changeables/Settings/SettingTypes/Note/NoteVbox/SDHbox/SD.value = Flux.get_setting("note", "sd")
+	$Changeables/Settings/SettingTypes/Note/NoteVbox/FDHbox/FD.value = Flux.get_setting("note", "fd")
 	$Changeables/Settings/SettingTypes/Note/NoteVbox/FadeHbox/EnableFade.button_pressed = Flux.get_setting("note", "fade")
 	$Changeables/Settings/SettingTypes/UI/UIVbox/RuwoHbox/EnableRuwoCheckbox.button_pressed = Flux.get_setting("ui", "enable_ruwo")
 	$Changeables/Settings/SettingTypes/Sound/SoundVbox/MusicVolHbox/MusicVolume.value = Flux.get_setting("audio", "music_volume") * 100.0
@@ -100,19 +101,15 @@ func _on_enable_drift_toggled(button_pressed):
 	Flux.settings.cursor.drift = button_pressed
 	save_settings()
 
-
 func _on_no_fail_checkbox_toggled(button_pressed):
 	Flux.mods.no_fail = button_pressed
-
 
 func _on_visual_map_toggled(button_pressed):
 	Flux.mods.visual_map = button_pressed
 
-
 func _on_cursorset_item_selected(index):
 	Flux.settings.sets.cursorset = $Changeables/Settings/SettingTypes/Sets/SetsVbox/CursorsetHbox/Cursorset.get_item_text(index)
 	save_settings()
-
 
 func _on_enable_debug_toggled(button_pressed):
 	Flux.settings.ui.debug = button_pressed
@@ -120,3 +117,6 @@ func _on_enable_debug_toggled(button_pressed):
 
 func _on_seek_value_changed(value):
 	Flux.mods.seek = value
+
+func _on_fd_value_changed(value):
+	Flux.settings.note.fade_distance = value / 100.0

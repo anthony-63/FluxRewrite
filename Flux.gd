@@ -39,6 +39,7 @@ var default_settings: Dictionary = {
 	"note": {
 		"ar": 10.0, # m/s
 		"sd": 4.0, # m
+		"fd": 0.0,
 		"approach_time": 0.0, # s
 		"fade": false,
 	},
