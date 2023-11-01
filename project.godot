@@ -29,9 +29,13 @@ DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
 ReplayManager="*res://scripts/game/managers/ReplayManager.gd"
 FluxCursorset="*res://scripts/io/FluxCursorset.gd"
 FluxEvents="*res://scripts/io/FluxEvents.gd"
+NotificationType="*res://scripts/notification/NotificationType.gd"
+NotificationService="*res://scripts/notification/NotificationService.gd"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/vsync/vsync_mode=0
 
 [editor_plugins]
@@ -41,6 +45,8 @@ enabled=PackedStringArray("res://addons/draw3d/plugin.cfg")
 [gui]
 
 theme/custom="res://prefabs/theme.tres"
+theme/size/viewport_height=648
+theme/size/viewport_width=1152
 
 [input]
 

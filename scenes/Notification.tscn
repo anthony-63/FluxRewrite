@@ -1,0 +1,168 @@
+[gd_scene load_steps=6 format=3 uid="uid://bat2c3jyrbahv"]
+
+[ext_resource type="Theme" uid="uid://qmwk3y85d3n0" path="res://themes/theme.tres" id="1_0nhra"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wynej"]
+bg_color = Color(0.0784314, 0.0784314, 0.0784314, 0.784314)
+
+[sub_resource type="Animation" id="Animation_e260u"]
+resource_name = "slide"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-500, -0.25, 0, 0.25, 0, 801.75, -0.25, 0, 0.25, 0, 763, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.7, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(433, -0.25, 0, 0.25, 0, 433, -0.25, 0, 0.25, 0, 433, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.7, 1)
+}
+
+[sub_resource type="Animation" id="Animation_5utvm"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(423.5, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(235, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_whck6"]
+_data = {
+"RESET": SubResource("Animation_5utvm"),
+"slide": SubResource("Animation_e260u")
+}
+
+[node name="Notification" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0nhra")
+
+[node name="Untouchable" type="Panel" parent="."]
+modulate = Color(1, 1, 1, 0.219608)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NotifPanel" type="Panel" parent="."]
+custom_minimum_size = Vector2(394, 214)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -536.5
+offset_top = -305.0
+offset_right = -142.5
+offset_bottom = -91.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buttons" type="HBoxContainer" parent="NotifPanel"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -141.5
+offset_top = -39.0
+offset_right = 142.5
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Ok" type="Button" parent="NotifPanel/Buttons"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Ok"
+
+[node name="Yes" type="Button" parent="NotifPanel/Buttons"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Yes"
+
+[node name="No" type="Button" parent="NotifPanel/Buttons"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "No"
+
+[node name="Body" type="RichTextLabel" parent="NotifPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = 37.0
+offset_right = -11.0
+offset_bottom = -44.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Body"
+
+[node name="TitlePanel" type="Panel" parent="NotifPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 34.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_wynej")
+
+[node name="Title" type="Label" parent="NotifPanel/TitlePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 13.0
+offset_top = 1.0
+offset_right = -16.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Title"
+vertical_alignment = 1
+
+[node name="Slide" type="AnimationPlayer" parent="NotifPanel"]
+libraries = {
+"": SubResource("AnimationLibrary_whck6")
+}

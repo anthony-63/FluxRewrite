@@ -117,12 +117,20 @@ func ms_to_min_sec_str(ms):
 	var secs: int = int(float(ms) * 0.001) % 60
 	return str(max(mins, 0.0)) + ":" + ("%02d" % max(secs, 0.0))
 
-func play_replay(replay_data):
+func play_replay(replay_data, scr):
 	var file_text: String = FileAccess.get_file_as_string("user://replays/" + replay_data.file)
 	var a: int = file_text.find("Ξζξ")
 	var b: int = file_text.find("Ξζξ", a + 1)
 	replay_file = FileAccess.open("user://replays/" + replay_data.file, FileAccess.READ)
 	replay_file.seek(b + 9)
+	
+	var m: Dictionary = {}
+	for map in Flux.maps:
+		if map.meta.id == replay_data.meta.id: m = map
+	
+	if not FileAccess.file_exists("user://maps/%s.flux" % replay_data.meta.id):
+		NotificationService.show_notification(scr, NotificationType.Ok, "Failed to load replay", "Map ID does not exist: %s" % replay_data.meta.id)
+		return
 	
 	replaying = true
 	
@@ -134,11 +142,10 @@ func play_replay(replay_data):
 	Flux.settings.note.sd = replay_file.get_float()
 	
 	print("speed: " + str(Flux.mods.speed) + "\nar: " + str(Flux.settings.note.ar) + "\nsd: " + str(Flux.settings.note.sd))
-	var m: Dictionary = {}
-	for map in Flux.maps:
-		if map.meta.id == replay_data.meta.id: m = map
+
 	Flux.current_map = m
 	FluxMap.load_data(Flux.current_map)
+	
 	get_tree().change_scene_to_file("res://scenes/Game.tscn")
 
 func get_map_len_str(map):

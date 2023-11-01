@@ -36,6 +36,7 @@ func _ready():
 		if Flux.get_setting("sets", "cursorset") == cursorset:
 			$Changeables/Settings/SettingTypes/Sets/SetsVbox/CursorsetHbox/Cursorset.selected = current_id
 		current_id +=  1
+		
 
 func _process(_delta):
 	Flux.settings.sets.noteset = $Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.get_item_text($Changeables/Settings/SettingTypes/Sets/SetsVbox/NotesetHbox/Noteset.selected)

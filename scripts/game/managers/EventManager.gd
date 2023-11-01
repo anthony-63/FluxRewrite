@@ -44,7 +44,7 @@ func process_event(event_data: Dictionary):
 
 func _process(_delta):
 	if Flux.current_map == {}: return
-	if not Flux.current_map.has_events: return
+	if not Flux.current_map.meta.has_events: return
 
 	if event_index + 1 >= len(Flux.current_map.events):
 		process_next_events = false

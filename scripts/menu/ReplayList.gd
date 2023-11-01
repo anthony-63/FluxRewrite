@@ -70,8 +70,7 @@ func update_replays():
 #func _on_reload_map_list_pressed():
 #	Flux.reload_game()
 
-
 func _on_replay_button_selected(replay_data):
 	Flux.tmp_settings = Flux.settings.duplicate(true)
 	Flux.tmp_mods = Flux.mods.duplicate(true)
-	Flux.play_replay(replay_data)
+	Flux.play_replay(replay_data, self.get_parent().get_parent().get_parent())

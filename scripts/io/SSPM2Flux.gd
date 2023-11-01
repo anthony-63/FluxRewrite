@@ -67,6 +67,7 @@ func flux_from_sspm(path: String):
 			"artist": "",
 			"title": mapset.name,
 			"mapper": mapset.creator,
+			"has_events": false,
 			"has_jacket": false,
 			"id": mapset.id,
 		},

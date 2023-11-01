@@ -25,8 +25,8 @@ func load_data(dict: Dictionary):
 	var file_bytes: PackedByteArray = FileAccess.get_file_as_bytes("user://maps/%s" % dict.path)
 
 	dict.diffs = JSON.parse_string(file_txt[1])
-	print(dict.has_events)
-	if dict.has_events: dict.events = JSON.parse_string(file_txt[4])
+	
+	if dict.meta.has_events: dict.events = JSON.parse_string(file_txt[4])
 
 	if meta["has_jacket"]:
 		dict.jackets = JSON.parse_string(file_txt[2])
@@ -57,17 +57,15 @@ func load_from_path(path_: String, map_cache: Dictionary):
 	else:
 		var file_txt_a: String = FileAccess.get_file_as_string("user://maps/%s" % path)
 		var file_txt: PackedStringArray = file_txt_a.substr(1).split(very_cool_seperator)
-		
 		var file: FileAccess = FileAccess.open("user://maps/%s" % path, FileAccess.READ)
 		
-		var version_ev = file.get_8()
-		version = (version_ev >> 4) & 0xf
-		has_events = bool(version_ev & 0xf)
+		version = file.get_8()
 
 		if version < 2 and version > 3:
-			push_error("Invalid map version... skipping")
+			print("Invalid map version... skipping")
 			return
 		file.close()
+		
 		meta = JSON.parse_string(file_txt[0])
 		diffs = JSON.parse_string(file_txt[1])
 		if len(diffs.default) < 1:
@@ -82,7 +80,6 @@ func load_from_path(path_: String, map_cache: Dictionary):
 		"jackets": {},
 		"audio_stream": null,
 		"version": version,
-		"has_events": has_events,
 	}
 
 	Flux.maps.append(combined_map_data)
@@ -113,6 +110,7 @@ func conv_from_txt_audio(txt_data, audio_path, title, artist, mapper, id, _jacke
 	meta_["mapper"] = mapper
 	meta_["id"] = id
 	meta_["has_jacket"] = false # jackets are not supported yet
+	meta_["has_events"] = false
 	output.store_string(JSON.stringify(meta_))
 	
 	output.store_string(very_cool_seperator)
